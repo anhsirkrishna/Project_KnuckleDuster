@@ -4,7 +4,7 @@ class InputManager {
 public:
 	InputManager();
 	~InputManager();
-	void Update();
+	bool Update();
 	bool isKeyPressed(unsigned int keyScanCode);
 	bool isKeyReleased(unsigned int keyScanCode);
 	bool isKeyTriggered(unsigned int keyScanCode);

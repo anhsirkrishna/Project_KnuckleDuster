@@ -47,63 +47,60 @@ EventManager* p_event_manager;
 unsigned int WORLD_WIDTH = 900;
 unsigned int WORLD_HEIGHT = 600;
 
-int main(int argc, char* args[])
-{
-	SDL_Window *pWindow;
-	//OpenGL context
-	SDL_GLContext gContext;
+unsigned int WINDOW_WIDTH = 900;
+unsigned int WINDOW_HEIGHT = 600;
 
-	AllocConsole();
-	int error = 0;
-	bool appIsRunning = true;
-	int mode = 1;
-	unsigned short  curr_level = 1;
-	SDL_Surface* pWindowSurface = NULL;
-	SDL_Surface* ppImageSurfaces[3] = { NULL, NULL, NULL};
+//Global SDL vars
+SDL_Window* pWindow;
+//OpenGL context
+SDL_GLContext gContext;
 
+//Create all the necessary Global Manager objects
+void CreateManagers() {
 	pInputManager = new InputManager;
 	pFrameRateController = new FrameRateController(DEFAULT_FRAMERATE);
 	pResourceManager = new ResourceManager();
 	pGameObjectManager = new GameObjectManager();
 	p_event_manager = new EventManager();
+}
 
-	GameObjectFactory obj_factory;
+void DeleteManagers() {
+	delete pInputManager;
+	delete pResourceManager;
+	delete pFrameRateController;
+	pGameObjectManager->Cleanup();
+	delete pGameObjectManager;
+}
 
-	SDL_Rect charRect;
-	charRect.x = 400;
-	charRect.y = 300;
-	charRect.h = 96;
-	charRect.w = 84;
-	char* orientation[4] = { "Up", "Down", "Right", "Left" };
-	int currOrientation=0;
+//Function to initalize SDL and Open GL 
+bool SDL_GL_Init() {
 
+	int error = 0;
 	// Initialize SDL
-	if((error = SDL_Init( SDL_INIT_VIDEO )) < 0 )
+	if ((error = SDL_Init(SDL_INIT_VIDEO)) < 0)
 	{
 		SDL_Log("Couldn't initialize SDL, error %i\n", error);
-		return 1;
+		return false;
 	}
 
 	//Use OpenGL 3.1 core
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-	unsigned int window_width = WORLD_WIDTH;
-	unsigned int window_height = WORLD_HEIGHT;
 
 	pWindow = SDL_CreateWindow("SDL2 window",		// window title
 		SDL_WINDOWPOS_UNDEFINED,					// initial x position
 		SDL_WINDOWPOS_UNDEFINED,					// initial y position
-		window_width,								// width, in pixels
-		window_height,								// height, in pixels
+		WINDOW_WIDTH,								// width, in pixels
+		WINDOW_HEIGHT,								// height, in pixels
 		SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-	
+
 	// Check that the window was successfully made
 	if (NULL == pWindow)
 	{
 		// In the event that the window could not be made...
 		SDL_Log("Could not create window: %s\n", SDL_GetError());
-		return 1;
+		return false;
 	}
 
 	//Create context
@@ -111,6 +108,7 @@ int main(int argc, char* args[])
 	if (gContext == NULL)
 	{
 		SDL_Log("OpenGL context could not be created! SDL Error: %s\n", SDL_GetError());
+		return false;
 	}
 	else
 	{
@@ -120,12 +118,14 @@ int main(int argc, char* args[])
 		if (glewError != GLEW_OK)
 		{
 			SDL_Log("Error initializing GLEW! %s\n", glewGetErrorString(glewError));
+			return false;
 		}
 
 		//Use Vsync
 		if (SDL_GL_SetSwapInterval(1) < 0)
 		{
 			SDL_Log("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
+			return false;
 		}
 
 		//Initialize PNG loading
@@ -133,19 +133,77 @@ int main(int argc, char* args[])
 		if (!(IMG_Init(imgFlags) & imgFlags))
 		{
 			SDL_Log("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+			return false;
 		}
 	}
 
-	ShaderProgram shader_program;
-	shader_program.AddShader("final.vert", GL_VERTEX_SHADER);
-	shader_program.AddShader("final.frag", GL_FRAGMENT_SHADER);
+	return true;
+}
 
-	glBindAttribLocation(shader_program.program_id, 0, "in_position");
-	glBindAttribLocation(shader_program.program_id, 1, "in_Color");
-	glBindAttribLocation(shader_program.program_id, 2, "in_TexCoords");
-	shader_program.LinkProgram();
-	
+void CloseProgram() {
+	// Close and destroy the window
+	SDL_DestroyWindow(pWindow);
+
+	// Quit SDL subsystems
+	SDL_Quit();
+	FreeConsole();
+}
+
+ShaderProgram* GL_Program_init() {
+	ShaderProgram *p_shader_program = new ShaderProgram();
+	p_shader_program->AddShader("final.vert", GL_VERTEX_SHADER);
+	p_shader_program->AddShader("final.frag", GL_FRAGMENT_SHADER);
+
+	glBindAttribLocation(p_shader_program->program_id, 0, "in_position");
+	glBindAttribLocation(p_shader_program->program_id, 1, "in_Color");
+	glBindAttribLocation(p_shader_program->program_id, 2, "in_TexCoords");
+	p_shader_program->LinkProgram();
 	CHECKERROR;
+
+	return p_shader_program;
+}
+
+void DrawScene(ShaderProgram * p_shader_program) {
+	p_shader_program->Use();
+	glClearColor(0.0, 1.0, 1.0, 1.0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	Matrix3D orthoGraphProj = OrthographicProj(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT, 0, 1.0);
+	GLuint loc = glGetUniformLocation(p_shader_program->program_id, "orthoGraphProj");
+	glUniformMatrix4fv(loc, 1, GL_FALSE, orthoGraphProj.GetMatrixP());
+
+	loc = glGetUniformLocation(p_shader_program->program_id, "mode");
+	glUniform1i(loc, 1);
+
+	CHECKERROR;
+	//Redraw the scene every frame
+	pGameObjectManager->Draw(p_shader_program);
+	CHECKERROR;
+	SDL_GL_SwapWindow(pWindow);
+	p_shader_program->Unuse();
+}
+
+int main(int argc, char* args[])
+{
+	AllocConsole();
+	bool appIsRunning = true;
+	int mode = 1;
+	unsigned short curr_level = 1;
+	unsigned int window_width = WORLD_WIDTH;
+	unsigned int window_height = WORLD_HEIGHT;
+
+	CreateManagers();
+
+	GameObjectFactory obj_factory;
+
+	if (SDL_GL_Init())
+		SDL_Log("Initialization Complete");
+	else {
+		SDL_Log("Initialization Failed");
+		return 1;
+	}
+
+	ShaderProgram *p_shader_program = GL_Program_init();
 	//Load resources using the resource manager
 
 	obj_factory.CreateLevel(curr_level);
@@ -154,65 +212,21 @@ int main(int argc, char* args[])
 	while(true == appIsRunning)
 	{
 		pFrameRateController->start_game_loop();
-		SDL_Event e;
-		while (SDL_PollEvent(&e) != 0)
-		{
-			//User requests quit
-			if (e.type == SDL_QUIT)
-			{
-				appIsRunning = false;
-			}
-		}
-		//const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
-		pInputManager->Update();
-
-		if (pInputManager->isKeyPressed(SDL_SCANCODE_ESCAPE)) {
+		if (pInputManager->Update() == false) {
 			appIsRunning = false;
 		}
 
-		if (pInputManager->isKeyTriggered(SDL_SCANCODE_SPACE)) {
-			mode = (mode + 1) % 2;
-		}
-
-		shader_program.Use();
-		glClearColor(0.0, 1.0, 1.0, 1.0);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		Matrix3D orthoGraphProj = OrthographicProj(0, window_width, 0, window_height, 0, 1.0);
-		GLuint loc = glGetUniformLocation(shader_program.program_id, "orthoGraphProj");
-		glUniformMatrix4fv(loc, 1, GL_FALSE, orthoGraphProj.GetMatrixP());
-		
-		loc = glGetUniformLocation(shader_program.program_id , "mode");
-		glUniform1i(loc, mode);
 
 		pGameObjectManager->Update();
 		p_event_manager->Update();
-		CHECKERROR;
-		//Redraw the scene every frame
-		//SDL_BlitSurface(pResourceManager->get_resource("Background"), NULL, pWindowSurface, NULL);
-		pGameObjectManager->Draw(&shader_program);
-		//SDL_UpdateWindowSurface(pWindow);
-		CHECKERROR;
-		SDL_GL_SwapWindow(pWindow);
+
+		DrawScene(p_shader_program);
 		//Limit the framerate
-		shader_program.Unuse();
 		pFrameRateController->end_game_loop();
 	}
 
-	delete pInputManager;
-	delete pResourceManager;
-	delete pFrameRateController;
-	pGameObjectManager->Cleanup();
-	delete pGameObjectManager;
-
-	SDL_FreeSurface(pWindowSurface);
-
-	// Close and destroy the window
-	SDL_DestroyWindow(pWindow);
-
-	// Quit SDL subsystems
-	SDL_Quit();
-	FreeConsole();
+	DeleteManagers();
+	CloseProgram();
 	return 0;
 }
