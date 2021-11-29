@@ -11,8 +11,10 @@ public:
 	void Clear();
 	void Push(BaseState* p_state);
 	void Pop();
+	~StateStackManager();
 private:
 	std::vector<BaseState*> state_stack;
+	std::vector<BaseState*> to_delete;
 };
 
 extern StateStackManager* p_statestack_manager;

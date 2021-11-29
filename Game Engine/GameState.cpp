@@ -1,13 +1,10 @@
-#include "StartState.h"
+#include "GameState.h"
 #include "GameObjectFactory.h"
 #include "EventManager.h"
 #include "InputManager.h"
 #include "GameManager.h"
 #include "Matrix3D.h"
 #include "Game.h"
-#include "StateStackManager.h"
-#include "GameState.h"
-#include "GameObjectManager.h"
 
 #include <GL\glew.h>
 #include <SDL_opengl.h>
@@ -15,29 +12,21 @@
 
 #define CHECKERROR {GLenum err = glGetError(); if (err != GL_NO_ERROR) { SDL_Log("OpenGL error (at line Main.cpp:%d): %s\n", __LINE__, glewGetErrorString(err));} }
 
-void StartState::Enter() {
+void GameState::Enter() {
 	GameObjectFactory obj_factory;
-	obj_factory.CreateLevel(0);
+	obj_factory.CreateLevel(p_game_manager->Level());
 }
 
-void StartState::Update() {
+void GameState::Update() {
 	if (pInputManager->Update() == false) {
 		p_game_manager->Quit();
 		return;
 	}
-
-	if (pInputManager->isKeyTriggered(SDL_SCANCODE_RETURN)) {
-		p_statestack_manager->Pop();
-		p_game_manager->SetLevel(1);
-		p_statestack_manager->Push(new GameState());
-		return;
-	}
-
 	pGameObjectManager->Update();
 	p_event_manager->Update();
 }
 
-void StartState::Render(ShaderProgram* p_program) {
+void GameState::Render(ShaderProgram* p_program) {
 	p_program->Use();
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -56,6 +45,6 @@ void StartState::Render(ShaderProgram* p_program) {
 	p_program->Unuse();
 }
 
-void StartState::Exit() {
-	pGameObjectManager->Cleanup();
+void GameState::Exit() {
+
 }

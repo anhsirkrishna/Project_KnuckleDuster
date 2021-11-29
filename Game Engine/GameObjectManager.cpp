@@ -49,5 +49,6 @@ void GameObjectManager::Cleanup() {
 			continue;
 
 		delete game_object_list[i];
+		game_object_list[i] = NULL;
 	}
 }

@@ -11,7 +11,16 @@ void StateStackManager::Render(ShaderProgram* p_program) {
 	}
 }
 void StateStackManager::Clear() {
-	state_stack.clear();
+	while (to_delete.size() > 0)
+	{
+		delete to_delete.back();
+		to_delete.pop_back();
+	}
+	while (state_stack.size() > 0)
+	{
+		delete state_stack.back();
+		state_stack.pop_back();
+	}
 }
 
 void StateStackManager::Push(BaseState* p_state) {
@@ -21,6 +30,10 @@ void StateStackManager::Push(BaseState* p_state) {
 
 void StateStackManager::Pop() {
 	state_stack.back()->Exit();
-	delete state_stack.back();
+	to_delete.push_back(state_stack.back());
 	state_stack.pop_back();
+}
+
+StateStackManager::~StateStackManager() {
+	Clear();
 }

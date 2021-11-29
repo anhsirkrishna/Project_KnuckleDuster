@@ -98,6 +98,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GLSprite.cpp" />
     <ClCompile Include="GLSpriteCreator.cpp" />
     <ClCompile Include="Hurtbox.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectFactory.h" />
     <ClInclude Include="GameObjectManager.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="GLSprite.h" />
     <ClInclude Include="GLSpriteCreator.h" />
     <ClInclude Include="Hurtbox.h" />

@@ -92,6 +92,9 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>gManagers</Filter>
     </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -187,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>gManagers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
