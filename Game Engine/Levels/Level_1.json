@@ -1,0 +1,94 @@
+{
+  "player": {
+    "HURTBOX": {
+      "coordinates": [ 200, 300, 90, 180 ]
+    },
+    "TRANSFORM":  {},
+    "CONTROLLER": {},
+    "GLSPRITE": {
+      "texture_name": "Camo",
+      "vertex_list": [
+          0,   0, 0,
+         90,   0, 0,
+         90, 180, 0,
+          0, 180, 0
+      ],
+      "color_list": [
+         40,  6,  55, 255,
+         40,  6,  55, 255,
+        185, 66, 245, 255,
+        185, 66, 245, 255
+      ],
+      "tex_coord_list": [
+        180, 360, 
+        270, 360,
+        270, 180,
+        180, 180
+      ]
+    }
+  },
+  "enemy1": {
+    "HURTBOX": {
+      "coordinates": [ 400, 200, 90, 180 ]
+    },
+    "TRANSFORM":  {},
+    "UPDOWN": {
+      "range": 350,
+      "move_rate": 5,
+      "subscribed": true
+    },
+    "GLSPRITE": {
+      "texture_name": "brick",
+      "vertex_list": [
+          0,   0, 0,
+         90,   0, 0,
+         90, 180, 0,
+          0, 180, 0
+      ],
+      "color_list": [
+        255,  6,  55, 255,
+        255,  6,  55, 255,
+        185, 66, 245, 255,
+        185, 66, 245, 255
+      ],
+      "tex_coord_list": [
+        180, 360, 
+        270, 360,
+        270, 180,
+        180, 180
+      ]
+    }
+  },
+  "enemy2": {
+    "HURTBOX": {
+      "coordinates": [ 600, 300, 90, 180 ]
+    },
+    "TRANSFORM":  {},
+    "UPDOWN": {
+      "range": 350,
+      "move_rate": 10,
+      "subscribed":  false
+    },
+    "GLSPRITE": {
+      "texture_name": "brick",
+      "vertex_list": [
+          0,   0, 0,
+         90,   0, 0,
+         90, 180, 0,
+          0, 180, 0
+      ],
+      "color_list": [
+        255,  6,  55, 255,
+        255,  6,  55, 255,
+        185, 66, 245, 255,
+        185, 66, 245, 255
+      ],
+      "tex_coord_list": [
+        180, 360, 
+        270, 360,
+        270, 180,
+        180, 180
+      ]
+    }
+  }
+}

@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Component.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="UpDown.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectFactory.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentFactory.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteCreator.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformCreator.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="ControllerCreator.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="UpDownCreator.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentCreator.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderProgram.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>gManagers</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>gManagers</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameRateController.cpp">
+      <Filter>gManagers</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="GLSprite.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GLSpriteCreator.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix3D.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Hurtbox.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="HurtboxCreator.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Events.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>gManagers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Component.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="UpDown.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectFactory.h">
+      <Filter>Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentFactory.h">
+      <Filter>Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteCreator.h">
+      <Filter>Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformCreator.h">
+      <Filter>Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="ControllerCreator.h">
+      <Filter>Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="UpDownCreator.h">
+      <Filter>Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentCreator.h">
+      <Filter>Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderProgram.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>gManagers</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>gManagers</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameRateController.h">
+      <Filter>gManagers</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="GLSprite.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GLSpriteCreator.h">
+      <Filter>Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix3D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Hurtbox.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="HurtboxCreator.h">
+      <Filter>Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Events.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>gManagers</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseState.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Components">
+      <UniqueIdentifier>{a6f565c3-51a7-40f8-80f1-c16867cf0950}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{0c3bbcec-8c47-4b8e-9703-149b1b377677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Factories">
+      <UniqueIdentifier>{d61fbaea-bdde-4945-9aa9-0a1d197c67e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Util">
+      <UniqueIdentifier>{f4b3afac-58aa-4147-9062-16ff8939304f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gManagers">
+      <UniqueIdentifier>{5df17d63-c5e4-4d62-934e-3ceffd5c3309}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{af4561d5-1ab1-4090-96b6-8aa8b7f409da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{303d0e3d-5772-4c59-b8d2-ab4d392ac531}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{fe69e036-9435-423e-a99b-d74e79bcbd05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Levels">
+      <UniqueIdentifier>{36536e31-2ba0-4b1a-9d9a-c2db55cef05a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Levels\Level_1.json">
+      <Filter>Levels</Filter>
+    </None>
+    <None Include="final.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="final.frag">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>
