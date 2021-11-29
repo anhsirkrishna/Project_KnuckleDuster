@@ -83,6 +83,15 @@
     <ClCompile Include="EventManager.cpp">
       <Filter>gManagers</Filter>
     </ClCompile>
+    <ClCompile Include="StartState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="StateStackManager.cpp">
+      <Filter>gManagers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>gManagers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -170,6 +179,15 @@
     <ClInclude Include="BaseState.h">
       <Filter>Util</Filter>
     </ClInclude>
+    <ClInclude Include="StateStackManager.h">
+      <Filter>gManagers</Filter>
+    </ClInclude>
+    <ClInclude Include="StartState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>gManagers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -199,6 +217,12 @@
     <Filter Include="Levels">
       <UniqueIdentifier>{36536e31-2ba0-4b1a-9d9a-c2db55cef05a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{1e3d3850-91ea-4678-9105-f7f331cf4adc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UIComponents">
+      <UniqueIdentifier>{0972afb2-6034-48c5-bcaf-de39ddbca612}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Levels\Level_1.json">
@@ -209,6 +233,9 @@
     </None>
     <None Include="final.frag">
       <Filter>Shaders</Filter>
+    </None>
+    <None Include="Levels\Level_0.json">
+      <Filter>Levels</Filter>
     </None>
   </ItemGroup>
 </Project>

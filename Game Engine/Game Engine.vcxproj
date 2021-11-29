@@ -94,6 +94,7 @@
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="Events.cpp" />
     <ClCompile Include="FrameRateController.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
@@ -108,6 +109,8 @@
     <ClCompile Include="HurtboxCreator.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteCreator.cpp" />
+    <ClCompile Include="StartState.cpp" />
+    <ClCompile Include="StateStackManager.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="TransformCreator.cpp" />
@@ -125,6 +128,7 @@
     <ClInclude Include="Events.h" />
     <ClInclude Include="FrameRateController.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectFactory.h" />
     <ClInclude Include="GameObjectManager.h" />
@@ -139,6 +143,8 @@
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteCreator.h" />
+    <ClInclude Include="StartState.h" />
+    <ClInclude Include="StateStackManager.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TransformCreator.h" />
@@ -148,6 +154,7 @@
   <ItemGroup>
     <None Include="final.frag" />
     <None Include="final.vert" />
+    <None Include="Levels\Level_0.json" />
     <None Include="Levels\Level_1.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

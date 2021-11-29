@@ -17,6 +17,9 @@
 #include "GameObjectFactory.h"
 #include "Matrix3D.h"
 #include "EventManager.h"
+#include "StateStackManager.h"
+#include "StartState.h"
+#include "GameManager.h"
 
 FILE _iob[] = { *stdin, *stdout, *stderr };
 
@@ -43,12 +46,14 @@ ResourceManager* pResourceManager;
 GameObjectManager* pGameObjectManager;
 FrameRateController* pFrameRateController;
 EventManager* p_event_manager;
+StateStackManager* p_statestack_manager;
+GameManager* p_game_manager;
 
-unsigned int WORLD_WIDTH = 900;
-unsigned int WORLD_HEIGHT = 600;
+unsigned int WORLD_WIDTH = 720;
+unsigned int WORLD_HEIGHT = 480;
 
-unsigned int WINDOW_WIDTH = 900;
-unsigned int WINDOW_HEIGHT = 600;
+unsigned int WINDOW_WIDTH = 720;
+unsigned int WINDOW_HEIGHT = 480;
 
 //Global SDL vars
 SDL_Window* pWindow;
@@ -62,6 +67,8 @@ void CreateManagers() {
 	pResourceManager = new ResourceManager();
 	pGameObjectManager = new GameObjectManager();
 	p_event_manager = new EventManager();
+	p_statestack_manager = new StateStackManager();
+	p_game_manager = new GameManager();
 }
 
 void DeleteManagers() {
@@ -70,6 +77,8 @@ void DeleteManagers() {
 	delete pFrameRateController;
 	pGameObjectManager->Cleanup();
 	delete pGameObjectManager;
+	delete p_statestack_manager;
+	delete p_game_manager;
 }
 
 //Function to initalize SDL and Open GL 
@@ -164,23 +173,7 @@ ShaderProgram* GL_Program_init() {
 }
 
 void DrawScene(ShaderProgram * p_shader_program) {
-	p_shader_program->Use();
-	glClearColor(0.0, 1.0, 1.0, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	Matrix3D orthoGraphProj = OrthographicProj(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT, 0, 1.0);
-	GLuint loc = glGetUniformLocation(p_shader_program->program_id, "orthoGraphProj");
-	glUniformMatrix4fv(loc, 1, GL_FALSE, orthoGraphProj.GetMatrixP());
-
-	loc = glGetUniformLocation(p_shader_program->program_id, "mode");
-	glUniform1i(loc, 1);
-
-	CHECKERROR;
-	//Redraw the scene every frame
-	pGameObjectManager->Draw(p_shader_program);
-	CHECKERROR;
-	SDL_GL_SwapWindow(pWindow);
-	p_shader_program->Unuse();
+	
 }
 
 int main(int argc, char* args[])
@@ -206,23 +199,18 @@ int main(int argc, char* args[])
 	ShaderProgram *p_shader_program = GL_Program_init();
 	//Load resources using the resource manager
 
-	obj_factory.CreateLevel(curr_level);
+	p_statestack_manager->Push(new StartState());
 
 	// Game loop
-	while(true == appIsRunning)
+	while(p_game_manager->Status())
 	{
 		pFrameRateController->start_game_loop();
 
-		if (pInputManager->Update() == false) {
-			appIsRunning = false;
-		}
+		p_statestack_manager->Update();
 
-
-		pGameObjectManager->Update();
-		p_event_manager->Update();
-
-		DrawScene(p_shader_program);
-		//Limit the framerate
+		p_statestack_manager->Render(p_shader_program);
+		
+		SDL_GL_SwapWindow(pWindow);
 		pFrameRateController->end_game_loop();
 	}
 
