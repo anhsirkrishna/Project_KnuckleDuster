@@ -105,6 +105,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Matrix3D.cpp" />
+    <ClCompile Include="Panel.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="HurtboxCreator.cpp" />
@@ -112,6 +113,7 @@
     <ClCompile Include="SpriteCreator.cpp" />
     <ClCompile Include="StartState.cpp" />
     <ClCompile Include="StateStackManager.cpp" />
+    <ClCompile Include="Textbox.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="TransformCreator.cpp" />
@@ -141,12 +143,14 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Matrix3D.h" />
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="Panel.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteCreator.h" />
     <ClInclude Include="StartState.h" />
     <ClInclude Include="StateStackManager.h" />
+    <ClInclude Include="Textbox.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TransformCreator.h" />

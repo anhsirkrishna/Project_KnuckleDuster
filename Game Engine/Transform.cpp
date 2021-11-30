@@ -2,6 +2,8 @@
 
 const float PI = 3.14159f;
 
+Transform::Transform() : Component("TRANSFORM"), position(), rotation(0) {}
+
 SDL_Rect Transform::GetPosition() {
 	return position;
 }

@@ -8,10 +8,10 @@ class Hurtbox;
 
 class Controller : public Component {
 public:
+	Controller();
 	virtual void HandleInput();
 	virtual void Link();
 	void Serialize(json json_object);
 private:
-	unsigned short direction;
 	Hurtbox* p_owner_hurtbox;
 };

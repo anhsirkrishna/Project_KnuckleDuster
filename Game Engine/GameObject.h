@@ -12,7 +12,7 @@ class GameObject {
 	public:
 		GameObject(std::string object_name);
 		Component* HasComponent(std::string component_name) const;
-		void AddComponent(std::string component_name, Component* component);
+		void AddComponent(Component* component);
 		void Update();
 		void HandleInput();
 		void HandleEvent(TimedEvent* p_event);
@@ -20,6 +20,6 @@ class GameObject {
 		void LinkComponents();
 		void Draw(ShaderProgram* program);
 	private:
-		std::unordered_map<std::string, Component*> component_list;
+		std::vector<Component*> component_list;
 		std::string name;
 };

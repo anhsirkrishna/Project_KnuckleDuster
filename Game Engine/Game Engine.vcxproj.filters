@@ -95,6 +95,12 @@
     <ClCompile Include="GameState.cpp">
       <Filter>States</Filter>
     </ClCompile>
+    <ClCompile Include="Textbox.cpp">
+      <Filter>UIComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Panel.cpp">
+      <Filter>UIComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -193,6 +199,12 @@
     </ClInclude>
     <ClInclude Include="GameState.h">
       <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Textbox.h">
+      <Filter>UIComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Panel.h">
+      <Filter>UIComponents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

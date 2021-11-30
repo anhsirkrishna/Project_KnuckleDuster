@@ -7,6 +7,7 @@
 
 class Sprite : public Component {
 public:
+	Sprite();
 	SDL_Surface* GetImage();
 	void SetImage(SDL_Surface* p_sprite);
 	void Serialize(json json_object);

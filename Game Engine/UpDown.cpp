@@ -3,6 +3,9 @@
 #include "Hurtbox.h"
 #include "EventManager.h"
 
+UpDown::UpDown() : Component("UPDOWN"), move_rate(0), range(0), direction(1), 
+					subscribed(false),  move(true), p_owner_hurtbox(NULL) {}
+
 void UpDown::Update() {
 	if (move) {
 		SDL_Rect currPosition = p_owner_hurtbox->GetPosition();

@@ -6,6 +6,7 @@ class Hurtbox;
 
 class UpDown : public Component {
 public:
+	UpDown();
 	virtual void Update();
 	virtual void Link();
 	void Serialize(json json_object);
@@ -13,7 +14,7 @@ public:
 private:
 	unsigned int move_rate;
 	int range;
-	int direction = 1;
+	int direction;
 	bool subscribed;
 	bool move;
 	Hurtbox* p_owner_hurtbox;

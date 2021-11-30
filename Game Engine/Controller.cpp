@@ -2,6 +2,8 @@
 #include "GameObject.h"
 #include "Hurtbox.h"
 
+Controller::Controller() : Component("CONTROLLER"), p_owner_hurtbox(NULL) { }
+
 void Controller::HandleInput() {
 	SDL_Rect currPosition = p_owner_hurtbox->GetPosition();
 

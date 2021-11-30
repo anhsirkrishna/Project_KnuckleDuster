@@ -6,6 +6,7 @@
 
 class Hurtbox : public Component {
 public:
+	Hurtbox();
 	void Serialize(json json_object);
 	virtual void Update();
 	virtual void RegisterObjectComponents(GameObject** game_object_list, unsigned int list_size, unsigned int self_index);

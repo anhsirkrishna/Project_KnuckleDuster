@@ -172,10 +172,6 @@ ShaderProgram* GL_Program_init() {
 	return p_shader_program;
 }
 
-void DrawScene(ShaderProgram * p_shader_program) {
-	
-}
-
 int main(int argc, char* args[])
 {
 	AllocConsole();

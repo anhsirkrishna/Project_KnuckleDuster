@@ -12,6 +12,7 @@
 
 class GLSprite : public Component {
 public:
+	GLSprite();
 	Texture* GetTexture();
 	void SetTexture(Texture* _p_texture);
 	void Serialize(json json_object);

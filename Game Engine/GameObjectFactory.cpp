@@ -11,7 +11,6 @@ GameObject* GameObjectFactory::CreateGameObject(std::string object_name, json co
 		component_name = element.first;
 		component_data = element.second;
 		new_object->AddComponent(
-			component_name,
 			component_factory.Create(component_name, component_data)
 		);
 	}

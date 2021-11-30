@@ -31,6 +31,8 @@ void ConvertTextureCoords(std::vector<float>& tex_coords, float tex_width, float
 	}
 }
 
+GLSprite::GLSprite() : Component("GLSPRITE"), p_texture(NULL), vao_id(0), vertex_count(0), p_owner_transform(NULL) { }
+
 Texture* GLSprite::GetTexture() {
 	return p_texture;
 }

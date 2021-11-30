@@ -1,6 +1,8 @@
 #include "Sprite.h"
 #include "GameObject.h"
 
+Sprite::Sprite(): Component("SPRITE"), p_sprite_image(NULL) {}
+
 SDL_Surface* Sprite::GetImage() {
 	return p_sprite_image;
 }

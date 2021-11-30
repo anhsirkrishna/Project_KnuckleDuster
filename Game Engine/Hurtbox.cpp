@@ -4,6 +4,9 @@
 #include "Collision.h"
 #include "EventManager.h"
 
+
+Hurtbox::Hurtbox() : Component("HURTBOX"), box(),  p_owner_transform(NULL) {}
+
 SDL_Rect Hurtbox::GetPosition() {
 	return box;
 }

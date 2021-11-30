@@ -6,6 +6,7 @@
 
 class Transform : public Component {
 public:
+	Transform();
 	SDL_Rect GetPosition();
 	float GetRotation();
 	void SetPosition(SDL_Rect new_position);
