@@ -1,7 +1,5 @@
 #include "GLSprite.h"
 
-#define CHECKERROR {GLenum err = glGetError(); if (err != GL_NO_ERROR) { SDL_Log("OpenGL error (at line GLSprite.cpp:%d): %s\n", __LINE__, glewGetErrorString(err)); exit(-1);} }
-
 /*Helper function to convert colors from 0-255 range to 0-1 range*/
 void ConvertColor(std::vector<float>& colors) {
 	unsigned int size = colors.size();
@@ -14,7 +12,7 @@ void ConvertColor(std::vector<float>& colors) {
 //Also swaps the coordinates for use
 void ConvertTextureCoords(std::vector<float>& tex_coords, float tex_width, float tex_height) {
 	unsigned int size = tex_coords.size();
-	for (unsigned int i = 0; i < size; i+=2) {
+	for (unsigned int i = 0; i < size; i += 2) {
 		tex_coords[i] = tex_coords[i] / tex_width;
 		tex_coords[i + 1] = tex_coords[i + 1] / tex_height;
 	}
@@ -22,14 +20,16 @@ void ConvertTextureCoords(std::vector<float>& tex_coords, float tex_width, float
 	float temp;
 	for (unsigned int i = 0; i < size; i += size / 2) {
 		temp = tex_coords[i];
-		tex_coords[i] = tex_coords[i+2];
-		tex_coords[i+2] = temp;
+		tex_coords[i] = tex_coords[i + 2];
+		tex_coords[i + 2] = temp;
 
-		temp = tex_coords[i+1];
-		tex_coords[i+1] = tex_coords[i+3];
-		tex_coords[i+3] = temp;
+		temp = tex_coords[i + 1];
+		tex_coords[i + 1] = tex_coords[i + 3];
+		tex_coords[i + 3] = temp;
 	}
 }
+
+#define CHECKERROR {GLenum err = glGetError(); if (err != GL_NO_ERROR) { SDL_Log("OpenGL error (at line GLSprite.cpp:%d): %s\n", __LINE__, glewGetErrorString(err)); exit(-1);} }
 
 GLSprite::GLSprite() : Component("GLSPRITE"), p_texture(NULL), vao_id(0), vertex_count(0), p_owner_transform(NULL) { }
 
