@@ -2,17 +2,7 @@
 #include "Texture.h"
 #include "ShaderProgram.h"
 #include "ResourceManager.h"
-
-//Helper fuction to convert textures from pixel coords to 0-1 range
-//Also swaps the coordinates for use
-void ConvertTextureCoords(GLfloat* tex_coords, float tex_width, float tex_height) {
-	unsigned int size = 8;
-	for (unsigned int i = 0; i < size; i += 2) {
-		tex_coords[i] = tex_coords[i] / tex_width;
-		tex_coords[i + 1] = tex_coords[i + 1] / tex_height;
-	}
-
-}
+#include "Util.h"
 
 #define CHECKERROR {GLenum err = glGetError(); if (err != GL_NO_ERROR) { SDL_Log("OpenGL error (at line GLSprite.cpp:%d): %s\n", __LINE__, glewGetErrorString(err)); exit(-1);} }
 
@@ -118,17 +108,19 @@ void Panel::Toggle() {
 }
 
 void Panel::Draw(ShaderProgram* p_program) {
-	GLuint loc;
+	if (!visible)
+		return;
 
 	glBindVertexArray(vao_id);
 	CHECKERROR;
 
 	glActiveTexture(GL_TEXTURE2); // Activate texture unit 2
 	glBindTexture(GL_TEXTURE_2D, p_texture->texture_id); // Load texture into it
-	loc = glGetUniformLocation(p_program->program_id, "texture_map");
+	GLuint loc = glGetUniformLocation(p_program->program_id, "texture_map");
 	glUniform1i(loc, 2); // Tell shader texture is in unit 2
 	CHECKERROR;
 
+	//Draw each section of the panel individually
 	for (int i = 0; i < grid_height; i++) {
 		for (int j = 0; j < grid_width; j++) {
 			DrawSection(p_program, j, i);
@@ -142,6 +134,8 @@ void Panel::Draw(ShaderProgram* p_program) {
 void Panel::DrawSection(ShaderProgram* p_program, int grid_w, int grid_h) {
 	GLuint loc;
 
+	//dimensions.xy is the top left corner of the panel
+	//each section is an offset of 16 pixels
 	translate_matrix.SetVal(0, 3, dimensions.x + (grid_w * 16));
 	translate_matrix.SetVal(1, 3, dimensions.y + (grid_h * 16));
 	

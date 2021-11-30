@@ -101,6 +101,9 @@
     <ClCompile Include="Panel.cpp">
       <Filter>UIComponents</Filter>
     </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -205,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="Panel.h">
       <Filter>UIComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

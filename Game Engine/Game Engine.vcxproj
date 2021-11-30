@@ -119,6 +119,7 @@
     <ClCompile Include="TransformCreator.cpp" />
     <ClCompile Include="UpDown.cpp" />
     <ClCompile Include="UpDownCreator.cpp" />
+    <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseState.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="TransformCreator.h" />
     <ClInclude Include="UpDown.h" />
     <ClInclude Include="UpDownCreator.h" />
+    <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="final.frag" />
