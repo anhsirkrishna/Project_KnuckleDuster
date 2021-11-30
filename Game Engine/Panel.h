@@ -6,6 +6,7 @@
 class Texture;
 
 class Panel : public Component {
+public:
 	Panel(float x, float y, float width, float height);
 	void Draw(ShaderProgram* p_program);
 	void DrawSection(ShaderProgram* p_program, int grid_w, int grid_h);

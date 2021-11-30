@@ -17,6 +17,7 @@ void ConvertTextureCoords(std::vector<float>& tex_coords, float tex_width, float
 		tex_coords[i + 1] = tex_coords[i + 1] / tex_height;
 	}
 
+	/*
 	float temp;
 	for (unsigned int i = 0; i < size; i += size / 2) {
 		temp = tex_coords[i];
@@ -26,7 +27,7 @@ void ConvertTextureCoords(std::vector<float>& tex_coords, float tex_width, float
 		temp = tex_coords[i + 1];
 		tex_coords[i + 1] = tex_coords[i + 3];
 		tex_coords[i + 3] = temp;
-	}
+	}*/
 }
 
 #define CHECKERROR {GLenum err = glGetError(); if (err != GL_NO_ERROR) { SDL_Log("OpenGL error (at line GLSprite.cpp:%d): %s\n", __LINE__, glewGetErrorString(err)); exit(-1);} }
@@ -66,6 +67,11 @@ void GLSprite::Draw(ShaderProgram* program) {
 	glBindTexture(GL_TEXTURE_2D, p_texture->texture_id); // Load texture into it
 	loc = glGetUniformLocation(program->program_id, "texture_map");
 	glUniform1i(loc, 2); // Tell shader texture is in unit 2
+	CHECKERROR;
+
+	GLfloat tex_offset[2] = { 0.0, 0.0 };
+	loc = glGetUniformLocation(program->program_id, "tex_offset");
+	glUniform2fv(loc, 1, &(tex_offset[0]));
 	CHECKERROR;
 
 	glBindVertexArray(vao_id);

@@ -8,6 +8,7 @@
 #include "StateStackManager.h"
 #include "GameState.h"
 #include "GameObjectManager.h"
+#include "Panel.h"
 
 #include <GL\glew.h>
 #include <SDL_opengl.h>
@@ -18,6 +19,10 @@
 void StartState::Enter() {
 	GameObjectFactory obj_factory;
 	obj_factory.CreateLevel(0);
+
+	GameObject *ui_obj = new GameObject("UI_panel");
+	ui_obj->AddComponent(new Panel(200, 200, 8, 4));
+	pGameObjectManager->AddGameObject(ui_obj);
 }
 
 void StartState::Update() {
@@ -42,7 +47,7 @@ void StartState::Render(ShaderProgram* p_program) {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	Matrix3D orthoGraphProj = OrthographicProj(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT, 0, 1.0);
+	Matrix3D orthoGraphProj = OrthographicProj(0, WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0, 1.0);
 	GLuint loc = glGetUniformLocation(p_program->program_id, "orthoGraphProj");
 	glUniformMatrix4fv(loc, 1, GL_FALSE, orthoGraphProj.GetMatrixP());
 

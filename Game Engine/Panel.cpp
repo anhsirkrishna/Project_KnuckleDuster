@@ -12,16 +12,6 @@ void ConvertTextureCoords(GLfloat* tex_coords, float tex_width, float tex_height
 		tex_coords[i + 1] = tex_coords[i + 1] / tex_height;
 	}
 
-	float temp;
-	for (unsigned int i = 0; i < size; i += size / 2) {
-		temp = tex_coords[i];
-		tex_coords[i] = tex_coords[i + 2];
-		tex_coords[i + 2] = temp;
-
-		temp = tex_coords[i + 1];
-		tex_coords[i + 1] = tex_coords[i + 3];
-		tex_coords[i + 3] = temp;
-	}
 }
 
 #define CHECKERROR {GLenum err = glGetError(); if (err != GL_NO_ERROR) { SDL_Log("OpenGL error (at line GLSprite.cpp:%d): %s\n", __LINE__, glewGetErrorString(err)); exit(-1);} }
@@ -36,8 +26,8 @@ Panel::Panel(float x, float y, float width, float height) : Component("PANEL"), 
 	for (unsigned int i = 0; i < 16; ++i)
 		color_coords[i] = 1.0;
 
-	pResourceManager->add_texture("Panel");
-	p_texture = pResourceManager->get_texture("Panel");
+	pResourceManager->add_texture("GUI");
+	p_texture = pResourceManager->get_texture("GUI");
 
 	//Texture coordiantes taken according to GUI_numbered_16.png (check resources for reference)
 	//Tex coord upper left
@@ -53,8 +43,8 @@ Panel::Panel(float x, float y, float width, float height) : Component("PANEL"), 
 	tex_coords[5] = 48;
 
 	//Tex coord upper left
-	tex_coords[4] = 16;
-	tex_coords[5] = 32;
+	tex_coords[6] = 16;
+	tex_coords[7] = 32;
 	
 	tex_coords_offset[0] = tex_coords_offset[1] = 0.0;
 
@@ -62,15 +52,12 @@ Panel::Panel(float x, float y, float width, float height) : Component("PANEL"), 
 	for (unsigned int i = 0; i < 18; i+=2) {
 		tex_coords_offset[i] = temp_offset_x;
 		tex_coords_offset[i + 1] = temp_offset_y;
-		temp_offset_x += 16;
+		temp_offset_x += 16.0;
 		if ((i+2) % 3 == 0) {
-			temp_offset_x -= 32;
-			temp_offset_y += 16;
+			temp_offset_x -= 48.0;
+			temp_offset_y += 16.0;
 		}
 	}
-
-	translate_matrix.SetVal(0, 3, dimensions.x);
-	translate_matrix.SetVal(1, 3, dimensions.y);
 
 	//Create a VAO and put the ID in vao_id
 	glGenVertexArrays(1, &vao_id);
@@ -133,34 +120,47 @@ void Panel::Toggle() {
 void Panel::Draw(ShaderProgram* p_program) {
 	GLuint loc;
 
+	glBindVertexArray(vao_id);
+	CHECKERROR;
+
 	glActiveTexture(GL_TEXTURE2); // Activate texture unit 2
 	glBindTexture(GL_TEXTURE_2D, p_texture->texture_id); // Load texture into it
 	loc = glGetUniformLocation(p_program->program_id, "texture_map");
 	glUniform1i(loc, 2); // Tell shader texture is in unit 2
 	CHECKERROR;
-	
-	loc = glGetUniformLocation(p_program->program_id, "translateMatrix");
-	glUniformMatrix4fv(loc, 1, GL_FALSE, translate_matrix.GetMatrixP());
-	CHECKERROR;
 
-	glBindVertexArray(vao_id);
-	CHECKERROR;
-	glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, NULL);
+	for (int i = 0; i < grid_height; i++) {
+		for (int j = 0; j < grid_width; j++) {
+			DrawSection(p_program, j, i);
+		}
+	}
 
 	glBindVertexArray(0);
 }
 
 //Draws a section of the panel at the grid position grid_w, grid_h
 void Panel::DrawSection(ShaderProgram* p_program, int grid_w, int grid_h) {
+	GLuint loc;
+
 	translate_matrix.SetVal(0, 3, dimensions.x + (grid_w * 16));
-	translate_matrix.SetVal(1, 3, dimensions.y + (grid_w * 16));
+	translate_matrix.SetVal(1, 3, dimensions.y + (grid_h * 16));
 	
 	GLfloat tex_offset_x, tex_offset_y;
 	CalculateTexOffset(grid_w, grid_h, tex_offset_x, tex_offset_y);
-
+	//SDL_Log("Texoffset x:%d, offset y:%d \n", tex_offset_x, tex_offset_x);
 	GLfloat tex_offset[2];
-	tex_offset[0] = tex_offset_x;
-	tex_offset[1] = tex_offset_y;
+	tex_offset[0] = tex_offset_x / p_texture->width;
+	tex_offset[1] = tex_offset_y / p_texture->height;
+
+	loc = glGetUniformLocation(p_program->program_id, "translateMatrix");
+	glUniformMatrix4fv(loc, 1, GL_FALSE, translate_matrix.GetMatrixP());
+	CHECKERROR;
+
+	loc = glGetUniformLocation(p_program->program_id, "tex_offset");
+	glUniform2fv(loc, 1, &(tex_offset[0]));
+	CHECKERROR;
+
+	glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, NULL);
 	
 }
 
@@ -169,35 +169,35 @@ void Panel::CalculateTexOffset(int grid_w, int grid_h, GLfloat& tex_offset_x, GL
 		tex_offset_x = tex_coords_offset[0];
 		tex_offset_y = tex_coords_offset[1];
 	}
-	else if (grid_w < grid_width && grid_h == 0) { //Upper middle texture 
+	else if (grid_w < (grid_width - 1) && grid_h == 0) { //Upper middle texture 
 		tex_offset_x = tex_coords_offset[2];
 		tex_offset_y = tex_coords_offset[3];
 	}
-	else if (grid_w < grid_width && grid_h == 0) { //Upper right corner texture 
+	else if (grid_w == (grid_width - 1) && grid_h == 0) { //Upper right corner texture 
 		tex_offset_x = tex_coords_offset[4];
 		tex_offset_y = tex_coords_offset[5];
 	}
-	else if (grid_w == 0 && grid_h < grid_height) { //Left middle texture 
+	else if (grid_w == 0 && grid_h < (grid_height - 1)) { //Left middle texture 
 		tex_offset_x = tex_coords_offset[6];
 		tex_offset_y = tex_coords_offset[7];
 	}
-	else if (grid_w < grid_width && grid_h < grid_height) { //Middle middle texture 
+	else if (grid_w < (grid_width - 1) && grid_h < (grid_height - 1)) { //Middle middle texture 
 		tex_offset_x = tex_coords_offset[8];
 		tex_offset_y = tex_coords_offset[9];
 	}
-	else if (grid_w == grid_width && grid_h < grid_height) { //Right middle texture 
+	else if (grid_w == (grid_width - 1) && grid_h < (grid_height - 1)) { //Right middle texture 
 		tex_offset_x = tex_coords_offset[10];
 		tex_offset_y = tex_coords_offset[11];
 	}
-	else if (grid_w == 0 && grid_h == grid_height) { //Lower left corner texture 
+	else if (grid_w == 0 && grid_h == (grid_height - 1)) { //Lower left corner texture 
 		tex_offset_x = tex_coords_offset[12];
 		tex_offset_y = tex_coords_offset[13];
 	}
-	else if (grid_w < grid_width && grid_h == grid_height) { //Lower middle texture 
+	else if (grid_w < (grid_width - 1) && grid_h == (grid_height - 1)) { //Lower middle texture 
 		tex_offset_x = tex_coords_offset[14];
 		tex_offset_y = tex_coords_offset[15];
 	}
-	else if (grid_w == grid_width && grid_h == grid_height) { //Lower right corner texture 
+	else if (grid_w == (grid_width - 1) && grid_h == (grid_height - 1)) { //Lower right corner texture 
 		tex_offset_x = tex_coords_offset[16];
 		tex_offset_y = tex_coords_offset[17];
 	}
