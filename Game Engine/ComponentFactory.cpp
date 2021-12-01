@@ -5,6 +5,7 @@
 #include "UpDownCreator.h"
 #include "GLSpriteCreator.h"
 #include "HurtboxCreator.h"
+#include "AnimationCreator.h"
 
 ComponentFactory::ComponentFactory() {
 	creator_map.insert(std::pair<std::string, ComponentCreator*>("TRANSFORM", new TransformCreator));
@@ -13,6 +14,7 @@ ComponentFactory::ComponentFactory() {
 	creator_map.insert(std::pair<std::string, ComponentCreator*>("UPDOWN", new UpDownCreator));
 	creator_map.insert(std::pair<std::string, ComponentCreator*>("GLSPRITE", new GLSpriteCreator));
 	creator_map.insert(std::pair<std::string, ComponentCreator*>("HURTBOX", new HurtboxCreator));
+	creator_map.insert(std::pair<std::string, ComponentCreator*>("ANIMATION", new AnimationCreator));
 }
 
 ComponentFactory::~ComponentFactory() {

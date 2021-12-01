@@ -31,7 +31,7 @@ void GameState::Render(ShaderProgram* p_program) {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	Matrix3D orthoGraphProj = OrthographicProj(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT, 0, 1.0);
+	Matrix3D orthoGraphProj = OrthographicProj(0, WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0, 1.0);
 	GLuint loc = glGetUniformLocation(p_program->program_id, "orthoGraphProj");
 	glUniformMatrix4fv(loc, 1, GL_FALSE, orthoGraphProj.GetMatrixP());
 

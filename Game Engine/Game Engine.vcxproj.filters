@@ -104,6 +104,12 @@
     <ClCompile Include="Util.cpp">
       <Filter>Util</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationCreator.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -211,6 +217,12 @@
     </ClInclude>
     <ClInclude Include="Util.h">
       <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationCreator.h">
+      <Filter>Factories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

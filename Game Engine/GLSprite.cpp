@@ -16,23 +16,13 @@ void ConvertTextureCoords(std::vector<float>& tex_coords, float tex_width, float
 		tex_coords[i] = tex_coords[i] / tex_width;
 		tex_coords[i + 1] = tex_coords[i + 1] / tex_height;
 	}
-
-	/*
-	float temp;
-	for (unsigned int i = 0; i < size; i += size / 2) {
-		temp = tex_coords[i];
-		tex_coords[i] = tex_coords[i + 2];
-		tex_coords[i + 2] = temp;
-
-		temp = tex_coords[i + 1];
-		tex_coords[i + 1] = tex_coords[i + 3];
-		tex_coords[i + 3] = temp;
-	}*/
 }
 
 #define CHECKERROR {GLenum err = glGetError(); if (err != GL_NO_ERROR) { SDL_Log("OpenGL error (at line GLSprite.cpp:%d): %s\n", __LINE__, glewGetErrorString(err)); exit(-1);} }
 
-GLSprite::GLSprite() : Component("GLSPRITE"), p_texture(NULL), vao_id(0), vertex_count(0), p_owner_transform(NULL) { }
+GLSprite::GLSprite() : Component("GLSPRITE"), p_texture(NULL), vao_id(0), vertex_count(0), p_owner_transform(NULL) { 
+	tex_offset[0] = tex_offset[1] = 0;
+}
 
 Texture* GLSprite::GetTexture() {
 	return p_texture;
@@ -69,9 +59,12 @@ void GLSprite::Draw(ShaderProgram* program) {
 	glUniform1i(loc, 2); // Tell shader texture is in unit 2
 	CHECKERROR;
 
-	GLfloat tex_offset[2] = { 0.0, 0.0 };
+	GLfloat converted_tex_offset[2];
+	converted_tex_offset[0] = tex_offset[0] / p_texture->width;
+	converted_tex_offset[1] = tex_offset[1] / p_texture->height;
+
 	loc = glGetUniformLocation(program->program_id, "tex_offset");
-	glUniform2fv(loc, 1, &(tex_offset[0]));
+	glUniform2fv(loc, 1, &(converted_tex_offset[0]));
 	CHECKERROR;
 
 	glBindVertexArray(vao_id);
@@ -143,4 +136,9 @@ void GLSprite::Serialize(json json_object) {
 
 void GLSprite::Link() {
 	p_owner_transform = static_cast<Transform*>(GetOwner()->HasComponent("TRANSFORM"));
+}
+
+void GLSprite::SetTexOffset(GLfloat tex_offset_x, GLfloat tex_offset_y) {
+	tex_offset[0] = tex_offset_x;
+	tex_offset[1] = tex_offset_y;
 }
