@@ -16,10 +16,12 @@ class GameObject {
 		void Update();
 		void HandleInput();
 		void HandleEvent(TimedEvent* p_event);
-		void RegisterObjectComponents(GameObject **game_object_list, unsigned int list_size, unsigned int self_index);
 		void LinkComponents();
 		void Draw(ShaderProgram* program);
+		void AddState(std::string new_state);
+		void ChangeState(std::string new_state);
 	private:
-		std::vector<Component*> component_list;
 		std::string name;
+		std::unordered_map<std::string, std::vector<Component*>> component_list;
+		std::string current_state;
 };

@@ -15,10 +15,6 @@ GameObject* Component::GetOwner() {
 	return p_owner_object;
 }
 
-void Component::RegisterObjectComponents(GameObject **game_object_list, unsigned int list_size, unsigned int self_index) {
-
-}
-
 void Component::Update() {
 
 }

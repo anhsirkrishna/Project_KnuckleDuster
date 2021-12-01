@@ -168,6 +168,9 @@
     <None Include="final.vert" />
     <None Include="Levels\Level_0.json" />
     <None Include="Levels\Level_1.json" />
+    <None Include="Levels\Level_2.json" />
+    <None Include="Obj_defs\background.json" />
+    <None Include="Obj_defs\player.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

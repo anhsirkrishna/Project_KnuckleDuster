@@ -1,26 +1,6 @@
 {
   "background": {
-    "GLSPRITE": {
-      "texture_name": "Wasteland_Sky",
-      "vertex_list": [
-           0,  40, 0,
-           0, 440, 0,
-         720, 440, 0,
-         720,  40, 0
-      ],
-      "color_list": [
-         40,  6,  55, 255,
-         40,  6,  55, 255,
-        185, 66, 245, 255,
-        185, 66, 245, 255
-      ],
-      "tex_coord_list": [
-           0,   0,
-           0, 256,
-         512, 256,
-         512, 0
-      ]
-    },
-  "TRANSFORM":  {}
+    "obj_def": "background",
+    "default_state": "DEFAULT"
   }
 }

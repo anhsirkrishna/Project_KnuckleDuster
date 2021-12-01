@@ -83,17 +83,11 @@
     <ClCompile Include="EventManager.cpp">
       <Filter>gManagers</Filter>
     </ClCompile>
-    <ClCompile Include="StartState.cpp">
-      <Filter>States</Filter>
-    </ClCompile>
     <ClCompile Include="StateStackManager.cpp">
       <Filter>gManagers</Filter>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>gManagers</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState.cpp">
-      <Filter>States</Filter>
     </ClCompile>
     <ClCompile Include="Textbox.cpp">
       <Filter>UIComponents</Filter>
@@ -109,6 +103,12 @@
     </ClCompile>
     <ClCompile Include="AnimationCreator.cpp">
       <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>States\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="StartState.cpp">
+      <Filter>States\GameStates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -200,14 +200,8 @@
     <ClInclude Include="StateStackManager.h">
       <Filter>gManagers</Filter>
     </ClInclude>
-    <ClInclude Include="StartState.h">
-      <Filter>States</Filter>
-    </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>gManagers</Filter>
-    </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>States</Filter>
     </ClInclude>
     <ClInclude Include="Textbox.h">
       <Filter>UIComponents</Filter>
@@ -223,6 +217,12 @@
     </ClInclude>
     <ClInclude Include="AnimationCreator.h">
       <Filter>Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>States\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="StartState.h">
+      <Filter>States\GameStates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +259,12 @@
     <Filter Include="UIComponents">
       <UniqueIdentifier>{0972afb2-6034-48c5-bcaf-de39ddbca612}</UniqueIdentifier>
     </Filter>
+    <Filter Include="States\GameStates">
+      <UniqueIdentifier>{2ddebdb2-31e2-424c-87f5-865a438b3f86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Obj_defs">
+      <UniqueIdentifier>{f1b2ed2f-ca5b-493c-a0c8-fed7aab3ea13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Levels\Level_1.json">
@@ -272,6 +278,15 @@
     </None>
     <None Include="Levels\Level_0.json">
       <Filter>Levels</Filter>
+    </None>
+    <None Include="Levels\Level_2.json">
+      <Filter>Levels</Filter>
+    </None>
+    <None Include="Obj_defs\player.json">
+      <Filter>Obj_defs</Filter>
+    </None>
+    <None Include="Obj_defs\background.json">
+      <Filter>Obj_defs</Filter>
     </None>
   </ItemGroup>
 </Project>

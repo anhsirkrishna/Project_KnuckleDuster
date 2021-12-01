@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "Collision.h"
 #include "EventManager.h"
-
+#include "GameObjectManager.h"
 
 Hurtbox::Hurtbox() : Component("HURTBOX"), box(),  p_owner_transform(NULL) {}
 
@@ -14,27 +14,6 @@ SDL_Rect Hurtbox::GetPosition() {
 
 void Hurtbox::SetPosition(SDL_Rect new_position) {
 	box = new_position;
-}
-
-//Function to get pointers to all the other hurtboxes in the game for collision detection
-void Hurtbox::RegisterObjectComponents(GameObject **game_object_list, unsigned int list_size, unsigned int self_index) {
-	for (unsigned int i = 0; i < self_index; i++) {
-		if (game_object_list[i] == NULL)
-			continue;
-		Component* temp_component = game_object_list[i]->HasComponent("HURTBOX");
-		if (temp_component != NULL) {
-			hurtbox_list.push_back(static_cast<Hurtbox*>(temp_component));
-		}
-	}
-	//Skip it's own hurtbox.
-	for (unsigned int i = self_index+1; i < list_size; i++) {
-		if (game_object_list[i] == NULL)
-			continue;
-		Component* temp_component = game_object_list[i]->HasComponent("HURTBOX");
-		if (temp_component != NULL) {
-			hurtbox_list.push_back(static_cast<Hurtbox*>(temp_component));
-		}
-	}
 }
 
 
@@ -73,12 +52,18 @@ bool Hurtbox::CheckOutOfBounds() {
 //Function to check if a collision has occured with another hurtbox 
 bool Hurtbox::CheckCollision() {
 	//Go through all other hurtboxes in the game
-	for (std::vector<Hurtbox*>::iterator it = hurtbox_list.begin(); it != hurtbox_list.end(); ++it) {
-		if (Collision::AABB(box, (*it)->box)) {
+	GameObject* curr_obj;
+	Hurtbox* obj_hurtbox;
+	for (unsigned int i = 0; i < pGameObjectManager->max_objects; i++) {
+		curr_obj = pGameObjectManager->game_object_list[i];
+		if (curr_obj == NULL)
+			continue;
+		obj_hurtbox = static_cast<Hurtbox*>(curr_obj->HasComponent("HURTBOX"));
+		if (obj_hurtbox == NULL)
+			continue;
+		if (Collision::AABB(box, obj_hurtbox->box))
 			return true;
-		}
 	}
-
 	return false;
 }
 

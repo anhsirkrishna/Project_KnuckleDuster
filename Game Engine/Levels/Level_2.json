@@ -1,0 +1,40 @@
+{
+  "player": {
+    "HURTBOX": {
+      "coordinates": [ 200, 300, 90, 180 ]
+    },
+    "TRANSFORM":  {},
+    "CONTROLLER": {},
+    "GLSPRITE": {
+      "texture_name": "Player_idle",
+      "vertex_list": [
+          0,  0, 0,
+          0, 64, 0,
+         32, 64, 0,
+         32,  0, 0
+      ],
+      "color_list": [
+         40,  6,  55, 255,
+         40,  6,  55, 255,
+        185, 66, 245, 255,
+        185, 66, 245, 255
+      ],
+      "tex_coord_list": [
+          0,  0,
+          0, 32,
+         16, 32,
+         16,  0
+      ]
+    },
+    "ANIMATION": {
+      "frames": [
+        0, 0,
+        16, 0,
+        32, 0,
+        48, 0
+      ],
+      "looping": true,
+      "interval": 8
+    }
+  }
+}

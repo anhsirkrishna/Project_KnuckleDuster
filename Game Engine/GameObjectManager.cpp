@@ -9,15 +9,6 @@ void GameObjectManager::AddGameObject(GameObject* game_object) {
 	}
 }
 
-void GameObjectManager::RegisterObjectComponents() {
-	for (int i = 0; i < max_objects; i++) {
-		if (game_object_list[i] == NULL) {
-			continue;
-		}
-		game_object_list[i]->RegisterObjectComponents(game_object_list, max_objects, i);
-	}
-}
-
 void GameObjectManager::Update() {
 	for (int i = 0; i < max_objects; i++) {
 		if (game_object_list[i] == NULL)

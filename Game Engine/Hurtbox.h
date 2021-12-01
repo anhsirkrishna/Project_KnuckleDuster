@@ -9,7 +9,6 @@ public:
 	Hurtbox();
 	void Serialize(json json_object);
 	virtual void Update();
-	virtual void RegisterObjectComponents(GameObject** game_object_list, unsigned int list_size, unsigned int self_index);
 	virtual void Link();
 	virtual void HandleEvent(TimedEvent* p_event);
 	SDL_Rect GetPosition();

@@ -18,7 +18,6 @@ public:
 	virtual void Update();
 	virtual void HandleInput();
 	virtual void HandleEvent(TimedEvent* p_event);
-	virtual void RegisterObjectComponents(GameObject **game_object_list,unsigned int list_size,unsigned int self_index);
 	virtual void Link();
 	virtual void Draw(ShaderProgram* p_program);
 	std::string GetName();

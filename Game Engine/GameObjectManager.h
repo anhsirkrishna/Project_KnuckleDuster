@@ -4,7 +4,6 @@
 class GameObjectManager {
 public:
 	void AddGameObject(GameObject* game_object);
-	void RegisterObjectComponents();
 	void Update();
 	void Draw(ShaderProgram* program);
 	void Cleanup();

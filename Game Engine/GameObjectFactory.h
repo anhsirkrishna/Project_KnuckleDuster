@@ -7,7 +7,7 @@
 
 class GameObjectFactory {
 public:
-	GameObject* CreateGameObject(std::string object_name, json components_json);
+	GameObject* CreateGameObject(std::string object_name, std::string obj_def);
 	void CreateLevel(unsigned int level);
 private:
 	ComponentFactory component_factory;
