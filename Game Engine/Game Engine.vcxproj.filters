@@ -116,6 +116,12 @@
     <ClCompile Include="WalkingCreator.cpp">
       <Filter>Factories</Filter>
     </ClCompile>
+    <ClCompile Include="Tilemap.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TilemapCreator.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -236,6 +242,12 @@
     <ClInclude Include="WalkingCreator.h">
       <Filter>Factories</Filter>
     </ClInclude>
+    <ClInclude Include="Tilemap.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TilemapCreator.h">
+      <Filter>Factories</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -298,6 +310,12 @@
       <Filter>Obj_defs</Filter>
     </None>
     <None Include="Obj_defs\background.json">
+      <Filter>Obj_defs</Filter>
+    </None>
+    <None Include="Obj_defs\level1_tilemap.json">
+      <Filter>Obj_defs</Filter>
+    </None>
+    <None Include="Obj_defs\level2_tilemap.json">
       <Filter>Obj_defs</Filter>
     </None>
   </ItemGroup>

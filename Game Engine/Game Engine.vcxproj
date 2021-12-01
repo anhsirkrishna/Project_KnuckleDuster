@@ -117,6 +117,8 @@
     <ClCompile Include="StateStackManager.cpp" />
     <ClCompile Include="Textbox.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Tilemap.cpp" />
+    <ClCompile Include="TilemapCreator.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="TransformCreator.cpp" />
     <ClCompile Include="UpDown.cpp" />
@@ -159,6 +161,8 @@
     <ClInclude Include="StateStackManager.h" />
     <ClInclude Include="Textbox.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Tilemap.h" />
+    <ClInclude Include="TilemapCreator.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TransformCreator.h" />
     <ClInclude Include="UpDown.h" />
@@ -174,6 +178,8 @@
     <None Include="Levels\Level_1.json" />
     <None Include="Levels\Level_2.json" />
     <None Include="Obj_defs\background.json" />
+    <None Include="Obj_defs\level1_tilemap.json" />
+    <None Include="Obj_defs\level2_tilemap.json" />
     <None Include="Obj_defs\player.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

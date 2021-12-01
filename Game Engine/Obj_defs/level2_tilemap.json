@@ -1,0 +1,35 @@
+{
+  "COMMON": {
+    "GLSPRITE": {
+      "texture_names": [ "Level1TileSet" ],
+      "vertex_list": [
+          0,  0, -1,
+          0, 16, -1,
+         16, 16, -1,
+         16,  0, -1
+      ],
+      "color_list": [
+          40,  6,  55, 255,
+          40,  6,  55, 255,
+        185, 66, 245, 255,
+        185, 66, 245, 255
+      ],
+      "tex_coord_list": [
+          0,  0,
+          0,  16,
+         16,  16,
+         16,  0
+      ]
+    },
+    "TRANSFORM": {},
+    "TILEMAP": {
+      "tile_index_map": [
+        [ [1, 0, 0], [1, 0, 0] ],
+        [ [2, 0, 0], [2, 0, 0] ]
+      ],
+      "tile_width": 16,
+      "tile_height": 16,
+      "position": [0, 0]
+    }
+  }
+}

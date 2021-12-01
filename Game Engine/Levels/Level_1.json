@@ -2,5 +2,9 @@
   "player": {
     "obj_def": "player",
     "default_state": "IDLE"
+  },
+  "level_tilemap": {
+    "obj_def": "Level1_tilemap",
+    "default_state":  "NONE"
   }
 }
