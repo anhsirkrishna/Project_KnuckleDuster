@@ -8,10 +8,10 @@ void Controller::HandleInput() {
 	SDL_Rect currPosition = p_owner_hurtbox->GetPosition();
 
 	if (pInputManager->isKeyPressed(SDL_SCANCODE_UP) || pInputManager->isKeyPressed(SDL_SCANCODE_W)) {
-		currPosition.y = currPosition.y + 5;
+		currPosition.y = currPosition.y - 5;
 	}
 	if (pInputManager->isKeyPressed(SDL_SCANCODE_DOWN) || pInputManager->isKeyPressed(SDL_SCANCODE_S)) {
-		currPosition.y = currPosition.y - 5;
+		currPosition.y = currPosition.y + 5;
 	}
 	if (pInputManager->isKeyPressed(SDL_SCANCODE_RIGHT) || pInputManager->isKeyPressed(SDL_SCANCODE_D)) {
 		currPosition.x = currPosition.x + 5;

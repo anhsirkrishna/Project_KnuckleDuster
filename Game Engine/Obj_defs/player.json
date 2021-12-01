@@ -1,7 +1,7 @@
 {
   "IDLE": {
     "HURTBOX": {
-    "coordinates": [ 200, 300, 90, 180 ]
+    "coordinates": [ 200, 200, 32, 64 ]
     },
     "TRANSFORM":  {},
     "CONTROLLER": {},

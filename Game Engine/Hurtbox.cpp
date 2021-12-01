@@ -21,17 +21,18 @@ void Hurtbox::Update() {
 	if (CheckOutOfBounds()) {
 		//Reset the hurtbox back to it's previous position since it's gone out of bounds
 		box = p_owner_transform->GetPosition();
-		p_event_manager->QueueTimedEvent(new TimedEvent(EventID::out_of_bounds));
 	}
 
 	if (CheckCollision()) {
 		//Reset the hurtbox back to it's previous position since it's collided with another hurtbox
 		box = p_owner_transform->GetPosition();
+		/*
 		p_event_manager->QueueTimedEvent(new TimedEvent(EventID::collision));
 		//Set the broadcast event to trigger after 2 seconds 
 		TimedEvent* delayed_broadcast_event = new TimedEvent(EventID::collision, true);
 		delayed_broadcast_event->SetTime(2000);
 		p_event_manager->QueueTimedEvent(delayed_broadcast_event);
+		*/
 	}
 	
 	p_owner_transform->SetPosition(box);
@@ -54,7 +55,7 @@ bool Hurtbox::CheckCollision() {
 	//Go through all other hurtboxes in the game
 	GameObject* curr_obj;
 	Hurtbox* obj_hurtbox;
-	for (unsigned int i = 0; i < pGameObjectManager->max_objects; i++) {
+	for (unsigned int i = 0; i < GetOwner()->index; i++) {
 		curr_obj = pGameObjectManager->game_object_list[i];
 		if (curr_obj == NULL)
 			continue;
@@ -64,6 +65,20 @@ bool Hurtbox::CheckCollision() {
 		if (Collision::AABB(box, obj_hurtbox->box))
 			return true;
 	}
+
+	//Skip of self game object so do in two loops, one before self and one after self
+
+	for (unsigned int i = GetOwner()->index + 1; i < pGameObjectManager->max_objects; i++) {
+		curr_obj = pGameObjectManager->game_object_list[i];
+		if (curr_obj == NULL)
+			continue;
+		obj_hurtbox = static_cast<Hurtbox*>(curr_obj->HasComponent("HURTBOX"));
+		if (obj_hurtbox == NULL)
+			continue;
+		if (Collision::AABB(box, obj_hurtbox->box))
+			return true;
+	}
+
 	return false;
 }
 

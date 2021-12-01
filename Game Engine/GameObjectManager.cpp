@@ -4,6 +4,7 @@ void GameObjectManager::AddGameObject(GameObject* game_object) {
 	for (int i = 0; i < max_objects; i++) {
 		if (game_object_list[i] == NULL) {
 			game_object_list[i] = game_object;
+			game_object->index = i;
 			return;
 		}
 	}

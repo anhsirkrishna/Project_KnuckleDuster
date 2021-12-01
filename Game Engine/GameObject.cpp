@@ -3,7 +3,7 @@
 #include "GLSprite.h"
 #include "Transform.h"
 
-GameObject::GameObject(std::string object_name) {
+GameObject::GameObject(std::string object_name) : index(0) {
 	name = object_name;
 }
 
