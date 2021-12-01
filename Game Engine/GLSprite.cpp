@@ -43,6 +43,11 @@ void GLSprite::Draw(ShaderProgram* program) {
 	glUniformMatrix4fv(loc, 1, GL_FALSE, rotate_matrix.GetMatrixP());
 	CHECKERROR;
 
+	loc = glGetUniformLocation(program->program_id, "scaleMatrix");
+	Matrix3D scale_matrix = p_owner_transform->GetScaleMatrix();
+	glUniformMatrix4fv(loc, 1, GL_FALSE, scale_matrix.GetMatrixP());
+	CHECKERROR;
+
 	loc = glGetUniformLocation(program->program_id, "preRotateMatrix");
 	Matrix3D pre_rotate_matrix = p_owner_transform->GetPreRotateMatrix();
 	glUniformMatrix4fv(loc, 1, GL_FALSE, pre_rotate_matrix.GetMatrixP());

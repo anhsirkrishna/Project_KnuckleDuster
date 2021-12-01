@@ -9,12 +9,16 @@ public:
 	Transform();
 	SDL_Rect GetPosition();
 	float GetRotation();
+	float GetScaleX();
+	float GetScaleY();
 	void SetPosition(SDL_Rect new_position);
 	void SetRotation(float new_rotation);
+	void SetScale(float _scale_x, float _scale_y);
 	void Serialize(json json_object);
 	void Update();
 	Matrix3D GetTranslateMatrix();
 	Matrix3D GetRotateMatrix();
+	Matrix3D GetScaleMatrix();
 	Matrix3D GetPreRotateMatrix();
 	Matrix3D GetPostRotateMatrix();
 	void SetRotMatrices();
@@ -22,7 +26,9 @@ private:
 	SDL_Rect position;
 	Matrix3D translate_matrix;
 	Matrix3D rotate_matrix;
+	Matrix3D scale_matrix;
 	Matrix3D pre_rotate_matrix;
 	Matrix3D post_rotate_matrix;
-	float rotation = 0;
+	float rotation;
+	float scale_x, scale_y;
 };

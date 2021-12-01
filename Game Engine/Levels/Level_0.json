@@ -1,6 +1,6 @@
 {
   "background": {
     "obj_def": "background",
-    "default_state": "DEFAULT"
+    "default_state": "NONE"
   }
 }

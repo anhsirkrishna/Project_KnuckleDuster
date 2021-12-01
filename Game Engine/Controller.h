@@ -4,7 +4,7 @@
 #include "Transform.h"
 #include "InputManager.h"
 
-class Hurtbox;
+class Walking;
 
 class Controller : public Component {
 public:
@@ -13,5 +13,5 @@ public:
 	virtual void Link();
 	void Serialize(json json_object);
 private:
-	Hurtbox* p_owner_hurtbox;
+	Walking* p_owner_walking;
 };

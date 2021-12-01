@@ -1,5 +1,5 @@
 {
-  "DEFAULT" : {
+  "COMMON" : {
     "GLSPRITE": {
         "texture_name": "Wasteland_Sky",
         "vertex_list": [

@@ -110,6 +110,12 @@
     <ClCompile Include="StartState.cpp">
       <Filter>States\GameStates</Filter>
     </ClCompile>
+    <ClCompile Include="Walking.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="WalkingCreator.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -223,6 +229,12 @@
     </ClInclude>
     <ClInclude Include="StartState.h">
       <Filter>States\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Walking.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="WalkingCreator.h">
+      <Filter>Factories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

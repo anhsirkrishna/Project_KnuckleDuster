@@ -5,10 +5,23 @@
 #include "EventManager.h"
 #include "GameObjectManager.h"
 
-Hurtbox::Hurtbox() : Component("HURTBOX"), box(),  p_owner_transform(NULL) {}
+Hurtbox::Hurtbox() : Component("HURTBOX"), box(),  p_owner_transform(NULL), scale_x(1), scale_y(1) {}
 
 SDL_Rect Hurtbox::GetPosition() {
 	return box;
+}
+
+float Hurtbox::GetScaleX() {
+	return scale_x;
+}
+
+float Hurtbox::GetScaleY() {
+	return scale_y;
+}
+
+void Hurtbox::SetScale(float _scale_x, float _scale_y) {
+	scale_x = _scale_x;
+	scale_y = _scale_y;
 }
 
 
@@ -36,6 +49,7 @@ void Hurtbox::Update() {
 	}
 	
 	p_owner_transform->SetPosition(box);
+	p_owner_transform->SetScale(scale_x, scale_y);
 }
 
 //Function to check if the Hurtbox has left the world bounds

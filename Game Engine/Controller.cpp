@@ -1,31 +1,42 @@
 #include "Controller.h"
 #include "GameObject.h"
-#include "Hurtbox.h"
+#include "Walking.h"
 
-Controller::Controller() : Component("CONTROLLER"), p_owner_hurtbox(NULL) { }
+Controller::Controller() : Component("CONTROLLER") { }
 
 void Controller::HandleInput() {
-	SDL_Rect currPosition = p_owner_hurtbox->GetPosition();
 
-	if (pInputManager->isKeyPressed(SDL_SCANCODE_UP) || pInputManager->isKeyPressed(SDL_SCANCODE_W)) {
-		currPosition.y = currPosition.y - 5;
+	if (pInputManager->isKeyTriggered(SDL_SCANCODE_UP) || pInputManager->isKeyTriggered(SDL_SCANCODE_W)) {
+		p_owner_walking->Walk(WalkDirection::Up);
 	}
-	if (pInputManager->isKeyPressed(SDL_SCANCODE_DOWN) || pInputManager->isKeyPressed(SDL_SCANCODE_S)) {
-		currPosition.y = currPosition.y + 5;
+	if (pInputManager->isKeyTriggered(SDL_SCANCODE_DOWN) || pInputManager->isKeyTriggered(SDL_SCANCODE_S)) {
+		p_owner_walking->Walk(WalkDirection::Down);
 	}
-	if (pInputManager->isKeyPressed(SDL_SCANCODE_RIGHT) || pInputManager->isKeyPressed(SDL_SCANCODE_D)) {
-		currPosition.x = currPosition.x + 5;
+	if (pInputManager->isKeyTriggered(SDL_SCANCODE_RIGHT) || pInputManager->isKeyTriggered(SDL_SCANCODE_D)) {
+		p_owner_walking->Walk(WalkDirection::Right);
 	}
-	if (pInputManager->isKeyPressed(SDL_SCANCODE_LEFT) || pInputManager->isKeyPressed(SDL_SCANCODE_A)) {
-		currPosition.x = currPosition.x - 5;
+	if (pInputManager->isKeyTriggered(SDL_SCANCODE_LEFT) || pInputManager->isKeyTriggered(SDL_SCANCODE_A)) {
+		p_owner_walking->Walk(WalkDirection::Left);
 	}
 
-	p_owner_hurtbox->SetPosition(currPosition);
+	if (pInputManager->isKeyReleased(SDL_SCANCODE_UP) || pInputManager->isKeyReleased(SDL_SCANCODE_W)) {
+		p_owner_walking->StopWalk(WalkDirection::Up);
+	}
+	if (pInputManager->isKeyReleased(SDL_SCANCODE_DOWN) || pInputManager->isKeyReleased(SDL_SCANCODE_S)) {
+		p_owner_walking->StopWalk(WalkDirection::Down);
+	}
+	if (pInputManager->isKeyReleased(SDL_SCANCODE_RIGHT) || pInputManager->isKeyReleased(SDL_SCANCODE_D)) {
+		p_owner_walking->StopWalk(WalkDirection::Right);
+	}
+	if (pInputManager->isKeyReleased(SDL_SCANCODE_LEFT) || pInputManager->isKeyReleased(SDL_SCANCODE_A)) {
+		p_owner_walking->StopWalk(WalkDirection::Left);
+	}
+
 }
 
 
 void Controller::Link() {
-	p_owner_hurtbox = static_cast<Hurtbox*>(GetOwner()->HasComponent("HURTBOX"));
+	p_owner_walking = static_cast<Walking*>(GetOwner()->HasComponent("WALKING"));
 }
 
 void Controller::Serialize(json json_object) {
