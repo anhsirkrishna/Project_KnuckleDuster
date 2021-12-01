@@ -20,16 +20,22 @@ void ConvertTextureCoords(std::vector<float>& tex_coords, float tex_width, float
 
 #define CHECKERROR {GLenum err = glGetError(); if (err != GL_NO_ERROR) { SDL_Log("OpenGL error (at line GLSprite.cpp:%d): %s\n", __LINE__, glewGetErrorString(err)); exit(-1);} }
 
-GLSprite::GLSprite() : Component("GLSPRITE"), p_texture(NULL), vao_id(0), vertex_count(0), p_owner_transform(NULL) { 
+GLSprite::GLSprite() : Component("GLSPRITE"), p_texture(NULL), vao_id(0), vertex_count(0), p_owner_transform(NULL), texure_list_size(0) { 
 	tex_offset[0] = tex_offset[1] = 0;
+	p_texure_list[0] = p_texure_list[1] = p_texure_list[2] = p_texure_list[3] = p_texure_list[4] =  NULL;
 }
 
 Texture* GLSprite::GetTexture() {
 	return p_texture;
 }
 
-void GLSprite::SetTexture(Texture* _p_texture) {
-	p_texture = _p_texture;
+void GLSprite::AddTexture(Texture* _p_texture) {
+	p_texure_list[texure_list_size] = _p_texture;
+	texure_list_size++;
+}
+
+void GLSprite::SetTexture(unsigned int index) {
+	p_texture = p_texure_list[index];
 }
 
 void GLSprite::Draw(ShaderProgram* program) {
@@ -80,10 +86,12 @@ void GLSprite::Draw(ShaderProgram* program) {
 }
 
 void GLSprite::Serialize(json json_object) {
-	auto texture_name = json_object["texture_name"].get<std::string>();
-	pResourceManager->add_texture(texture_name);
-	p_texture = pResourceManager->get_texture(texture_name);
-
+	auto texture_names = json_object["texture_names"].get<std::vector<std::string>>();
+	for (auto texture_name : texture_names) {
+		pResourceManager->add_texture(texture_name);
+		AddTexture(pResourceManager->get_texture(texture_name));
+	}
+	SetTexture(0);
 	//Create a VAO and put the ID in vao_id
 	glGenVertexArrays(1, &vao_id);
 	//Use the same VAO for all the following operations

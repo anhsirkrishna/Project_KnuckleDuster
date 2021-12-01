@@ -2,6 +2,7 @@
 #include "Component.h"
 
 class Hurtbox;
+class GLSprite;
 
 enum class WalkDirection {
 	None,
@@ -28,4 +29,5 @@ private:
 	int direction_x;
 	int direction_y;
 	Hurtbox* p_owner_hurtbox;
+	GLSprite* p_owner_glsprite;
 };
