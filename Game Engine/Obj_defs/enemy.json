@@ -1,22 +1,21 @@
 {
   "COMMON": {
     "HURTBOX": {
-      "coordinates": [ 200, 200, 32, 64 ]
+      "coordinates": [ 400, 200, 32, 64 ]
     },
     "TRANSFORM": {},
-    "CONTROLLER": {},
     "WALKING": {
       "speed": 2
     },
     "PUNCHING": {
-      "hitbox": [ 24, 4, 12, 8 ],
+      "hitbox": [ 24, 4, 8, 8 ],
       "punch_damage": 5
     },
     "HURTING": {}
   },
   "IDLE": {
     "GLSPRITE": {
-      "texture_names": [ "Player_idle" ],
+      "texture_names": [ "Enemy1_idle" ],
       "vertex_list": [
           0,  0, 0,
           0, 64, 0,
@@ -49,7 +48,7 @@
   },
   "WALK": {
     "GLSPRITE": {
-      "texture_names": [ "Player_walk", "Player_walk2", "Player_walk3" ],
+      "texture_names": [ "Enemy1_walk", "Enemy1_walk2", "Enemy1_walk3" ],
       "vertex_list": [
           0,  0, 0,
           0, 64, 0,
@@ -82,7 +81,7 @@
   },
   "PUNCH": {
     "GLSPRITE": {
-      "texture_names": [ "Player_punch1", "Player_punch2"],
+      "texture_names": [ "Enemy1_punch1", "Enemy1_punch2"],
       "vertex_list": [
           0,  0, 0,
           0, 64, 0,
@@ -112,12 +111,12 @@
   },
   "HURT": {
     "GLSPRITE": {
-      "texture_names": [ "Player_hurt" ],
+      "texture_names": [ "Enemy1_hurt" ],
       "vertex_list": [
-          0,  0, 0,
-          0, 64, 0,
-          48, 64, 0,
-          48,  0, 0
+           0,  0, 0,
+           0, 64, 0,
+          32, 64, 0,
+          32,  0, 0
       ],
       "color_list": [
           40,  6,  55, 255,
@@ -137,7 +136,7 @@
         0, 0
       ],
       "looping": false,
-      "interval": 8
+      "interval": 1
     }
   }
 }

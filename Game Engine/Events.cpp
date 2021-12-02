@@ -1,7 +1,8 @@
 #include "Events.h"
 #include "FrameRateController.h"
 
-TimedEvent::TimedEvent(EventID _id, bool _broadcast) : time(0), event_id(_id), broadcast(_broadcast) { }
+TimedEvent::TimedEvent(EventID _id, bool _broadcast, int _obj_index) : time(0), event_id(_id), 
+																	   broadcast(_broadcast), reciever_obj_index(_obj_index) { }
 
 TimedEvent::~TimedEvent() {
 
@@ -23,3 +24,6 @@ double TimedEvent::When() const {
 bool TimedEvent::operator<(const TimedEvent& rhs) {
 	return time < rhs.time;
 }
+
+
+HitEvent::HitEvent(unsigned int _dmg, int _obj_index, bool _broadcast) : TimedEvent(EventID::hit, _broadcast, _obj_index), hit_damage(_dmg) {}

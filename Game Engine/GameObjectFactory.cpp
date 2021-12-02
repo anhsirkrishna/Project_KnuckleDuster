@@ -56,12 +56,17 @@ void GameObjectFactory::CreateLevel(unsigned int level) {
 	GameObject* new_object;
 	std::string obj_def;
 	std::string default_state;
+	bool is_background;
 	for (auto element : object_map) {
 		obj_def = element.second["obj_def"].get<std::string>();
 		default_state = element.second["default_state"].get<std::string>();
 		new_object = CreateGameObject(element.first, obj_def);
 		if (default_state != "NONE")
 			new_object->ChangeState(default_state);
-		pGameObjectManager->AddGameObject(new_object);
+		is_background = element.second["background"].get<bool>();
+		if (is_background)
+			pGameObjectManager->SetBackground(new_object);
+		else
+			pGameObjectManager->AddGameObject(new_object);
 	}
 }

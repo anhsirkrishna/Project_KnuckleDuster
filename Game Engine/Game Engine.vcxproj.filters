@@ -77,9 +77,6 @@
     <ClCompile Include="HurtboxCreator.cpp">
       <Filter>Factories</Filter>
     </ClCompile>
-    <ClCompile Include="Events.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
     <ClCompile Include="EventManager.cpp">
       <Filter>gManagers</Filter>
     </ClCompile>
@@ -126,6 +123,15 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="PunchingCreator.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Events.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Hurting.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="HurtingCreator.cpp">
       <Filter>Factories</Filter>
     </ClCompile>
   </ItemGroup>
@@ -206,9 +212,6 @@
     <ClInclude Include="HurtboxCreator.h">
       <Filter>Factories</Filter>
     </ClInclude>
-    <ClInclude Include="Events.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
     <ClInclude Include="EventManager.h">
       <Filter>gManagers</Filter>
     </ClInclude>
@@ -260,6 +263,15 @@
     <ClInclude Include="PunchingCreator.h">
       <Filter>Factories</Filter>
     </ClInclude>
+    <ClInclude Include="Events.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Hurting.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="HurtingCreator.h">
+      <Filter>Factories</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -301,6 +313,9 @@
     <Filter Include="Obj_defs">
       <UniqueIdentifier>{f1b2ed2f-ca5b-493c-a0c8-fed7aab3ea13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{0232111e-b2e1-49a3-86ab-b3a4393a52ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Levels\Level_1.json">
@@ -331,6 +346,9 @@
       <Filter>Obj_defs</Filter>
     </None>
     <None Include="Obj_defs\player_small.json">
+      <Filter>Obj_defs</Filter>
+    </None>
+    <None Include="Obj_defs\enemy.json">
       <Filter>Obj_defs</Filter>
     </None>
   </ItemGroup>

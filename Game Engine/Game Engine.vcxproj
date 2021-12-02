@@ -104,6 +104,8 @@
     <ClCompile Include="GLSprite.cpp" />
     <ClCompile Include="GLSpriteCreator.cpp" />
     <ClCompile Include="Hurtbox.cpp" />
+    <ClCompile Include="Hurting.cpp" />
+    <ClCompile Include="HurtingCreator.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Matrix3D.cpp" />
@@ -151,6 +153,8 @@
     <ClInclude Include="GLSpriteCreator.h" />
     <ClInclude Include="Hurtbox.h" />
     <ClInclude Include="HurtboxCreator.h" />
+    <ClInclude Include="Hurting.h" />
+    <ClInclude Include="HurtingCreator.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Matrix3D.h" />
     <ClInclude Include="Collision.h" />
@@ -182,6 +186,7 @@
     <None Include="Levels\Level_1.json" />
     <None Include="Levels\Level_2.json" />
     <None Include="Obj_defs\background.json" />
+    <None Include="Obj_defs\enemy.json" />
     <None Include="Obj_defs\level1_tilemap.json" />
     <None Include="Obj_defs\level2_tilemap.json" />
     <None Include="Obj_defs\player.json" />

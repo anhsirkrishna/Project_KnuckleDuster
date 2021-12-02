@@ -11,10 +11,16 @@ private:
 	GLSprite* p_owner_glsprite;
 	Animation* p_owner_animation;
 	int sprite_index;
+	SDL_Rect hitbox;
+	int hitbox_x_offset;
+	int hitbox_y_offset;
+	int punch_damage;
 public:
 	Punching();
 	void Serialize(json json_object);
 	virtual void Update();
 	virtual void Link();
 	void Punch();
+	void CheckCollision();
+	void UpdateHitbox();
 };

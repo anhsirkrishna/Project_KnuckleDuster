@@ -1,6 +1,7 @@
 {
   "background": {
     "obj_def": "background",
-    "default_state": "NONE"
+    "default_state": "NONE",
+    "background": true
   }
 }

@@ -1,10 +1,17 @@
 {
   "player": {
     "obj_def": "player",
-    "default_state": "IDLE"
+    "default_state": "IDLE",
+    "background": false
+  },
+  "enemy1": {
+    "obj_def": "enemy",
+    "default_state": "IDLE",
+    "background": false
   },
   "level_tilemap": {
     "obj_def": "Level1_tilemap",
-    "default_state":  "NONE"
+    "default_state": "NONE",
+    "background": true
   }
 }

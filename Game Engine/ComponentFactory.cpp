@@ -9,6 +9,7 @@
 #include "WalkingCreator.h"
 #include "TilemapCreator.h"
 #include "PunchingCreator.h"
+#include "HurtingCreator.h"
 
 ComponentFactory::ComponentFactory() {
 	creator_map.insert(std::pair<std::string, ComponentCreator*>("TRANSFORM", new TransformCreator));
@@ -21,6 +22,7 @@ ComponentFactory::ComponentFactory() {
 	creator_map.insert(std::pair<std::string, ComponentCreator*>("WALKING", new WalkingCreator));
 	creator_map.insert(std::pair<std::string, ComponentCreator*>("TILEMAP", new TilemapCreator));
 	creator_map.insert(std::pair<std::string, ComponentCreator*>("PUNCHING", new PunchingCreator));
+	creator_map.insert(std::pair<std::string, ComponentCreator*>("HURTING", new HurtingCreator));
 }
 
 ComponentFactory::~ComponentFactory() {
