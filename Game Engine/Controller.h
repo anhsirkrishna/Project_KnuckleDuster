@@ -5,6 +5,7 @@
 #include "InputManager.h"
 
 class Walking;
+class Punching;
 
 class Controller : public Component {
 public:
@@ -14,4 +15,5 @@ public:
 	void Serialize(json json_object);
 private:
 	Walking* p_owner_walking;
+	Punching* p_owner_punching;
 };

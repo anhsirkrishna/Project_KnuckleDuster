@@ -1,8 +1,9 @@
 #include "Controller.h"
 #include "GameObject.h"
 #include "Walking.h"
+#include "Punching.h"
 
-Controller::Controller() : Component("CONTROLLER") { }
+Controller::Controller() : Component("CONTROLLER"), p_owner_walking(NULL), p_owner_punching(NULL) { }
 
 void Controller::HandleInput() {
 
@@ -32,11 +33,14 @@ void Controller::HandleInput() {
 		p_owner_walking->StopWalk(WalkDirection::Left);
 	}
 
+	if (pInputManager->isKeyTriggered(SDL_SCANCODE_Z))
+		p_owner_punching->Punch();
 }
 
 
 void Controller::Link() {
 	p_owner_walking = static_cast<Walking*>(GetOwner()->HasComponent("WALKING"));
+	p_owner_punching = static_cast<Punching*>(GetOwner()->HasComponent("PUNCHING"));
 }
 
 void Controller::Serialize(json json_object) {

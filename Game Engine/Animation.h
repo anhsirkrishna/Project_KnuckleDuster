@@ -29,4 +29,5 @@ public:
 	virtual void Update();
 	virtual void Link();
 	void Serialize(json json_object);
+	bool Completed();
 };

@@ -95,3 +95,6 @@ void GameObject::AddState(std::string new_state) {
 void GameObject::ChangeState(std::string new_state) {
 	current_state = new_state;
 }
+std::string GameObject::CurrentState() {
+	return current_state;
+}

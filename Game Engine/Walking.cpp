@@ -10,7 +10,10 @@ void Walking::Serialize(json json_object) {
 }
 void Walking::Link() {	
 	p_owner_hurtbox = static_cast<Hurtbox*>(GetOwner()->HasComponent("HURTBOX"));
+	std::string current_state = GetOwner()->CurrentState();
+	GetOwner()->ChangeState("WALK");
 	p_owner_glsprite = static_cast<GLSprite*>(GetOwner()->HasComponent("GLSPRITE"));
+	GetOwner()->ChangeState(current_state);
 }
 
 void Walking::Walk(WalkDirection dir) {
@@ -81,10 +84,12 @@ void Walking::StopWalk(WalkDirection dir) {
 }
 
 void Walking::Update() {
-	SDL_Rect curr_position = p_owner_hurtbox->GetPosition();
-	curr_position.x = curr_position.x + (speed * direction_x);
-	curr_position.y = curr_position.y + (speed * direction_y);
-	p_owner_hurtbox->SetPosition(curr_position);
+	if (GetOwner()->CurrentState() == "WALK") {
+		SDL_Rect curr_position = p_owner_hurtbox->GetPosition();
+		curr_position.x = curr_position.x + (speed * direction_x);
+		curr_position.y = curr_position.y + (speed * direction_y);
+		p_owner_hurtbox->SetPosition(curr_position);
+	}
 }
 
 

@@ -16,19 +16,25 @@ void Animation::Refresh() {
 	timer = 0;
 }
 
-void Animation::Update() {
-	//If an entire loop as already been played then nothing else do to	
-	if (current_frame == 0 && times_played > 0)
-		return;
+bool Animation::Completed() {
+	if (times_played > 0)
+		return true;
+	return false;
+}
 
-	if (frames.size() > 1) {
-		timer += 1;
-		if (timer == interval) {
-			timer = 0;
-			//Move to the next frame of animation 
+void Animation::Update() {	
+	timer += 1;
+	
+	if (timer >= interval) {
+		timer = 0;
+		//Move to the next frame of animation 
+		if (times_played > 0 && looping == false)
+			current_frame = frames.size() - 1;
+		else
 			current_frame = current_frame + 1 < frames.size() ? (current_frame + 1) : 0;
-		}
+		times_played += 1;
 	}
+
 	//Set the texture offset for the GLSprite component of the the owner
 	p_owner_glsprite->SetTexOffset(frames[current_frame][0], frames[current_frame][1]);
 }

@@ -21,6 +21,7 @@ class GameObject {
 		void Draw(ShaderProgram* program);
 		void AddState(std::string new_state);
 		void ChangeState(std::string new_state);
+		std::string CurrentState();
 		unsigned int index;
 	private:
 		std::string name;
