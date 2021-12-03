@@ -11,9 +11,7 @@ void Health::Serialize(json json_object) {
 
 void Health::TakeDamage(unsigned int damage) {
 	current_health = (current_health - damage) > 0 ? (current_health - damage) : 0;
-	SDL_Log("Took %d damage", damage);
 	if (current_health == 0) {
-		SDL_Log("I died");
 		p_event_manager->QueueTimedEvent(
 			new TimedEvent(EventID::health_zero, false, GetOwner()->index)
 		);

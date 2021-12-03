@@ -71,7 +71,8 @@ void Punching::CheckCollision() {
 			continue;
 		if (Collision::AABB(hitbox, obj_hurtbox->GetPosition())) {
 			p_event_manager->QueueTimedEvent(
-				new HitEvent(punch_damage, obj_hurtbox->GetOwner()->index)
+				new HitEvent(punch_damage, p_owner_hurtbox->GetScaleX(), //Hit direction is the opposite of the punching direction 
+							 obj_hurtbox->GetOwner()->index)
 			);
 		}
 	}
@@ -87,8 +88,9 @@ void Punching::CheckCollision() {
 			continue;
 		if (Collision::AABB(hitbox, obj_hurtbox->GetPosition())) {
 			p_event_manager->QueueTimedEvent(
-				new HitEvent(punch_damage, obj_hurtbox->GetOwner()->index)
+				new HitEvent(punch_damage, p_owner_hurtbox->GetScaleX(), //Hit direction is the opposite of the punching direction 
+					obj_hurtbox->GetOwner()->index)
 			);
-		}		
+		}
 	}
 }

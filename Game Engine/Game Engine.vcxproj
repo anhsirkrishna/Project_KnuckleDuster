@@ -108,6 +108,7 @@
     <ClCompile Include="Hurting.cpp" />
     <ClCompile Include="HurtingCreator.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Knockdown.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Matrix3D.cpp" />
     <ClCompile Include="Panel.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="Hurting.h" />
     <ClInclude Include="HurtingCreator.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Knockdown.h" />
     <ClInclude Include="Matrix3D.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Panel.h" />

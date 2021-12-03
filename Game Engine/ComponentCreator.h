@@ -14,3 +14,8 @@ class HealthCreator : public ComponentCreator {
 public:
 	virtual Component* Create(json json_object);
 };
+
+class KnockdownCreator : public ComponentCreator {
+public:
+	virtual Component* Create(json json_object);
+};

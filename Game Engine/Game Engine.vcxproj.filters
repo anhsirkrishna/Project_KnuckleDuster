@@ -137,6 +137,9 @@
     <ClCompile Include="Transform.cpp">
       <Filter>Components\GeneralComponents</Filter>
     </ClCompile>
+    <ClCompile Include="Knockdown.cpp">
+      <Filter>Components\CharacterComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -277,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Components\GeneralComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Knockdown.h">
+      <Filter>Components\CharacterComponents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,8 @@ enum class EventID
 	hit,
 	health_zero,
 	take_damage,
+	knock_down,
+	downed,
 	NUM
 };
 
@@ -30,8 +32,9 @@ private:
 
 class HitEvent : public TimedEvent {
 public :
-	HitEvent(unsigned int _dmg, int _obj_index, bool _broadcast=false);
+	HitEvent(unsigned int _dmg, int _direction, int _obj_index, bool _broadcast=false);
 	unsigned int hit_damage;
+	int direction;
 };
 
 class TakeDamageEvent : public TimedEvent {

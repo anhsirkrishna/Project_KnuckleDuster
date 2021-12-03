@@ -13,7 +13,7 @@ public:
 	virtual void Update();
 	virtual void Link();
 	virtual void HandleEvent(TimedEvent* p_event);
-	void Hurt(int damage);
+	void Hurt(int damage, int direction);
 private:
 	Hurtbox* p_owner_hurtbox;
 	GLSprite* p_owner_glsprite;
