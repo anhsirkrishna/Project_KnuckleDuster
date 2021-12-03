@@ -8,18 +8,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Controller.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="UpDown.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="GameObjectManager.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
@@ -59,9 +47,6 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Util</Filter>
     </ClCompile>
-    <ClCompile Include="GLSprite.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="GLSpriteCreator.cpp">
       <Filter>Factories</Filter>
     </ClCompile>
@@ -70,9 +55,6 @@
     </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Hurtbox.cpp">
-      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="HurtboxCreator.cpp">
       <Filter>Factories</Filter>
@@ -95,9 +77,6 @@
     <ClCompile Include="Util.cpp">
       <Filter>Util</Filter>
     </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="AnimationCreator.cpp">
       <Filter>Factories</Filter>
     </ClCompile>
@@ -107,20 +86,11 @@
     <ClCompile Include="StartState.cpp">
       <Filter>States\GameStates</Filter>
     </ClCompile>
-    <ClCompile Include="Walking.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="WalkingCreator.cpp">
       <Filter>Factories</Filter>
     </ClCompile>
-    <ClCompile Include="Tilemap.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="TilemapCreator.cpp">
       <Filter>Factories</Filter>
-    </ClCompile>
-    <ClCompile Include="Punching.cpp">
-      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="PunchingCreator.cpp">
       <Filter>Factories</Filter>
@@ -128,11 +98,44 @@
     <ClCompile Include="Events.cpp">
       <Filter>Events</Filter>
     </ClCompile>
-    <ClCompile Include="Hurting.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="HurtingCreator.cpp">
       <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Components\GraphicsComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="GLSprite.cpp">
+      <Filter>Components\GraphicsComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Components\GraphicsComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Tilemap.cpp">
+      <Filter>Components\GraphicsComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Health.cpp">
+      <Filter>Components\CharacterComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Hurtbox.cpp">
+      <Filter>Components\CharacterComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Hurting.cpp">
+      <Filter>Components\CharacterComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Punching.cpp">
+      <Filter>Components\CharacterComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Walking.cpp">
+      <Filter>Components\CharacterComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Components\PlayerComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="UpDown.cpp">
+      <Filter>Components\EnemyComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Components\GeneralComponents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -141,18 +144,6 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Controller.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="UpDown.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="GameObjectManager.h">
       <Filter>GameObjects</Filter>
@@ -193,9 +184,6 @@
     <ClInclude Include="Texture.h">
       <Filter>Util</Filter>
     </ClInclude>
-    <ClInclude Include="GLSprite.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="GLSpriteCreator.h">
       <Filter>Factories</Filter>
     </ClInclude>
@@ -204,9 +192,6 @@
     </ClInclude>
     <ClInclude Include="Collision.h">
       <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Hurtbox.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Game.h" />
     <ClInclude Include="HurtboxCreator.h">
@@ -233,9 +218,6 @@
     <ClInclude Include="Util.h">
       <Filter>Util</Filter>
     </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="AnimationCreator.h">
       <Filter>Factories</Filter>
     </ClInclude>
@@ -245,20 +227,11 @@
     <ClInclude Include="StartState.h">
       <Filter>States\GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="Walking.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="WalkingCreator.h">
       <Filter>Factories</Filter>
     </ClInclude>
-    <ClInclude Include="Tilemap.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="TilemapCreator.h">
       <Filter>Factories</Filter>
-    </ClInclude>
-    <ClInclude Include="Punching.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="PunchingCreator.h">
       <Filter>Factories</Filter>
@@ -266,11 +239,44 @@
     <ClInclude Include="Events.h">
       <Filter>Events</Filter>
     </ClInclude>
-    <ClInclude Include="Hurting.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="HurtingCreator.h">
       <Filter>Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Components\GraphicsComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="GLSprite.h">
+      <Filter>Components\GraphicsComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Components\GraphicsComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Tilemap.h">
+      <Filter>Components\GraphicsComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Health.h">
+      <Filter>Components\CharacterComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Hurtbox.h">
+      <Filter>Components\CharacterComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Hurting.h">
+      <Filter>Components\CharacterComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Punching.h">
+      <Filter>Components\CharacterComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Walking.h">
+      <Filter>Components\CharacterComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Components\PlayerComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="UpDown.h">
+      <Filter>Components\EnemyComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Components\GeneralComponents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -315,6 +321,21 @@
     </Filter>
     <Filter Include="Events">
       <UniqueIdentifier>{0232111e-b2e1-49a3-86ab-b3a4393a52ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\GraphicsComponents">
+      <UniqueIdentifier>{8da24db8-5705-4463-a60f-c3dbdb2999e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\CharacterComponents">
+      <UniqueIdentifier>{902a416e-b7cf-4776-ba24-a3d9a39ab7ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\PlayerComponents">
+      <UniqueIdentifier>{d94b89dd-5d52-4975-8d6d-566d47b69e79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\EnemyComponents">
+      <UniqueIdentifier>{561ac6f1-ed43-4853-8e06-c55bf68d2a02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\GeneralComponents">
+      <UniqueIdentifier>{3e318fe0-1723-4e4b-9620-fb475f5bd9d5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

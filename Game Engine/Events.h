@@ -6,6 +6,8 @@ enum class EventID
 	collision,
 	out_of_bounds,
 	hit,
+	health_zero,
+	take_damage,
 	NUM
 };
 
@@ -29,6 +31,11 @@ private:
 class HitEvent : public TimedEvent {
 public :
 	HitEvent(unsigned int _dmg, int _obj_index, bool _broadcast=false);
-private:
+	unsigned int hit_damage;
+};
+
+class TakeDamageEvent : public TimedEvent {
+public:
+	TakeDamageEvent(unsigned int _dmg, int _obj_index, bool _broadcast = false);
 	unsigned int hit_damage;
 };

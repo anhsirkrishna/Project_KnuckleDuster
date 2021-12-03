@@ -27,3 +27,5 @@ bool TimedEvent::operator<(const TimedEvent& rhs) {
 
 
 HitEvent::HitEvent(unsigned int _dmg, int _obj_index, bool _broadcast) : TimedEvent(EventID::hit, _broadcast, _obj_index), hit_damage(_dmg) {}
+
+TakeDamageEvent::TakeDamageEvent(unsigned int _dmg, int _obj_index, bool _broadcast) : TimedEvent(EventID::take_damage, _broadcast, _obj_index), hit_damage(_dmg) {}

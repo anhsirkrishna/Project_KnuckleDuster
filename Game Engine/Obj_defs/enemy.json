@@ -11,7 +11,10 @@
       "hitbox": [ 24, 4, 8, 8 ],
       "punch_damage": 5
     },
-    "HURTING": {}
+    "HURTING": {},
+    "HEALTH": {
+      "max_health" :  20
+    }
   },
   "IDLE": {
     "GLSPRITE": {
@@ -106,7 +109,7 @@
         0, 0
       ],
       "looping": false,
-      "interval": 8
+      "interval": 6
     }
   },
   "HURT": {
@@ -136,7 +139,7 @@
         0, 0
       ],
       "looping": false,
-      "interval": 1
+      "interval": 8
     }
   }
 }

@@ -103,6 +103,7 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GLSprite.cpp" />
     <ClCompile Include="GLSpriteCreator.cpp" />
+    <ClCompile Include="Health.cpp" />
     <ClCompile Include="Hurtbox.cpp" />
     <ClCompile Include="Hurting.cpp" />
     <ClCompile Include="HurtingCreator.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GLSprite.h" />
     <ClInclude Include="GLSpriteCreator.h" />
+    <ClInclude Include="Health.h" />
     <ClInclude Include="Hurtbox.h" />
     <ClInclude Include="HurtboxCreator.h" />
     <ClInclude Include="Hurting.h" />

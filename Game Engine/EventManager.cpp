@@ -34,7 +34,7 @@ void EventManager::BroadcastEventToSubscribers(TimedEvent* p_event) {
 
 //Add a timed event to the list of events that need to be triggered.
 void EventManager::QueueTimedEvent(TimedEvent* p_event) {
-	timed_event_list.push_back(p_event);
+	new_events.push_back(p_event);
 }
 
 //Allows a game object to subscribe to receive particular types of events
@@ -47,6 +47,9 @@ void EventManager::SubscribeToEvent(EventID event_type, GameObject* p_game_objec
 //Checks if it's time for any of the events to be triggered 
 //If it's time then it broadcasts it appropriately.
 void EventManager::Update() {
+	for (auto new_event : new_events)
+		timed_event_list.push_back(new_event);
+	new_events.clear();
 	std::vector<TimedEvent*>::iterator it = timed_event_list.begin();
 	while (it != timed_event_list.end()) {
 		TimedEvent* timed_event = *it;

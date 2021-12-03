@@ -9,7 +9,7 @@
 
 
 Punching::Punching() : Component("PUNCHING"), p_owner_hurtbox(NULL), p_owner_glsprite(NULL), p_owner_animation(NULL), sprite_index(0), 
-					   hitbox(), punch_damage(0), hitbox_x_offset(0), hitbox_y_offset(0) {}
+					   hitbox(), punch_damage(0), hitbox_x_offset(0), hitbox_y_offset(0), prev_state("IDLE") {}
 
 void Punching::Serialize(json json_object) {
 	auto hitbox_coords = json_object["hitbox"].get<std::vector<int>>();
@@ -30,9 +30,13 @@ void Punching::Link() {
 }
 
 void Punching::Punch() {
-	GetOwner()->ChangeState("PUNCH");
-	UpdateHitbox();
-	p_owner_animation->Refresh();
+	GameObject* game_obj = GetOwner();
+	prev_state = game_obj->CurrentState();
+	if (prev_state != "PUNCH") {
+		GetOwner()->ChangeState("PUNCH");
+		UpdateHitbox();
+		p_owner_animation->Refresh();
+	}
 }
 
 void Punching::Update() {
@@ -44,7 +48,7 @@ void Punching::Update() {
 		if (p_owner_animation->Completed()) {
 			sprite_index = (sprite_index + 1) % 2;
 			p_owner_glsprite->SetTexture(sprite_index);
-			GetOwner()->ChangeState("IDLE");
+			GetOwner()->ChangeState(prev_state);
 		}
 	}
 }

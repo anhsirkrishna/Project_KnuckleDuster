@@ -9,3 +9,8 @@ class ComponentCreator {
 public:
 	virtual Component* Create(json json_object);
 };
+
+class HealthCreator : public ComponentCreator {
+public:
+	virtual Component* Create(json json_object);
+};

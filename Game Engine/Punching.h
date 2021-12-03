@@ -15,6 +15,7 @@ private:
 	int hitbox_x_offset;
 	int hitbox_y_offset;
 	int punch_damage;
+	std::string prev_state;
 public:
 	Punching();
 	void Serialize(json json_object);

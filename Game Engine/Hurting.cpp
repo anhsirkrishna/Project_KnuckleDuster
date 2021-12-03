@@ -3,7 +3,7 @@
 #include "GLSprite.h"
 #include "Animation.h"
 #include "GameObject.h"
-#include "Events.h"
+#include "EventManager.h"
 
 Hurting::Hurting() : Component("HURTING"), p_owner_glsprite(NULL), p_owner_hurtbox(NULL), p_owner_animation(NULL) {}
 
@@ -19,10 +19,15 @@ void Hurting::Link() {
 	p_owner_animation = static_cast<Animation*>(GetOwner()->HasComponent("ANIMATION"));
 	GetOwner()->ChangeState(current_state);
 }
-void Hurting::Hurt() {
-	GetOwner()->ChangeState("HURT");
-	p_owner_animation->Refresh();
-	SDL_Log("Got hit");
+void Hurting::Hurt(int damage) {
+	GameObject* owner_object = GetOwner();
+	if (owner_object->CurrentState() != "HURT") {
+		owner_object->ChangeState("HURT");
+		p_owner_animation->Refresh();
+		p_event_manager->QueueTimedEvent(
+			new TakeDamageEvent(damage, owner_object->index)
+		);
+	}
 }
 
 void Hurting::Update() {
@@ -37,7 +42,8 @@ void Hurting::Update() {
 void Hurting::HandleEvent(TimedEvent* p_event) {
 	switch (p_event->event_id) {
 	case EventID::hit:
-		Hurt();
+		HitEvent* hit_event = static_cast<HitEvent*>(p_event);
+		Hurt(hit_event->hit_damage);
 		break;
 	}
 }
