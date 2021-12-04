@@ -28,7 +28,7 @@ bool InputManager::Update() {
 	memcpy(mPrevState, mCurrentState, 512 * sizeof * mCurrentState);
 	memcpy(mCurrentState, currentKeyStates, 512 * sizeof * mCurrentState);
 
-	if (isKeyPressed(SDL_SCANCODE_ESCAPE)) {
+	if (isKeyTriggered(SDL_SCANCODE_ESCAPE)) {
 		return false;
 	}
 	return true;

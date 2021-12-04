@@ -111,12 +111,31 @@ void Panel::Draw(ShaderProgram* p_program) {
 	if (!visible)
 		return;
 
+	Matrix3D id_matrix;
+
 	glBindVertexArray(vao_id);
+	CHECKERROR;
+	
+	GLuint loc;
+	loc = glGetUniformLocation(p_program->program_id, "rotateMatrix");
+	glUniformMatrix4fv(loc, 1, GL_FALSE, id_matrix.GetMatrixP());
+	CHECKERROR;
+
+	loc = glGetUniformLocation(p_program->program_id, "scaleMatrix");
+	glUniformMatrix4fv(loc, 1, GL_FALSE, id_matrix.GetMatrixP());
+	CHECKERROR;
+
+	loc = glGetUniformLocation(p_program->program_id, "preRotateMatrix");
+	glUniformMatrix4fv(loc, 1, GL_FALSE, id_matrix.GetMatrixP());
+	CHECKERROR;
+
+	loc = glGetUniformLocation(p_program->program_id, "postRotateMatrix");
+	glUniformMatrix4fv(loc, 1, GL_FALSE, id_matrix.GetMatrixP());
 	CHECKERROR;
 
 	glActiveTexture(GL_TEXTURE2); // Activate texture unit 2
 	glBindTexture(GL_TEXTURE_2D, p_texture->texture_id); // Load texture into it
-	GLuint loc = glGetUniformLocation(p_program->program_id, "texture_map");
+	loc = glGetUniformLocation(p_program->program_id, "texture_map");
 	glUniform1i(loc, 2); // Tell shader texture is in unit 2
 	CHECKERROR;
 
@@ -133,7 +152,6 @@ void Panel::Draw(ShaderProgram* p_program) {
 //Draws a section of the panel at the grid position grid_w, grid_h
 void Panel::DrawSection(ShaderProgram* p_program, int grid_w, int grid_h) {
 	GLuint loc;
-
 	//dimensions.xy is the top left corner of the panel
 	//each section is an offset of 16 pixels
 	translate_matrix.SetVal(0, 3, dimensions.x + (grid_w * 16));

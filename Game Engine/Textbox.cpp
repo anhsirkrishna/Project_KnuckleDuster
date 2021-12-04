@@ -106,11 +106,28 @@ void Textbox::Draw(ShaderProgram* p_program) {
 
 	glBindVertexArray(vao_id);
 	CHECKERROR;
+	Matrix3D id_matrix;
 
 	glActiveTexture(GL_TEXTURE2); // Activate texture unit 2
 	glBindTexture(GL_TEXTURE_2D, p_texture->texture_id); // Load texture into it
 	GLuint loc = glGetUniformLocation(p_program->program_id, "texture_map");
 	glUniform1i(loc, 2); // Tell shader texture is in unit 2
+	CHECKERROR;
+
+	loc = glGetUniformLocation(p_program->program_id, "rotateMatrix");
+	glUniformMatrix4fv(loc, 1, GL_FALSE, id_matrix.GetMatrixP());
+	CHECKERROR;
+
+	loc = glGetUniformLocation(p_program->program_id, "scaleMatrix");
+	glUniformMatrix4fv(loc, 1, GL_FALSE, id_matrix.GetMatrixP());
+	CHECKERROR;
+
+	loc = glGetUniformLocation(p_program->program_id, "preRotateMatrix");
+	glUniformMatrix4fv(loc, 1, GL_FALSE, id_matrix.GetMatrixP());
+	CHECKERROR;
+
+	loc = glGetUniformLocation(p_program->program_id, "postRotateMatrix");
+	glUniformMatrix4fv(loc, 1, GL_FALSE, id_matrix.GetMatrixP());
 	CHECKERROR;
 
 	//Draw each section of the panel individually

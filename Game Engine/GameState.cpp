@@ -5,6 +5,8 @@
 #include "GameManager.h"
 #include "Matrix3D.h"
 #include "Game.h"
+#include "StateStackManager.h"
+#include "PauseState.h"
 
 #include <GL\glew.h>
 #include <SDL_opengl.h>
@@ -19,8 +21,7 @@ void GameState::Enter() {
 
 void GameState::Update() {
 	if (pInputManager->Update() == false) {
-		p_game_manager->Quit();
-		return;
+		p_statestack_manager->Push(new PauseState());
 	}
 	pGameObjectManager->Update();
 	p_event_manager->Update();

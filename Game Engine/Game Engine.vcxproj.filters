@@ -146,6 +146,9 @@
     <ClCompile Include="Jumpkick.cpp">
       <Filter>Components\CharacterComponents</Filter>
     </ClCompile>
+    <ClCompile Include="PauseState.cpp">
+      <Filter>States\GameStates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -295,6 +298,9 @@
     </ClInclude>
     <ClInclude Include="Jumpkick.h">
       <Filter>Components\CharacterComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseState.h">
+      <Filter>States\GameStates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
