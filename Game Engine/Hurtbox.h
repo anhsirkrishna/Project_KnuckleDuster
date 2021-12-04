@@ -16,10 +16,13 @@ public:
 	float GetScaleY();
 	void SetPosition(SDL_Rect new_position);
 	void SetScale(float _scale_x, float _scale_y);
+	void SetSolid(bool _solid);
+	bool IsSolid();
 	bool CheckOutOfBounds();
 	bool CheckCollision();
 private:
 	SDL_Rect box;
+	bool solid;
 	int scale_x, scale_y;
 	Transform* p_owner_transform;
 };

@@ -140,6 +140,9 @@
     <ClCompile Include="Knockdown.cpp">
       <Filter>Components\CharacterComponents</Filter>
     </ClCompile>
+    <ClCompile Include="Playerdazed.cpp">
+      <Filter>Components\PlayerComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -283,6 +286,9 @@
     </ClInclude>
     <ClInclude Include="Knockdown.h">
       <Filter>Components\CharacterComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Playerdazed.h">
+      <Filter>Components\PlayerComponents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

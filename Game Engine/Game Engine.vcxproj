@@ -112,6 +112,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Matrix3D.cpp" />
     <ClCompile Include="Panel.cpp" />
+    <ClCompile Include="Playerdazed.cpp" />
     <ClCompile Include="Punching.cpp" />
     <ClCompile Include="PunchingCreator.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Matrix3D.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Panel.h" />
+    <ClInclude Include="Playerdazed.h" />
     <ClInclude Include="Punching.h" />
     <ClInclude Include="PunchingCreator.h" />
     <ClInclude Include="ResourceManager.h" />

@@ -19,4 +19,5 @@ public:
 	virtual void HandleEvent(TimedEvent* p_event);
 	void Serialize(json json_object);
 	void KnockedDown();
+	void GetUp();
 };

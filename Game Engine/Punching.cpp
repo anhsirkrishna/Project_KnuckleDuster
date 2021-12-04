@@ -69,6 +69,8 @@ void Punching::CheckCollision() {
 		obj_hurtbox = static_cast<Hurtbox*>(curr_obj->HasComponent("HURTBOX"));
 		if (obj_hurtbox == NULL)
 			continue;
+		if (!obj_hurtbox->IsSolid())
+			continue;
 		if (Collision::AABB(hitbox, obj_hurtbox->GetPosition())) {
 			p_event_manager->QueueTimedEvent(
 				new HitEvent(punch_damage, p_owner_hurtbox->GetScaleX(), //Hit direction is the opposite of the punching direction 
@@ -85,6 +87,8 @@ void Punching::CheckCollision() {
 			continue;
 		obj_hurtbox = static_cast<Hurtbox*>(curr_obj->HasComponent("HURTBOX"));
 		if (obj_hurtbox == NULL)
+			continue;
+		if (!obj_hurtbox->IsSolid())
 			continue;
 		if (Collision::AABB(hitbox, obj_hurtbox->GetPosition())) {
 			p_event_manager->QueueTimedEvent(

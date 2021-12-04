@@ -10,6 +10,7 @@ enum class EventID
 	take_damage,
 	knock_down,
 	downed,
+	revived,
 	NUM
 };
 

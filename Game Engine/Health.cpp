@@ -25,8 +25,10 @@ void Health::Heal(unsigned int heal) {
 void Health::HandleEvent(TimedEvent* p_event) {
 	switch (p_event->event_id) {
 	case EventID::take_damage:
-		TakeDamageEvent* p_take_damage_event = static_cast<TakeDamageEvent*>(p_event);
-		TakeDamage(p_take_damage_event->hit_damage);
+		TakeDamage(static_cast<TakeDamageEvent*>(p_event)->hit_damage);
+		break;
+	case EventID::revived:
+		Heal(max_health);
 		break;
 	}
 }

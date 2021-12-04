@@ -3,6 +3,7 @@
 #include "Component.h"
 #include "Transform.h"
 #include "InputManager.h"
+#include "Util.h"
 
 class Walking;
 class Punching;
@@ -16,4 +17,5 @@ public:
 private:
 	Walking* p_owner_walking;
 	Punching* p_owner_punching;
+	RingBuffer<Uint8, 32> input_buffer;
 };

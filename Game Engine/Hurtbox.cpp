@@ -5,7 +5,7 @@
 #include "EventManager.h"
 #include "GameObjectManager.h"
 
-Hurtbox::Hurtbox() : Component("HURTBOX"), box(),  p_owner_transform(NULL), scale_x(1), scale_y(1) {}
+Hurtbox::Hurtbox() : Component("HURTBOX"), box(),  p_owner_transform(NULL), scale_x(1), scale_y(1), solid(true) {}
 
 SDL_Rect Hurtbox::GetPosition() {
 	return box;
@@ -29,6 +29,13 @@ void Hurtbox::SetPosition(SDL_Rect new_position) {
 	box = new_position;
 }
 
+void Hurtbox::SetSolid(bool _solid) {
+	solid = _solid;
+}
+
+bool Hurtbox::IsSolid() {
+	return solid;
+}
 
 void Hurtbox::Update() {
 	if (CheckOutOfBounds()) {
@@ -76,6 +83,8 @@ bool Hurtbox::CheckCollision() {
 		obj_hurtbox = static_cast<Hurtbox*>(curr_obj->HasComponent("HURTBOX"));
 		if (obj_hurtbox == NULL)
 			continue;
+		if (!obj_hurtbox->IsSolid())
+			continue;
 		if (Collision::AABB(box, obj_hurtbox->box))
 			return true;
 	}
@@ -88,6 +97,8 @@ bool Hurtbox::CheckCollision() {
 			continue;
 		obj_hurtbox = static_cast<Hurtbox*>(curr_obj->HasComponent("HURTBOX"));
 		if (obj_hurtbox == NULL)
+			continue;
+		if (!obj_hurtbox->IsSolid())
 			continue;
 		if (Collision::AABB(box, obj_hurtbox->box))
 			return true;

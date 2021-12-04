@@ -24,12 +24,17 @@ void Knockdown::KnockedDown() {
 	GameObject* p_game_obj = GetOwner();
 	if (p_game_obj->CurrentState() != "KNOCKDOWN") {
 		p_game_obj->ChangeState("KNOCKDOWN");
-		SDL_Rect no_hurtbox = p_owner_hurtbox->GetPosition();
-		no_hurtbox.x = 0;
-		no_hurtbox.y = 0;
-		no_hurtbox.w = 0;
-		no_hurtbox.h = 0;
-		p_owner_hurtbox->SetPosition(no_hurtbox);
+		p_owner_hurtbox->SetSolid(false);
+		p_owner_animation->Refresh();
+	}
+}
+
+void Knockdown::GetUp() {
+	GameObject* p_game_obj = GetOwner();
+	if (p_game_obj->CurrentState() == "DAZED" ||
+		p_game_obj->CurrentState() == "KNOCKDOWN") {
+		p_game_obj->ChangeState("IDLE");
+		p_owner_hurtbox->SetSolid(true);
 		p_owner_animation->Refresh();
 	}
 }
@@ -41,9 +46,9 @@ void Knockdown::Update() {
 		p_owner_hurtbox->SetPosition(curr_position);
 		if (p_owner_animation->Completed()) {
 			GetOwner()->ChangeState("DOWNED");
-			p_event_manager->QueueTimedEvent(
-				new TimedEvent(EventID::downed, false, GetOwner()->index)
-			);
+			TimedEvent* downed_event = new TimedEvent(EventID::downed, false, GetOwner()->index);
+			downed_event->SetTime(2000);
+			p_event_manager->QueueTimedEvent(downed_event);
 		}
 	}
 }
@@ -52,6 +57,9 @@ void Knockdown::HandleEvent(TimedEvent* p_event) {
 	switch (p_event->event_id) {
 	case EventID::health_zero:
 		KnockedDown();
+		break;
+	case EventID::revived:
+		GetUp();
 		break;
 	}
 }

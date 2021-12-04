@@ -19,3 +19,8 @@ class KnockdownCreator : public ComponentCreator {
 public:
 	virtual Component* Create(json json_object);
 };
+
+class PlayerdazedCreator : public ComponentCreator {
+public:
+	virtual Component* Create(json json_object);
+};
