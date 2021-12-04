@@ -13,6 +13,7 @@ public:
 	void Drawcharacter(ShaderProgram* p_program, int grid_w, int grid_h, int char_index);
 	void CalculateTexOffset(int char_index, GLfloat& tex_offset_x, GLfloat& tex_offset_y);
 	void Toggle();
+	void SetY(float y);
 private:
 	SDL_Rect dimensions;
 	std::string text;
@@ -26,6 +27,6 @@ private:
 	Texture* p_texture;
 	Matrix3D translate_matrix;
 	GLuint vao_id;
-	const float quad_width = 8.07692307;
+	const float quad_width = 10;
 	const int quad_height = 16;
 };

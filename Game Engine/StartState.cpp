@@ -26,7 +26,7 @@ void StartState::Enter() {
 	ui_obj->ChangeState("DEFAULT");
 	ui_obj->AddComponent(new Panel(170, 240, 25, 4));
 	std::string textbox_text = "PRESS ENTER TO START";
-	ui_obj->AddComponent(new Textbox(188, 252, textbox_text.size(), 1, textbox_text, 2.0));
+	ui_obj->AddComponent(new Textbox(195, 260, textbox_text.size(), 1, textbox_text, 1.5));
 	pGameObjectManager->AddGameObject(ui_obj);
 }
 

@@ -1,30 +1,32 @@
-
 #include "Textbox.h"
-
-#include "Texture.h"
+#include "Button.h"
 #include "ShaderProgram.h"
 #include "ResourceManager.h"
+#include "InputManager.h"
 #include "Util.h"
 
-#include <cctype>
+#define CHECKERROR {GLenum err = glGetError(); if (err != GL_NO_ERROR) { SDL_Log("OpenGL error (at line Button.cpp:%d): %s\n", __LINE__, glewGetErrorString(err)); exit(-1);} }
 
-#define CHECKERROR {GLenum err = glGetError(); if (err != GL_NO_ERROR) { SDL_Log("OpenGL error (at line GLSprite.cpp:%d): %s\n", __LINE__, glewGetErrorString(err)); exit(-1);} }
+Button::Button(int x, int y, int w,
+			   std::string text, void (*_button_action)()) : 
+				Component("BUTTON"), dimensions(), button_action(_button_action), visible(true), button_down(false) {
 
-Textbox::Textbox(float x, float y, float width, float height, 
-				std::string _text, GLfloat _font_size) : Component("PANEL"), text(_text), grid_width(width), grid_height(height),
-														 visible(true), vao_id(0), font_size(_font_size) {
+	int button_width = w * quad_width;
+	int textbox_offset_x = (button_width / 2) - ((text.size() * 15) / 2);
+	p_textbox = new Textbox(x + textbox_offset_x, y + 8, text.size(), 1, text, 1.5);
 	dimensions.x = x;
 	dimensions.y = y;
-	dimensions.w = width * quad_width;
-	dimensions.h = height * quad_height;
+	dimensions.w = w * quad_width;
+	dimensions.h = quad_height*3;
+
+	grid_width = w;
 
 	for (unsigned int i = 0; i < 16; ++i)
 		color_coords[i] = 1.0;
 
-	pResourceManager->add_texture("font");
-	p_texture = pResourceManager->get_texture("font");
+	pResourceManager->add_texture("GUI");
+	p_texture = pResourceManager->get_texture("GUI");
 
-	//Texture coordiantes taken according to font_numbered_16.png (check resources for reference)
 	//Tex coord upper left
 	tex_coords[0] = 0;
 	tex_coords[1] = 0;
@@ -34,14 +36,16 @@ Textbox::Textbox(float x, float y, float width, float height,
 	tex_coords[3] = quad_height;
 
 	//Tex coord lower right
-	tex_coords[4] = quad_width;
+	tex_coords[4] = quad_width-1;
 	tex_coords[5] = quad_height;
 
 	//Tex coord upper left
-	tex_coords[6] = quad_width;
+	tex_coords[6] = quad_width-1;
 	tex_coords[7] = 0;
 
-	tex_coords_offset[0] = tex_coords_offset[1] = 0.0;
+	tex_coords_offset[0] = 9 * quad_width;
+	tex_coords_offset[1] = 5 * quad_height;
+
 
 	//Create a VAO and put the ID in vao_id
 	glGenVertexArrays(1, &vao_id);
@@ -51,8 +55,8 @@ Textbox::Textbox(float x, float y, float width, float height,
 	//Put a vertex consisting of 3 float coordinates x,y,z into the list of all vertices
 	//Specifying the quad that represents one section this panel in terms of 4 vertices
 	GLfloat vertices[12] = { 0 };
-	vertices[6] = vertices[9] = quad_width*font_size;
-	vertices[4] = vertices[7] = quad_height*font_size;
+	vertices[6] = vertices[9] = quad_width*3;
+	vertices[4] = vertices[7] = quad_height*3;
 
 	//Create a continguous buffer for all the vertices/points
 	GLuint point_buffer;
@@ -80,7 +84,7 @@ Textbox::Textbox(float x, float y, float width, float height,
 	GLuint tex_coord_buffer;
 	glGenBuffers(1, &tex_coord_buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, tex_coord_buffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 8, &tex_coords[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 8, &tex_coords[0], GL_STATIC_DRAW);
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -96,17 +100,40 @@ Textbox::Textbox(float x, float y, float width, float height,
 	glBindVertexArray(0);
 }
 
-void Textbox::Toggle() {
-	visible = ~visible;
+void Button::Click() {
+	button_action();
 }
 
-void Textbox::Draw(ShaderProgram* p_program) {
+void Button::Update() {
+	if (pInputManager->isMouseTriggered(SDL_BUTTON_LMASK)) {
+		if (pInputManager->mouse_x > dimensions.x &&
+			pInputManager->mouse_x < dimensions.x + dimensions.w &&
+			pInputManager->mouse_y > dimensions.y &&
+			pInputManager->mouse_y < dimensions.y + dimensions.h) {
+			button_down = true;
+		}
+	}
+
+	if (pInputManager->isMouseReleased(SDL_BUTTON_LMASK)) {
+		if (button_down == true) {
+			button_down = false;
+			Click();
+		}			
+	}
+
+	if (button_down)
+		p_textbox->SetY(dimensions.y + 12);
+	else
+		p_textbox->SetY(dimensions.y + 8);
+}
+
+void Button::Draw(ShaderProgram* p_program) {
 	if (!visible)
 		return;
 
 	glBindVertexArray(vao_id);
 	CHECKERROR;
-	Matrix3D id_matrix;
+	Matrix3D id_matrix, translate_matrix;
 
 	glActiveTexture(GL_TEXTURE2); // Activate texture unit 2
 	glBindTexture(GL_TEXTURE_2D, p_texture->texture_id); // Load texture into it
@@ -130,42 +157,20 @@ void Textbox::Draw(ShaderProgram* p_program) {
 	glUniformMatrix4fv(loc, 1, GL_FALSE, id_matrix.GetMatrixP());
 	CHECKERROR;
 
-	//Draw each section of the panel individually
-	int char_index = 0;
-	for (int i = 0; i < grid_height; i++) {
-		for (int j = 0; j < grid_width; j++) {
-			Drawcharacter(p_program, j, i, char_index);
-			char_index++;
-			if (char_index == text.size()) {
-				glBindVertexArray(0);
-				return;
-			}
-		}
-	}
-
-	glBindVertexArray(0);
-}
-
-//Draws a section of the panel at the grid position grid_w, grid_h
-void Textbox::Drawcharacter(ShaderProgram* p_program, int grid_w, int grid_h, int char_index) {
-	GLuint loc;
-
-	if (isspace(text[char_index]))
-		return;
-	//dimensions.xy is the top left corner of the panel
-	//each section is an offset of 16 pixels
-	translate_matrix.SetVal(0, 3, dimensions.x + (grid_w * ((quad_width*font_size)+2)));
-	translate_matrix.SetVal(1, 3, dimensions.y + (grid_h * quad_height*font_size));
-
-	GLfloat tex_offset[2];
-	GLfloat tex_offset_x, tex_offset_y;
-	CalculateTexOffset(char_index, tex_offset_x, tex_offset_y);
-	tex_offset[0] = tex_offset_x / p_texture->width;
-	tex_offset[1] = tex_offset_y / p_texture->height;
-
 	loc = glGetUniformLocation(p_program->program_id, "translateMatrix");
+	translate_matrix.SetVal(0, 3, dimensions.x);
+	translate_matrix.SetVal(1, 3, dimensions.y);
 	glUniformMatrix4fv(loc, 1, GL_FALSE, translate_matrix.GetMatrixP());
 	CHECKERROR;
+
+	GLfloat tex_offset[2];
+	tex_offset[0] = tex_coords_offset[0] / p_texture->width;
+	if (button_down) {
+		tex_offset[0] = tex_offset[0];
+		tex_offset[1] = (tex_coords_offset[1] + quad_height) / p_texture->height;
+	}
+	else
+		tex_offset[1] = tex_coords_offset[1] / p_texture->height;
 
 	loc = glGetUniformLocation(p_program->program_id, "tex_offset");
 	glUniform2fv(loc, 1, &(tex_offset[0]));
@@ -173,17 +178,48 @@ void Textbox::Drawcharacter(ShaderProgram* p_program, int grid_w, int grid_h, in
 
 	glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, NULL);
 
-}
+	unsigned int i;
+	for (i = 1; i < grid_width - 1; i++) {
+		translate_matrix.SetVal(0, 3, dimensions.x + (quad_width * i));
+		loc = glGetUniformLocation(p_program->program_id, "translateMatrix");
+		glUniformMatrix4fv(loc, 1, GL_FALSE, translate_matrix.GetMatrixP());
+		CHECKERROR;
 
-void Textbox::CalculateTexOffset(int char_index, GLfloat& tex_offset_x, GLfloat& tex_offset_y) {
-	tex_offset_y = 0.0;
-	char c = text[char_index];
-	//Characters in the texture are arranged alphabetically so A would be in the 0th position in the texture
-	//Ascii value of A is 65. 65-65 = 0 hence it will be the 0th position
-	int texture_index = int(c) - 65;
-	tex_offset_x = texture_index * quad_width;
-}
+		tex_offset[0] = (tex_coords_offset[0] + quad_width) / p_texture->width;
+		if (button_down) {
+			tex_offset[0] = tex_offset[0];
+			tex_offset[1] = (tex_coords_offset[1] + quad_height) / p_texture->height;
+		}
+		else
+			tex_offset[1] = tex_coords_offset[1] / p_texture->height;
 
-void Textbox::SetY(float y) {
-	dimensions.y = y;
+		loc = glGetUniformLocation(p_program->program_id, "tex_offset");
+		glUniform2fv(loc, 1, &(tex_offset[0]));
+		CHECKERROR;
+
+		glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, NULL);
+	}
+
+	translate_matrix.SetVal(0, 3, dimensions.x + (quad_width*i));
+	loc = glGetUniformLocation(p_program->program_id, "translateMatrix");
+	glUniformMatrix4fv(loc, 1, GL_FALSE, translate_matrix.GetMatrixP());
+	CHECKERROR;
+
+	tex_offset[0] = (tex_coords_offset[0] + (quad_width*2)) / p_texture->width;
+	if (button_down) {
+		tex_offset[0] = tex_offset[0];
+		tex_offset[1] = (tex_coords_offset[1] + quad_height) / p_texture->height;
+	}
+	else
+		tex_offset[1] = tex_coords_offset[1] / p_texture->height;
+
+	loc = glGetUniformLocation(p_program->program_id, "tex_offset");
+	glUniform2fv(loc, 1, &(tex_offset[0]));
+	CHECKERROR;
+
+	glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, NULL);
+
+	glBindVertexArray(0);
+
+	p_textbox->Draw(p_program);
 }

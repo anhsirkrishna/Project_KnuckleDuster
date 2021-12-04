@@ -6,6 +6,7 @@
 #include "StateStackManager.h"
 #include "Panel.h"
 #include "Textbox.h"
+#include "Button.h"
 #include "GameObject.h"
 
 #include <GL\glew.h>
@@ -14,20 +15,25 @@
 
 #define CHECKERROR {GLenum err = glGetError(); if (err != GL_NO_ERROR) { SDL_Log("OpenGL error (at line Main.cpp:%d): %s\n", __LINE__, glewGetErrorString(err));} }
 
+void ButtonFunc() {
+	p_game_manager->Quit();
+}
+
 void PauseState::Enter() {
 	GameObject* ui_obj = new GameObject("PauseMenu");
 	ui_obj->AddState("DEFAULT");
 	ui_obj->ChangeState("DEFAULT");
-	ui_obj->AddComponent(new Panel(170, 240, 25, 4));
+	ui_obj->AddComponent(new Panel(200, 120, 20, 18));
 	std::string textbox_text = "GAME PAUSED";
-	ui_obj->AddComponent(new Textbox(188, 252, textbox_text.size(), 1, textbox_text, 2.0));
+	ui_obj->AddComponent(new Textbox(230, 140, textbox_text.size(), 1, textbox_text, 2.0));
+	textbox_text = "QUIT";
+	ui_obj->AddComponent(new Button(250, 200, 12, textbox_text, &ButtonFunc));
 	game_object_list.push_back(ui_obj);
 }
 
-
 void PauseState::Update() {
 	if (pInputManager->Update() == false) {
-		p_game_manager->Quit();
+		p_statestack_manager->Pop();
 		return;
 	}
 
@@ -43,8 +49,6 @@ void PauseState::Update() {
 
 void PauseState::Render(ShaderProgram* p_program) {
 	p_program->Use();
-	//glClearColor(0.0, 0.0, 0.0, 1.0);
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	Matrix3D orthoGraphProj = OrthographicProj(0, WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0, 1.0);
 	GLuint loc = glGetUniformLocation(p_program->program_id, "orthoGraphProj");

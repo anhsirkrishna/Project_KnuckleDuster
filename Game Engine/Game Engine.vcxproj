@@ -87,6 +87,7 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationCreator.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentCreator.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationCreator.h" />
     <ClInclude Include="BaseState.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentCreator.h" />
     <ClInclude Include="ComponentFactory.h" />

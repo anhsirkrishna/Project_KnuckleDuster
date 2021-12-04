@@ -149,6 +149,9 @@
     <ClCompile Include="PauseState.cpp">
       <Filter>States\GameStates</Filter>
     </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>UIComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -301,6 +304,9 @@
     </ClInclude>
     <ClInclude Include="PauseState.h">
       <Filter>States\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>UIComponents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
