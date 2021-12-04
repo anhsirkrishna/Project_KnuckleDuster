@@ -30,4 +30,5 @@ public:
 	virtual void Link();
 	void Serialize(json json_object);
 	bool Completed();
+	int Duration();
 };

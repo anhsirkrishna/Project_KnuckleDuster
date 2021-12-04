@@ -26,6 +26,7 @@ ComponentFactory::ComponentFactory() {
 	creator_map.insert(std::pair<std::string, ComponentCreator*>("HEALTH", new HealthCreator));
 	creator_map.insert(std::pair<std::string, ComponentCreator*>("KNOCKDOWN", new KnockdownCreator));
 	creator_map.insert(std::pair<std::string, ComponentCreator*>("PLAYERDAZED", new PlayerdazedCreator));
+	creator_map.insert(std::pair<std::string, ComponentCreator*>("JUMPKICK", new JumpkickCreator));
 }
 
 ComponentFactory::~ComponentFactory() {

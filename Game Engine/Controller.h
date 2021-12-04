@@ -7,6 +7,7 @@
 
 class Walking;
 class Punching;
+class Jumpkick;
 
 class Controller : public Component {
 public:
@@ -17,5 +18,6 @@ public:
 private:
 	Walking* p_owner_walking;
 	Punching* p_owner_punching;
+	Jumpkick* p_owner_jumpkick;
 	RingBuffer<Uint8, 32> input_buffer;
 };

@@ -33,9 +33,10 @@ private:
 
 class HitEvent : public TimedEvent {
 public :
-	HitEvent(unsigned int _dmg, int _direction, int _obj_index, bool _broadcast=false);
+	HitEvent(unsigned int _dmg, int _direction, int _distance, int _obj_index, bool _broadcast=false);
 	unsigned int hit_damage;
 	int direction;
+	int hit_move_distance;
 };
 
 class TakeDamageEvent : public TimedEvent {

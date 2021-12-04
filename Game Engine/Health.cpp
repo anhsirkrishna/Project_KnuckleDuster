@@ -9,12 +9,12 @@ void Health::Serialize(json json_object) {
 	current_health = max_health;
 }
 
-void Health::TakeDamage(unsigned int damage) {
+void Health::TakeDamage(int damage) {
 	current_health = (current_health - damage) > 0 ? (current_health - damage) : 0;
 	if (current_health == 0) {
-		p_event_manager->QueueTimedEvent(
-			new TimedEvent(EventID::health_zero, false, GetOwner()->index)
-		);
+		TimedEvent* p_event = new TimedEvent(EventID::health_zero, false, GetOwner()->index);
+		//p_event->SetTime(200);
+		p_event_manager->QueueTimedEvent(p_event);
 	}
 }
 

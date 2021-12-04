@@ -10,9 +10,19 @@
     },
     "PUNCHING": {
       "hitbox": [ 24, 4, 12, 8 ],
-      "punch_damage": 5
+      "punch_damage": 5,
+      "hit_distance": 0
     },
-    "HURTING": {}
+    "HURTING": {},
+    "JUMPKICK": {
+      "hitbox": [ 24, 4, 12, 8 ],
+      "damage": 20,
+      "move_distance": 80,
+      "hit_distance": 40
+    },
+    "PLAYERDAZED": {
+      "undazed_input_count": 10
+    }
   },
   "IDLE": {
     "GLSPRITE": {
@@ -135,6 +145,72 @@
     "ANIMATION": {
       "frames": [
         0, 0
+      ],
+      "looping": false,
+      "interval": 8
+    }
+  },
+  "DAZED": {
+    "GLSPRITE": {
+      "texture_names": [ "Player_dazed" ],
+      "vertex_list": [
+           0,  0, 0,
+           0, 64, 0,
+          32, 64, 0,
+          32,  0, 0
+      ],
+      "color_list": [
+          40,  6,  55, 255,
+          40,  6,  55, 255,
+        185, 66, 245, 255,
+        185, 66, 245, 255
+      ],
+      "tex_coord_list": [
+           0,  0,
+           0, 32,
+          16, 32,
+          16,  0
+      ]
+    },
+    "ANIMATION": {
+      "frames": [
+         0, 0,
+        16, 0,
+        32, 0,
+        48, 0
+      ],
+      "looping": true,
+      "interval": 8
+    }
+  },
+  "JUMPKICK": {
+    "GLSPRITE": {
+      "texture_names": [ "Player_jumpkick" ],
+      "vertex_list": [
+           0,  0, 0,
+           0, 64, 0,
+          48, 64, 0,
+          48,  0, 0
+      ],
+      "color_list": [
+          40,  6,  55, 255,
+          40,  6,  55, 255,
+        185, 66, 245, 255,
+        185, 66, 245, 255
+      ],
+      "tex_coord_list": [
+           0,  0,
+           0, 32,
+          24, 32,
+          24,  0
+      ]
+    },
+    "ANIMATION": {
+      "frames": [
+         0, 0,
+        24, 0,
+        48, 0,
+        72, 0
       ],
       "looping": false,
       "interval": 8

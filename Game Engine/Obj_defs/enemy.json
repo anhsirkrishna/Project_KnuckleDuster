@@ -9,7 +9,8 @@
     },
     "PUNCHING": {
       "hitbox": [ 24, 4, 8, 8 ],
-      "punch_damage": 5
+      "punch_damage": 5,
+      "hit_distance": 2
     },
     "HURTING": {},
     "HEALTH": {

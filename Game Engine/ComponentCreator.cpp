@@ -2,6 +2,7 @@
 #include "Health.h"
 #include "Knockdown.h"
 #include "Playerdazed.h"
+#include "Jumpkick.h"
 
 Component* ComponentCreator::Create(json json_object) {
 	return NULL;
@@ -23,4 +24,11 @@ Component* PlayerdazedCreator::Create(json json_object) {
 	Playerdazed* new_pd = new Playerdazed;
 	new_pd->Serialize(json_object);
 	return static_cast<Component*>(new_pd);
+}
+
+
+Component* JumpkickCreator::Create(json json_object) {
+	Jumpkick* new_jk = new Jumpkick;
+	new_jk->Serialize(json_object);
+	return static_cast<Component*>(new_jk);
 }

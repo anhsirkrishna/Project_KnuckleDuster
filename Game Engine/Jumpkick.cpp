@@ -1,4 +1,4 @@
-#include "Punching.h"
+#include "Jumpkick.h"
 #include "GameObject.h"
 #include "Hurtbox.h"
 #include "GLSprite.h"
@@ -8,58 +8,62 @@
 #include "EventManager.h"
 
 
-Punching::Punching() : Component("PUNCHING"), p_owner_hurtbox(NULL), p_owner_glsprite(NULL), p_owner_animation(NULL), sprite_index(0), 
-					   hitbox(), punch_damage(0), hitbox_x_offset(0), hitbox_y_offset(0), hit_distance(0), prev_state("IDLE") {}
+Jumpkick::Jumpkick() : Component("JUMPKICK"), p_owner_hurtbox(NULL), p_owner_animation(NULL),
+					   hitbox(), damage(0), hitbox_x_offset(0), hitbox_y_offset(0), hit_distance(0), prev_state("IDLE"), move_distance(0) {}
 
-void Punching::Serialize(json json_object) {
+void Jumpkick::Serialize(json json_object) {
 	auto hitbox_coords = json_object["hitbox"].get<std::vector<int>>();
 	hitbox_x_offset = hitbox_coords[0];
 	hitbox_y_offset = hitbox_coords[1];
 	hitbox.w = hitbox_coords[2];
 	hitbox.h = hitbox_coords[3];
 
-	punch_damage = json_object["punch_damage"].get<int>();
+	damage = json_object["damage"].get<int>();
+	move_distance = json_object["move_distance"].get<int>();
 	hit_distance = json_object["hit_distance"].get<int>();
 }
-void Punching::Link() {
+void Jumpkick::Link() {
 	p_owner_hurtbox = static_cast<Hurtbox*>(GetOwner()->HasComponent("HURTBOX"));
 	std::string current_state = GetOwner()->CurrentState();
-	GetOwner()->ChangeState("PUNCH");
-	p_owner_glsprite = static_cast<GLSprite*>(GetOwner()->HasComponent("GLSPRITE"));
+	GetOwner()->ChangeState("JUMPKICK");
 	p_owner_animation = static_cast<Animation*>(GetOwner()->HasComponent("ANIMATION"));
+	//Get the move distance per frame
+	move_distance = move_distance / p_owner_animation->Duration();
 	GetOwner()->ChangeState(current_state);
 }
 
-void Punching::Punch() {
+void Jumpkick::Kick() {
 	GameObject* game_obj = GetOwner();
 	prev_state = game_obj->CurrentState();
-	if (prev_state != "PUNCH") {
-		GetOwner()->ChangeState("PUNCH");
+	if (prev_state != "JUMPKICK") {
+		GetOwner()->ChangeState("JUMPKICK");
 		UpdateHitbox();
 		p_owner_animation->Refresh();
 	}
 }
 
-void Punching::Update() {
-	if (GetOwner()->CurrentState() == "PUNCH") {
+void Jumpkick::Update() {
+	if (GetOwner()->CurrentState() == "JUMPKICK") {
 		//Collision logic
 		CheckCollision();
-
+		SDL_Rect curr_position = p_owner_hurtbox->GetPosition();
+		curr_position.x = curr_position.x + (move_distance * p_owner_hurtbox->GetScaleX());
+		p_owner_hurtbox->SetPosition(curr_position);
+		UpdateHitbox();
 		//Animation logic and state change
 		if (p_owner_animation->Completed()) {
-			sprite_index = (sprite_index + 1) % 2;
-			p_owner_glsprite->SetTexture(sprite_index);
-			GetOwner()->ChangeState(prev_state);
+
+			GetOwner()->ChangeState("IDLE");
 		}
 	}
 }
 
-void Punching::UpdateHitbox() {
+void Jumpkick::UpdateHitbox() {
 	hitbox.x = p_owner_hurtbox->GetPosition().x + (hitbox_x_offset * p_owner_hurtbox->GetScaleX());
 	hitbox.y = p_owner_hurtbox->GetPosition().y + (hitbox_y_offset * p_owner_hurtbox->GetScaleY());
 }
 
-void Punching::CheckCollision() {
+void Jumpkick::CheckCollision() {
 	//Go through all other hurtboxes in the game
 	GameObject* curr_obj;
 	Hurtbox* obj_hurtbox;
@@ -74,7 +78,7 @@ void Punching::CheckCollision() {
 			continue;
 		if (Collision::AABB(hitbox, obj_hurtbox->GetPosition())) {
 			p_event_manager->QueueTimedEvent(
-				new HitEvent(punch_damage, p_owner_hurtbox->GetScaleX(), //Hit direction is the opposite of the punching direction 
+				new HitEvent(damage, p_owner_hurtbox->GetScaleX(), //Hit direction is the opposite of the Jumpkick direction 
 							 hit_distance, obj_hurtbox->GetOwner()->index)
 			);
 		}
@@ -93,7 +97,7 @@ void Punching::CheckCollision() {
 			continue;
 		if (Collision::AABB(hitbox, obj_hurtbox->GetPosition())) {
 			p_event_manager->QueueTimedEvent(
-				new HitEvent(punch_damage, p_owner_hurtbox->GetScaleX(), //Hit direction is the opposite of the punching direction 
+				new HitEvent(damage, p_owner_hurtbox->GetScaleX(), //Hit direction is the opposite of the Jumpkick direction 
 							 hit_distance, obj_hurtbox->GetOwner()->index)
 			);
 		}

@@ -19,7 +19,7 @@ void Hurting::Link() {
 	p_owner_animation = static_cast<Animation*>(GetOwner()->HasComponent("ANIMATION"));
 	GetOwner()->ChangeState(current_state);
 }
-void Hurting::Hurt(int damage, int direction) {
+void Hurting::Hurt(int damage, int direction, int hit_distance) {
 	GameObject* owner_object = GetOwner();
 	if (owner_object->CurrentState() != "HURT" &&
 		owner_object->CurrentState() != "KNOCKDOWN" &&
@@ -30,6 +30,7 @@ void Hurting::Hurt(int damage, int direction) {
 			p_owner_hurtbox->GetScaleY());
 		owner_object->ChangeState("HURT");
 		p_owner_animation->Refresh();
+		move_distance = hit_distance / p_owner_animation->Duration();
 		p_event_manager->QueueTimedEvent(
 			new TakeDamageEvent(damage, owner_object->index)
 		);
@@ -38,6 +39,9 @@ void Hurting::Hurt(int damage, int direction) {
 
 void Hurting::Update() {
 	if (GetOwner()->CurrentState() == "HURT") {
+		SDL_Rect curr_position = p_owner_hurtbox->GetPosition();
+		curr_position.x = curr_position.x + (move_distance * p_owner_hurtbox->GetScaleX() * -1);
+		p_owner_hurtbox->SetPosition(curr_position);
 		//Animation logic and state change
 		if (p_owner_animation->Completed()) {
 			GetOwner()->ChangeState("IDLE");
@@ -48,8 +52,9 @@ void Hurting::Update() {
 void Hurting::HandleEvent(TimedEvent* p_event) {
 	switch (p_event->event_id) {
 	case EventID::hit:
-		HitEvent* hit_event = static_cast<HitEvent*>(p_event);
-		Hurt(hit_event->hit_damage, hit_event->direction);
+		Hurt(static_cast<HitEvent*>(p_event)->hit_damage, 
+			 static_cast<HitEvent*>(p_event)->direction, 
+			 static_cast<HitEvent*>(p_event)->hit_move_distance);
 		break;
 	}
 }

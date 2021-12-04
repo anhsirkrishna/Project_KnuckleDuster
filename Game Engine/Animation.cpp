@@ -32,7 +32,8 @@ void Animation::Update() {
 			current_frame = frames.size() - 1;
 		else
 			current_frame = current_frame + 1 < frames.size() ? (current_frame + 1) : 0;
-		times_played += 1;
+		if (current_frame == 0 )
+			times_played += 1;
 	}
 
 	//Set the texture offset for the GLSprite component of the the owner
@@ -55,4 +56,9 @@ void Animation::Serialize(json json_object) {
 
 void Animation::Link() {
 	p_owner_glsprite = static_cast<GLSprite*>(GetOwner()->HasComponent("GLSPRITE"));
+}
+
+//Returns the total duration of the animation in number of frames
+int Animation::Duration() {
+	return frames.size() * interval;
 }
