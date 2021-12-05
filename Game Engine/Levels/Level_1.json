@@ -13,5 +13,10 @@
     "obj_def": "Level1_tilemap",
     "default_state": "NONE",
     "background": true
+  },
+  "level1_hurtbox": {
+    "obj_def": "Level1_hurtbox",
+    "default_state": "NONE",
+    "background": false
   }
 }

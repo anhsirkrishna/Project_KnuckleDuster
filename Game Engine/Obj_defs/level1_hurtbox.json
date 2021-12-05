@@ -1,0 +1,8 @@
+{
+  "COMMON": {
+    "HURTBOX": {
+      "coordinates": [ 0, 0, 720, 154 ]
+    },
+    "TRANSFORM": {}
+  }
+}

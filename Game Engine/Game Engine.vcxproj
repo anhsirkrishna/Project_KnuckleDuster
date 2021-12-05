@@ -199,6 +199,7 @@
     <None Include="Levels\Level_2.json" />
     <None Include="Obj_defs\background.json" />
     <None Include="Obj_defs\enemy.json" />
+    <None Include="Obj_defs\level1_hurtbox.json" />
     <None Include="Obj_defs\level1_tilemap.json" />
     <None Include="Obj_defs\level2_tilemap.json" />
     <None Include="Obj_defs\player.json" />

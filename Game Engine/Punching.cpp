@@ -49,7 +49,7 @@ void Punching::Update() {
 		if (p_owner_animation->Completed()) {
 			sprite_index = (sprite_index + 1) % 2;
 			p_owner_glsprite->SetTexture(sprite_index);
-			GetOwner()->ChangeState(prev_state);
+			GetOwner()->ChangeState("IDLE");
 		}
 	}
 }
