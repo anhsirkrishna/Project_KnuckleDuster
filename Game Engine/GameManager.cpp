@@ -15,6 +15,6 @@ unsigned int GameManager::Level() {
 	return level;
 }
 
-void GameManager::SetLevel(unsigned int next_level) {
+void GameManager::SetLevel(int next_level) {
 	level = next_level;
 }

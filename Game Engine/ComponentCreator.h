@@ -29,3 +29,8 @@ class JumpkickCreator : public ComponentCreator {
 public:
 	virtual Component* Create(json json_object);
 };
+
+class HostageCreator : public ComponentCreator {
+public:
+	virtual Component* Create(json json_object);
+};

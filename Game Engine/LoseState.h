@@ -1,11 +1,15 @@
 #pragma once
 #include "BaseState.h"
+#include <vector>
 
-class GameState : public BaseState {
+class GameObject;
+
+class LoseState : public BaseState {
+public:
 	virtual void Enter();
 	virtual void Exit();
 	virtual void Update();
 	virtual void Render(ShaderProgram* p_program);
 private:
-	int curr_level;
+	std::vector<GameObject*> game_object_list;
 };

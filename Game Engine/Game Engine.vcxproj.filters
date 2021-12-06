@@ -152,6 +152,12 @@
     <ClCompile Include="Button.cpp">
       <Filter>UIComponents</Filter>
     </ClCompile>
+    <ClCompile Include="Hostage.cpp">
+      <Filter>Components\CharacterComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="LoseState.cpp">
+      <Filter>States\GameStates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -308,6 +314,12 @@
     <ClInclude Include="Button.h">
       <Filter>UIComponents</Filter>
     </ClInclude>
+    <ClInclude Include="Hostage.h">
+      <Filter>Components\CharacterComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="LoseState.h">
+      <Filter>States\GameStates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -403,6 +415,9 @@
       <Filter>Obj_defs</Filter>
     </None>
     <None Include="Obj_defs\level1_hurtbox.json">
+      <Filter>Obj_defs</Filter>
+    </None>
+    <None Include="Obj_defs\hostage.json">
       <Filter>Obj_defs</Filter>
     </None>
   </ItemGroup>

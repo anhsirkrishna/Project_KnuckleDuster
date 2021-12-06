@@ -18,5 +18,10 @@
     "obj_def": "Level1_hurtbox",
     "default_state": "NONE",
     "background": false
+  },
+  "hostage": {
+    "obj_def": "hostage",
+    "default_state": "IDLE",
+    "background": false
   }
 }

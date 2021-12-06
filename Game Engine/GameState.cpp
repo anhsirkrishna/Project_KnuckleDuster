@@ -7,6 +7,7 @@
 #include "Game.h"
 #include "StateStackManager.h"
 #include "PauseState.h"
+#include "LoseState.h"
 
 #include <GL\glew.h>
 #include <SDL_opengl.h>
@@ -20,11 +21,19 @@ void GameState::Enter() {
 }
 
 void GameState::Update() {
+	curr_level = p_game_manager->Level();
 	if (pInputManager->Update() == false) {
 		p_statestack_manager->Push(new PauseState());
 	}
 	pGameObjectManager->Update();
 	p_event_manager->Update();
+
+	if (p_game_manager->Level() == -1) {
+		p_statestack_manager->Push(new LoseState());
+	}
+	else if (p_game_manager->Level() != curr_level) {
+		p_statestack_manager->Push(new GameState());
+	}
 }
 
 void GameState::Render(ShaderProgram* p_program) {
@@ -47,5 +56,5 @@ void GameState::Render(ShaderProgram* p_program) {
 }
 
 void GameState::Exit() {
-
+	pGameObjectManager->Cleanup();
 }

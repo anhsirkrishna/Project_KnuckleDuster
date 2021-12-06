@@ -105,12 +105,14 @@
     <ClCompile Include="GLSprite.cpp" />
     <ClCompile Include="GLSpriteCreator.cpp" />
     <ClCompile Include="Health.cpp" />
+    <ClCompile Include="Hostage.cpp" />
     <ClCompile Include="Hurtbox.cpp" />
     <ClCompile Include="Hurting.cpp" />
     <ClCompile Include="HurtingCreator.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Jumpkick.cpp" />
     <ClCompile Include="Knockdown.cpp" />
+    <ClCompile Include="LoseState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Matrix3D.cpp" />
     <ClCompile Include="Panel.cpp" />
@@ -159,6 +161,7 @@
     <ClInclude Include="GLSprite.h" />
     <ClInclude Include="GLSpriteCreator.h" />
     <ClInclude Include="Health.h" />
+    <ClInclude Include="Hostage.h" />
     <ClInclude Include="Hurtbox.h" />
     <ClInclude Include="HurtboxCreator.h" />
     <ClInclude Include="Hurting.h" />
@@ -166,6 +169,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Jumpkick.h" />
     <ClInclude Include="Knockdown.h" />
+    <ClInclude Include="LoseState.h" />
     <ClInclude Include="Matrix3D.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Panel.h" />
@@ -199,6 +203,7 @@
     <None Include="Levels\Level_2.json" />
     <None Include="Obj_defs\background.json" />
     <None Include="Obj_defs\enemy.json" />
+    <None Include="Obj_defs\hostage.json" />
     <None Include="Obj_defs\level1_hurtbox.json" />
     <None Include="Obj_defs\level1_tilemap.json" />
     <None Include="Obj_defs\level2_tilemap.json" />

@@ -6,10 +6,10 @@ public:
 	void Quit();
 	bool Status();
 	unsigned int Level();
-	void SetLevel(unsigned int level);
+	void SetLevel(int level);
 private:
 	bool isRunning;
-	unsigned int level;
+	int level;
 };
 
 extern GameManager* p_game_manager;
