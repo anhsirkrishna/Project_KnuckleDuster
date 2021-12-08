@@ -94,6 +94,7 @@
     <ClCompile Include="ComponentFactory.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="ControllerCreator.cpp" />
+    <ClCompile Include="EnemyAI.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="Events.cpp" />
     <ClCompile Include="FrameRateController.cpp" />
@@ -114,6 +115,7 @@
     <ClCompile Include="Knockdown.cpp" />
     <ClCompile Include="LoseState.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MathG.cpp" />
     <ClCompile Include="Matrix3D.cpp" />
     <ClCompile Include="Panel.cpp" />
     <ClCompile Include="PauseState.cpp" />
@@ -149,6 +151,7 @@
     <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="ControllerCreator.h" />
+    <ClInclude Include="EnemyAI.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="FrameRateController.h" />
@@ -170,6 +173,7 @@
     <ClInclude Include="Jumpkick.h" />
     <ClInclude Include="Knockdown.h" />
     <ClInclude Include="LoseState.h" />
+    <ClInclude Include="MathG.h" />
     <ClInclude Include="Matrix3D.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Panel.h" />
