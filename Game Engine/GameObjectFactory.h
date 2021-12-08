@@ -8,7 +8,9 @@
 class GameObjectFactory {
 public:
 	GameObject* CreateGameObject(std::string object_name, std::string obj_def);
+	GameObject* ReloadGameObject(std::string object_name, std::string obj_def);
 	void CreateLevel(unsigned int level);
+	void ReloadLevel(unsigned int level);
 private:
 	ComponentFactory component_factory;
 };

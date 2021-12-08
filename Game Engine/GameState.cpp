@@ -21,6 +21,12 @@ void GameState::Enter() {
 }
 
 void GameState::Update() {
+	if (p_game_manager->Level() == 0) {
+		p_statestack_manager->Pop();
+		p_game_manager->SetLevel(curr_level);
+		p_statestack_manager->Push(new GameState());
+	}
+
 	curr_level = p_game_manager->Level();
 	if (pInputManager->Update() == false) {
 		p_statestack_manager->Push(new PauseState());

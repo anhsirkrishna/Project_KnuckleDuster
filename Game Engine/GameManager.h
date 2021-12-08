@@ -7,6 +7,7 @@ public:
 	bool Status();
 	unsigned int Level();
 	void SetLevel(int level);
+	void RestartLevel();
 private:
 	bool isRunning;
 	int level;

@@ -11,6 +11,7 @@ class TimedEvent;
 class GameObject {
 	public:
 		GameObject(std::string object_name);
+		std::string GameObject::GetName();
 		Component* HasComponent(std::string component_name) const;
 		void AddComponent(Component* component);
 		void AddComponentToState(std::string, Component* component);

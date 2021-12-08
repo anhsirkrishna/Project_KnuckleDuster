@@ -70,3 +70,24 @@ void GameObjectFactory::CreateLevel(unsigned int level) {
 			pGameObjectManager->AddGameObject(new_object);
 	}
 }
+
+void GameObjectFactory::ReloadLevel(unsigned int level) {
+	std::string level_file = ".\\Levels\\Level_" + std::to_string(level) + ".json";
+	std::ifstream level_data(level_file);
+
+	json json_object;
+	level_data >> json_object;
+
+	auto object_map = json_object.get<std::unordered_map<std::string, json>>();
+
+	GameObject* new_object;
+	std::string obj_def;
+	std::string default_state;
+	bool is_background;
+	for (unsigned int i = 0; i < pGameObjectManager->max_objects; i++) {
+		if (pGameObjectManager->game_object_list[i] == NULL)
+			continue;
+		auto game_obj_def = object_map[pGameObjectManager->game_object_list[i]->GetName()].get<std::unordered_map<std::string, json>>();
+
+	}
+}

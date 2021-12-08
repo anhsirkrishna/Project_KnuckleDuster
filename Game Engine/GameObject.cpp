@@ -8,6 +8,10 @@ GameObject::GameObject(std::string object_name) : index(0) {
 	current_state;
 }
 
+std::string GameObject::GetName() {
+	return name;
+}
+
 Component* GameObject::HasComponent(std::string component_name) const {
 	for (auto component : component_list) {
 		if (component->GetName() == component_name)

@@ -7,6 +7,7 @@
 #include "Game.h"
 #include "InputManager.h"
 #include "StateStackManager.h"
+#include "GameState.h"
 
 #include <GL\glew.h>
 #include <SDL_opengl.h>
@@ -19,7 +20,8 @@ void ButtonFuncQuit() {
 }
 
 void ButtonFuncRestart() {
-	p_game_manager->Quit();
+	p_game_manager->RestartLevel();
+
 }
 
 void LoseState::Enter() {
@@ -28,11 +30,11 @@ void LoseState::Enter() {
 	ui_obj->ChangeState("DEFAULT");
 	ui_obj->AddComponent(new Panel(200, 120, 20, 18));
 	std::string textbox_text = "GAME OVER";
-	ui_obj->AddComponent(new Textbox(230, 140, textbox_text.size(), 1, textbox_text, 2.0));
-	textbox_text = "RESTART";
-	ui_obj->AddComponent(new Button(250, 200, 12, textbox_text, &ButtonFuncQuit));
+	ui_obj->AddComponent(new Textbox(240, 140, textbox_text.size(), 1, textbox_text, 2.0));
 	textbox_text = "QUIT";
-	ui_obj->AddComponent(new Button(250, 260, 12, textbox_text, &ButtonFuncRestart));
+	ui_obj->AddComponent(new Button(250, 260, 12, textbox_text, &ButtonFuncQuit));
+	textbox_text = "RESTART";
+	ui_obj->AddComponent(new Button(250, 200, 12, textbox_text, &ButtonFuncRestart));
 	game_object_list.push_back(ui_obj);
 }
 
@@ -49,6 +51,11 @@ void LoseState::Update() {
 
 	for (auto game_obj : game_object_list) {
 		game_obj->Update();
+	}
+
+	if (p_game_manager->Level() == 0) {
+		p_statestack_manager->Pop();
+		return;
 	}
 }
 

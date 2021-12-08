@@ -18,3 +18,7 @@ unsigned int GameManager::Level() {
 void GameManager::SetLevel(int next_level) {
 	level = next_level;
 }
+
+void GameManager::RestartLevel() {
+	level = 0;
+}
