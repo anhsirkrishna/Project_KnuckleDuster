@@ -24,7 +24,6 @@ void Hurting::Hurt(int damage, int direction, int hit_distance) {
 	if (owner_object->CurrentState() != "HURT" &&
 		owner_object->CurrentState() != "KNOCKDOWN" &&
 		owner_object->CurrentState() != "DOWNED") {
-		SDL_Log("Am hurt from %d", direction);
 		p_owner_hurtbox->SetScale(
 			direction*-1, 
 			p_owner_hurtbox->GetScaleY());

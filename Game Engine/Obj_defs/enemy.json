@@ -5,10 +5,10 @@
     },
     "TRANSFORM": {},
     "WALKING": {
-      "speed": 2
+      "speed": 1
     },
     "PUNCHING": {
-      "hitbox": [ 24, 4, 12, 8 ],
+      "hitbox": [ 24, 4, 16, 8 ],
       "punch_damage": 5,
       "hit_distance": 0
     },
@@ -19,7 +19,8 @@
     "KNOCKDOWN": {},
     "ENEMYAI": {
       "attack_range": 12,
-      "player_agro_range":  80
+      "player_agro_range": 80,
+      "action_cooldown":  1500
     }
   },
   "IDLE": {

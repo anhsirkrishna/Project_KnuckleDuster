@@ -27,3 +27,7 @@ void FrameRateController::limit_frame_rate() {
 Uint32 FrameRateController::GetLoopStartTime() {
 	return mLoopStartTime;
 }
+
+Uint32 FrameRateController::GetPrevLoopDeltaTime() {
+	return mPrevLoopDeltaTime;
+}

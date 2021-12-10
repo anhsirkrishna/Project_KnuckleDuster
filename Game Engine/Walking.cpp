@@ -83,6 +83,14 @@ void Walking::StopWalk(WalkDirection dir) {
 		GetOwner()->ChangeState("WALK");
 }
 
+void Walking::SetDirXZero() {
+	direction_x = 0;
+}
+
+void Walking::SetDirYZero() {
+	direction_y = 0;
+}
+
 void Walking::Update() {
 	if (GetOwner()->CurrentState() == "WALK") {
 		SDL_Rect curr_position = p_owner_hurtbox->GetPosition();

@@ -14,11 +14,15 @@ private:
 	GameObject* p_player;
 	GameObject* p_target;
 	int player_agro_range, attack_range;
+	int32_t action_cooldown, action_timer;
+	bool is_downed;
 public:
 	EnemyAI();
 	void Serialize(json json_object);
 	virtual void Update();
 	virtual void Link();
+	virtual void HandleEvent(TimedEvent* p_event);
 	bool CheckTargetInRange(GameObject* target, int range);
+	bool CheckTargetInAttackRange(GameObject* target);
 	void WalkToTarget();
 };

@@ -4,13 +4,17 @@
 #include "Punching.h"
 #include "GameObjectManager.h"
 #include "MathG.h"
+#include "FrameRateController.h"
+#include "Events.h"
 
 EnemyAI::EnemyAI() : Component("ENEMYAI"), p_owner_hurtbox(NULL), p_owner_punching(NULL), p_owner_walking(NULL), p_hostage(NULL), 
-					p_player(NULL), p_target(NULL), player_agro_range(0), attack_range(0) {}
+					p_player(NULL), p_target(NULL), player_agro_range(0), attack_range(0), action_cooldown(0), action_timer(0),
+					is_downed(false) {}
 
 void EnemyAI::Serialize(json json_object) {
 	player_agro_range = json_object["player_agro_range"].get<int>();
 	attack_range = json_object["attack_range"].get<int>();
+	action_cooldown = json_object["action_cooldown"].get<int>();
 }
 
 void EnemyAI::Link() {
@@ -38,13 +42,23 @@ void EnemyAI::Link() {
 }
 
 void EnemyAI::Update() {
+	if (is_downed)
+		return;
+
+	if (action_timer > 0) {
+		action_timer -= pFrameRateController->GetPrevLoopDeltaTime();
+		return;
+	}
+		
 	if (CheckTargetInRange(p_player, player_agro_range))
 		p_target = p_player;
 	else
 		p_target = p_hostage;
 
-	if (CheckTargetInRange(p_target, attack_range))
+	if (CheckTargetInAttackRange(p_target)) {
 		p_owner_punching->Punch();
+		action_timer = action_cooldown;
+	}
 	else
 		WalkToTarget();
 }
@@ -57,16 +71,46 @@ bool EnemyAI::CheckTargetInRange(GameObject* _target, int _range) {
 	return false;
 }
 
+bool EnemyAI::CheckTargetInAttackRange(GameObject* _target) {
+	Hurtbox* target_hurtbox = static_cast<Hurtbox*>(_target->HasComponent("HURTBOX"));
+	SDL_Rect curr_position = p_owner_hurtbox->GetPosition();
+	SDL_Rect target_curr_position = target_hurtbox->GetPosition();
+	if ((target_curr_position.x + target_curr_position.w + (attack_range / 3)) < curr_position.x)
+		return false;
+	else if (target_curr_position.x > (curr_position.x + curr_position.w + (attack_range / 3)))
+		return false;
+
+	if ((target_curr_position.y + (target_curr_position.h / 4)) < curr_position.y)
+		return false;
+	else if (target_curr_position.y > (curr_position.y + (curr_position.h / 4)))
+		return false;
+	
+	return true;
+}
+
 void EnemyAI::WalkToTarget() {
 	Hurtbox* target_hurtbox = static_cast<Hurtbox*>(p_target->HasComponent("HURTBOX"));
 	SDL_Rect curr_position = p_owner_hurtbox->GetPosition();
 	SDL_Rect target_curr_position = target_hurtbox->GetPosition();
-	if (target_curr_position.x < curr_position.x)
+	if ((target_curr_position.x + target_curr_position.w + (attack_range/3)) < curr_position.x)
 		p_owner_walking->Walk(WalkDirection::Left);
-	if (target_curr_position.x > curr_position.x)
+	else if (target_curr_position.x > (curr_position.x + curr_position.w + (attack_range/3)))
 		p_owner_walking->Walk(WalkDirection::Right);
-	if (target_curr_position.y < curr_position.y)
+	else
+		p_owner_walking->SetDirXZero();
+
+	if ((target_curr_position.y + (target_curr_position.h / 4)) < curr_position.y)
 		p_owner_walking->Walk(WalkDirection::Up);
-	if (target_curr_position.y > curr_position.y)
+	else if (target_curr_position.y > (curr_position.y + (curr_position.h / 4)))
 		p_owner_walking->Walk(WalkDirection::Down);
+	else
+		p_owner_walking->SetDirYZero();
+}
+
+void EnemyAI::HandleEvent(TimedEvent* p_event) {
+	switch (p_event->event_id) {
+	case EventID::health_zero:
+		is_downed = true;
+		break;
+	}
 }

@@ -24,6 +24,8 @@ public:
 	virtual void Link();
 	void Walk(WalkDirection dir);
 	void StopWalk(WalkDirection dir);
+	void SetDirXZero();
+	void SetDirYZero();
 private:
 	int speed;
 	int direction_x;

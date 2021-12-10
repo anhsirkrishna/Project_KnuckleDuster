@@ -13,6 +13,7 @@ public:
 	/*Function called at the end of the game loop to limit the framerate*/
 	void limit_frame_rate();
 	Uint32 GetLoopStartTime();
+	Uint32 GetPrevLoopDeltaTime();
 private:
 	float mTimePerFrame;
 	Uint32 mLoopStartTime;
