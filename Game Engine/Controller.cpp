@@ -4,7 +4,7 @@
 #include "Punching.h"
 #include "Jumpkick.h"
 
-Controller::Controller() : Component("CONTROLLER"), p_owner_walking(NULL), p_owner_punching(NULL) { }
+Controller::Controller() : Component("CONTROLLER"), p_owner_walking(NULL), p_owner_punching(NULL), p_owner_jumpkick(NULL) { }
 
 void Controller::HandleInput() {
 	if (GetOwner()->CurrentState() == "JUMPKICK" ||

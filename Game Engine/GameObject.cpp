@@ -75,9 +75,11 @@ void GameObject::LinkComponents() {
 		component->Link();
 	}
 	for (auto component_list : state_component_list) {
+		std::string current_state = CurrentState();
 		ChangeState(component_list.first);
 		for (auto component : component_list.second)
 			component->Link();
+		ChangeState(current_state);
 	}
 }
 

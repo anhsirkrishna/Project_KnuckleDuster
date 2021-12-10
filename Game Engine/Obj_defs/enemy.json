@@ -16,7 +16,11 @@
     "HEALTH": {
       "max_health": 20
     },
-    "KNOCKDOWN": {}
+    "KNOCKDOWN": {},
+    "ENEMYAI": {
+      "attack_range": 12,
+      "player_agro_range":  80
+    }
   },
   "IDLE": {
     "GLSPRITE": {

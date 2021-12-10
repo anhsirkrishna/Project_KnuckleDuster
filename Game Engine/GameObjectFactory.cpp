@@ -28,6 +28,7 @@ GameObject* GameObjectFactory::CreateGameObject(std::string object_name, std::st
 		}
 		else {
 			new_object->AddState(state_name);
+			std::string current_state = new_object->CurrentState();
 			new_object->ChangeState(state_name);
 			auto component_map = state.second.get<std::unordered_map<std::string, json>>();
 			for (auto element : component_map) {
@@ -38,9 +39,9 @@ GameObject* GameObjectFactory::CreateGameObject(std::string object_name, std::st
 					component_factory.Create(component_name, component_data)
 				);
 			}
+			new_object->ChangeState(current_state);
 		}
 	}
-	new_object->LinkComponents();
 	return new_object;
 }
 
@@ -69,6 +70,15 @@ void GameObjectFactory::CreateLevel(unsigned int level) {
 		else
 			pGameObjectManager->AddGameObject(new_object);
 	}
+
+	for (unsigned int i = 0; i < pGameObjectManager->max_objects; i++) {
+		if (pGameObjectManager->game_object_list[i] == NULL)
+			continue;
+
+		pGameObjectManager->game_object_list[i]->LinkComponents();
+	}
+	pGameObjectManager->p_background->LinkComponents();
+
 }
 
 void GameObjectFactory::ReloadLevel(unsigned int level) {

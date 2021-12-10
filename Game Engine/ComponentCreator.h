@@ -34,3 +34,8 @@ class HostageCreator : public ComponentCreator {
 public:
 	virtual Component* Create(json json_object);
 };
+
+class EnemyAICreator : public ComponentCreator {
+public:
+	virtual Component* Create(json json_object);
+};

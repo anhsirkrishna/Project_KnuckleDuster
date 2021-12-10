@@ -12,11 +12,13 @@ private:
 	Hurtbox* p_owner_hurtbox;
 	GameObject* p_hostage;
 	GameObject* p_player;
-	int player_agro_range;
+	GameObject* p_target;
+	int player_agro_range, attack_range;
 public:
 	EnemyAI();
 	void Serialize(json json_object);
 	virtual void Update();
 	virtual void Link();
-	bool CheckPlayerInRange();
+	bool CheckTargetInRange(GameObject* target, int range);
+	void WalkToTarget();
 };
