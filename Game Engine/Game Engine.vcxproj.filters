@@ -155,7 +155,7 @@
     <ClCompile Include="Hostage.cpp">
       <Filter>Components\CharacterComponents</Filter>
     </ClCompile>
-    <ClCompile Include="LoseState.cpp">
+    <ClCompile Include="WinLoseState.cpp">
       <Filter>States\GameStates</Filter>
     </ClCompile>
     <ClCompile Include="EnemyAI.cpp">
@@ -326,7 +326,7 @@
     <ClInclude Include="Hostage.h">
       <Filter>Components\CharacterComponents</Filter>
     </ClInclude>
-    <ClInclude Include="LoseState.h">
+    <ClInclude Include="WinLoseState.h">
       <Filter>States\GameStates</Filter>
     </ClInclude>
     <ClInclude Include="EnemyAI.h">

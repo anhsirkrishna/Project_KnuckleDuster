@@ -4,7 +4,7 @@
 
 class GameObject;
 
-class LoseState : public BaseState {
+class WinLoseState : public BaseState {
 public:
 	virtual void Enter();
 	virtual void Exit();

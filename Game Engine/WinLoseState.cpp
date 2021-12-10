@@ -1,4 +1,4 @@
-#include "LoseState.h"
+#include "WinLoseState.h"
 #include "GameObject.h"
 #include "Panel.h"
 #include "Textbox.h"
@@ -24,12 +24,17 @@ void ButtonFuncRestart() {
 
 }
 
-void LoseState::Enter() {
+void WinLoseState::Enter() {
 	GameObject* ui_obj = new GameObject("PauseMenu");
 	ui_obj->AddState("DEFAULT");
 	ui_obj->ChangeState("DEFAULT");
 	ui_obj->AddComponent(new Panel(200, 120, 20, 18));
-	std::string textbox_text = "GAME OVER";
+	std::string textbox_text;
+	if (p_game_manager->Level() == -1)
+		textbox_text = "GAME OVER";
+	else
+		textbox_text = "  YOU WIN";
+
 	ui_obj->AddComponent(new Textbox(240, 140, textbox_text.size(), 1, textbox_text, 2.0));
 	textbox_text = "QUIT";
 	ui_obj->AddComponent(new Button(250, 260, 12, textbox_text, &ButtonFuncQuit));
@@ -38,7 +43,7 @@ void LoseState::Enter() {
 	game_object_list.push_back(ui_obj);
 }
 
-void LoseState::Update() {
+void WinLoseState::Update() {
 	if (pInputManager->Update() == false) {
 		p_statestack_manager->Pop();
 		return;
@@ -59,7 +64,7 @@ void LoseState::Update() {
 	}
 }
 
-void LoseState::Render(ShaderProgram* p_program) {
+void WinLoseState::Render(ShaderProgram* p_program) {
 	p_program->Use();
 
 	Matrix3D orthoGraphProj = OrthographicProj(0, WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0, 1.0);
@@ -78,7 +83,7 @@ void LoseState::Render(ShaderProgram* p_program) {
 	p_program->Unuse();
 }
 
-void LoseState::Exit() {
+void WinLoseState::Exit() {
 	for (auto game_obj : game_object_list) {
 		delete game_obj;
 	}

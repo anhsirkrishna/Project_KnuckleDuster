@@ -7,7 +7,8 @@
 #include "Game.h"
 #include "StateStackManager.h"
 #include "PauseState.h"
-#include "LoseState.h"
+#include "WinLoseState.h"
+#include "EnemySpawner.h"
 
 #include <GL\glew.h>
 #include <SDL_opengl.h>
@@ -18,6 +19,17 @@
 void GameState::Enter() {
 	GameObjectFactory obj_factory;
 	obj_factory.CreateLevel(p_game_manager->Level());
+	
+	for (unsigned int i = 0; i < pGameObjectManager->max_objects; i++) {
+		if (pGameObjectManager->game_object_list[i] == NULL)
+			continue;
+		
+		EnemySpawner* p_spawner_component = 
+			static_cast<EnemySpawner*>(pGameObjectManager->game_object_list[i]->HasComponent("ENEMYSPAWNER"));
+
+		if (p_spawner_component != NULL)
+			spawners.push_back(p_spawner_component);
+	}
 }
 
 void GameState::Update() {
@@ -35,11 +47,18 @@ void GameState::Update() {
 	p_event_manager->Update();
 
 	if (p_game_manager->Level() == -1) {
-		p_statestack_manager->Push(new LoseState());
+		p_statestack_manager->Push(new WinLoseState());
 	}
 	else if (p_game_manager->Level() != curr_level) {
 		p_statestack_manager->Push(new GameState());
 	}
+
+	bool game_win = true;
+	for (auto spawner : spawners) {
+		game_win = (game_win && spawner->Finished());
+	}
+	if (game_win)
+		p_statestack_manager->Push(new WinLoseState());
 }
 
 void GameState::Render(ShaderProgram* p_program) {
