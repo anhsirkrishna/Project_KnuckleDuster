@@ -4,9 +4,9 @@
     "default_state": "IDLE",
     "background": false
   },
-  "enemy1": {
-    "obj_def": "enemy",
-    "default_state": "IDLE",
+  "enemy_spawner": {
+    "obj_def": "enemy1_spawner",
+    "default_state": "NONE",
     "background": false
   },
   "level_tilemap": {

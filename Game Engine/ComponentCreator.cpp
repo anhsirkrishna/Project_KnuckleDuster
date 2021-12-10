@@ -5,6 +5,7 @@
 #include "Jumpkick.h"
 #include "Hostage.h"
 #include "EnemyAI.h"
+#include "EnemySpawner.h"
 
 Component* ComponentCreator::Create(json json_object) {
 	return NULL;
@@ -44,4 +45,10 @@ Component* EnemyAICreator::Create(json json_object) {
 	EnemyAI* new_ai = new EnemyAI;
 	new_ai->Serialize(json_object);
 	return static_cast<Component*>(new_ai);
+}
+
+Component* EnemySpawnerCreator::Create(json json_object) {
+	EnemySpawner* new_es = new EnemySpawner;
+	new_es->Serialize(json_object);
+	return static_cast<Component*>(new_es);
 }

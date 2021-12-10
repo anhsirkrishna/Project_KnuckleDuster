@@ -39,3 +39,8 @@ class EnemyAICreator : public ComponentCreator {
 public:
 	virtual Component* Create(json json_object);
 };
+
+class EnemySpawnerCreator : public ComponentCreator {
+public:
+	virtual Component* Create(json json_object);
+};

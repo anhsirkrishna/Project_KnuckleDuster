@@ -164,6 +164,9 @@
     <ClCompile Include="MathG.cpp">
       <Filter>Math</Filter>
     </ClCompile>
+    <ClCompile Include="EnemySpawner.cpp">
+      <Filter>Components\EnemyComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -332,6 +335,9 @@
     <ClInclude Include="MathG.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="EnemySpawner.h">
+      <Filter>Components\EnemyComponents</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -430,6 +436,9 @@
       <Filter>Obj_defs</Filter>
     </None>
     <None Include="Obj_defs\hostage.json">
+      <Filter>Obj_defs</Filter>
+    </None>
+    <None Include="Obj_defs\enemy1_spawner.json">
       <Filter>Obj_defs</Filter>
     </None>
   </ItemGroup>

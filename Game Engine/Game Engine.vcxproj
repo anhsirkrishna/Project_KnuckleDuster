@@ -95,6 +95,7 @@
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="ControllerCreator.cpp" />
     <ClCompile Include="EnemyAI.cpp" />
+    <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="Events.cpp" />
     <ClCompile Include="FrameRateController.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="Controller.h" />
     <ClInclude Include="ControllerCreator.h" />
     <ClInclude Include="EnemyAI.h" />
+    <ClInclude Include="EnemySpawner.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="FrameRateController.h" />
@@ -207,6 +209,7 @@
     <None Include="Levels\Level_2.json" />
     <None Include="Obj_defs\background.json" />
     <None Include="Obj_defs\enemy.json" />
+    <None Include="Obj_defs\enemy1_spawner.json" />
     <None Include="Obj_defs\hostage.json" />
     <None Include="Obj_defs\level1_hurtbox.json" />
     <None Include="Obj_defs\level1_tilemap.json" />

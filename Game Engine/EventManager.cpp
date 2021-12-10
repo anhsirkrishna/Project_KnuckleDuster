@@ -56,7 +56,7 @@ void EventManager::Update() {
 		if (timed_event->When() <= 0) {
 			if (timed_event->reciever_obj_index != -1)
 				SendEvent(timed_event, timed_event->reciever_obj_index);
-			else if (timed_event->broadcast)
+			if (timed_event->broadcast)
 				BroadcastEvent(timed_event);
 			else
 				BroadcastEventToSubscribers(timed_event);
