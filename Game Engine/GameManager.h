@@ -8,9 +8,12 @@ public:
 	unsigned int Level();
 	void SetLevel(int level);
 	void RestartLevel();
+	int Debug();
+	void SetDebug(bool _mode);
 private:
 	bool isRunning;
 	int level;
+	bool debug_mode;
 };
 
 extern GameManager* p_game_manager;

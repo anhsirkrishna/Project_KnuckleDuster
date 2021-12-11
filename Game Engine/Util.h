@@ -7,6 +7,8 @@
 //Also swaps the coordinates for use
 void ConvertTextureCoords(GLfloat* tex_coords, float tex_width, float tex_height);
 
+void DEBUG_LOG(std::string const log_text);
+
 template <typename T, size_t TSize>
 struct RingBuffer {
     enum { array_size = TSize + 1 };

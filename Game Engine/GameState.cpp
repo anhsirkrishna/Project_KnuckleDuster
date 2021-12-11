@@ -71,7 +71,7 @@ void GameState::Render(ShaderProgram* p_program) {
 	glUniformMatrix4fv(loc, 1, GL_FALSE, orthoGraphProj.GetMatrixP());
 
 	loc = glGetUniformLocation(p_program->program_id, "mode");
-	glUniform1i(loc, 1);
+	glUniform1i(loc, p_game_manager->Debug());
 
 	CHECKERROR;
 	//Redraw the scene every frame

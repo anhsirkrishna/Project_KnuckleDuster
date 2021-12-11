@@ -18,6 +18,7 @@ private:
 	float mTimePerFrame;
 	Uint32 mLoopStartTime;
 	Uint32 mPrevLoopDeltaTime;
+	int frame_counter;
 };
 
 extern FrameRateController* pFrameRateController;

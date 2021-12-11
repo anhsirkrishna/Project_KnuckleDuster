@@ -1,6 +1,6 @@
 #include "GameManager.h"
 
-GameManager::GameManager() : isRunning(true), level(0) {
+GameManager::GameManager() : isRunning(true), level(0), debug_mode(false) {
 }
 
 void GameManager::Quit() {
@@ -21,4 +21,15 @@ void GameManager::SetLevel(int next_level) {
 
 void GameManager::RestartLevel() {
 	level = 0;
+}
+
+void GameManager::SetDebug(bool _mode) {
+	debug_mode = _mode;
+}
+
+int GameManager::Debug() {
+	if (debug_mode)
+		return 0;
+	else
+		return 1;
 }

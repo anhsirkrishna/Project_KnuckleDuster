@@ -1,10 +1,10 @@
 #include "FrameRateController.h"
+#include "Util.h"
+#include <string>
 
 /*Specify the framerate in FPS*/
-FrameRateController::FrameRateController(unsigned int frameRate) {
-	mTimePerFrame = (1.0/frameRate)*1000;
-	mLoopStartTime = 0;
-	mPrevLoopDeltaTime = 0;
+FrameRateController::FrameRateController(unsigned int frameRate) : mTimePerFrame(1000.0/frameRate), mLoopStartTime(0), 
+																   mPrevLoopDeltaTime(0), frame_counter(0) {
 }
 FrameRateController::~FrameRateController() {
 
@@ -15,8 +15,12 @@ void FrameRateController::start_game_loop() {
 }
 
 void FrameRateController::end_game_loop() {
+	frame_counter++;
 	limit_frame_rate();
 	mPrevLoopDeltaTime = SDL_GetTicks() - mLoopStartTime;
+	float avg_fps = frame_counter / (SDL_GetTicks() / 1000.0f);
+	std::string log_msg = "FPS : " + std::to_string(avg_fps);
+	DEBUG_LOG(log_msg);
 }
 
 void FrameRateController::limit_frame_rate() {

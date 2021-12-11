@@ -19,6 +19,15 @@ void ButtonFunc() {
 	p_game_manager->Quit();
 }
 
+void DebugToggle() {
+	if (p_game_manager->Debug() == 0) {
+		p_game_manager->SetDebug(false);
+	}
+	else if (p_game_manager->Debug() == 1) {
+		p_game_manager->SetDebug(true);
+	}
+}
+
 void PauseState::Enter() {
 	GameObject* ui_obj = new GameObject("PauseMenu");
 	ui_obj->AddState("DEFAULT");
@@ -26,8 +35,10 @@ void PauseState::Enter() {
 	ui_obj->AddComponent(new Panel(200, 120, 20, 18));
 	std::string textbox_text = "GAME PAUSED";
 	ui_obj->AddComponent(new Textbox(230, 140, textbox_text.size(), 1, textbox_text, 2.0));
+	textbox_text = "DEBUG TOGGLE";
+	ui_obj->AddComponent(new Button(250, 200, 12, textbox_text, &DebugToggle));
 	textbox_text = "QUIT";
-	ui_obj->AddComponent(new Button(250, 200, 12, textbox_text, &ButtonFunc));
+	ui_obj->AddComponent(new Button(250, 300, 12, textbox_text, &ButtonFunc));
 	game_object_list.push_back(ui_obj);
 }
 
