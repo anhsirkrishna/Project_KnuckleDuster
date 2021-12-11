@@ -210,6 +210,8 @@
     <None Include="Obj_defs\background.json" />
     <None Include="Obj_defs\enemy.json" />
     <None Include="Obj_defs\enemy1_spawner.json" />
+    <None Include="Obj_defs\Enemy2.json" />
+    <None Include="Obj_defs\enemy2_spawner.json" />
     <None Include="Obj_defs\hostage.json" />
     <None Include="Obj_defs\instructions.json" />
     <None Include="Obj_defs\level1_hurtbox.json" />

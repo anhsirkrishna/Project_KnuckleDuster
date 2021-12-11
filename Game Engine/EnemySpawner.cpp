@@ -13,7 +13,8 @@ EnemySpawner::EnemySpawner() : Component("ENEMYSPAWNER"), total_enemy_count(0), 
 void EnemySpawner::Serialize(json json_object) {
 	total_enemy_count = json_object["total_enemy_count"].get<int>();
 	max_enemy_count = json_object["max_enemy_count"].get<int>();
-	enemy_obj_def = json_object["enemy_obj_def"].get<std::string>();
+	enemy_types = json_object["enemy_types"].get<std::vector<std::string>>();
+	enemy_spawn_chance = json_object["enemy_spawn_chance"].get<std::vector<int>>();
 	spawn_positions = json_object["spawn_positions"].get<std::vector<std::vector<int>>>();
 	spawn_time = json_object["spawn_time"].get<int>();
 }
@@ -35,7 +36,8 @@ void EnemySpawner::Update() {
 		SpawnNewEnemy();
 		spawn_timer = spawn_time;
 	}
-	else if (current_enemy_count >= max_enemy_count) {
+	
+	if ((enemies_spawned % max_enemy_count) == 0) {
 		std::vector<int>::iterator enemy_iter = enemy_obj_index.begin();
 		while (enemy_iter != enemy_obj_index.end()) {
 			if (pGameObjectManager->game_object_list[*enemy_iter]->CurrentState() == "DOWNED") {
@@ -49,7 +51,16 @@ void EnemySpawner::Update() {
 }
 
 void EnemySpawner::SpawnNewEnemy() {
-	std::string enemy_name = "Enemy_" + std::to_string(enemies_spawned);
+	int chance = std::rand() % 100;
+	int index = 0;
+	for (auto spawn_chance : enemy_spawn_chance) {
+		if (chance <= spawn_chance) {
+			break;
+		}
+		index++;
+	}
+	enemy_obj_def = enemy_types[index];
+	std::string enemy_name = enemy_obj_def + "_" + std::to_string(enemies_spawned);
 	GameObject* new_enemy_obj = GameObjectFactory().CreateGameObject(enemy_name, enemy_obj_def);
 	new_enemy_obj->ChangeState("IDLE");
 	new_enemy_obj->LinkComponents();
@@ -70,7 +81,11 @@ void EnemySpawner::SpawnNewEnemy() {
 void EnemySpawner::HandleEvent(TimedEvent* p_event) {
 	switch (p_event->event_id) {
 	case EventID::downed:
-		current_enemy_count--;
+		for (auto enemy_index : enemy_obj_index) {
+			if (static_cast<DownedEvent*>(p_event)->downed_obj_index == enemy_index) {
+				current_enemy_count--;
+			}
+		}
 		break;
 	}
 }

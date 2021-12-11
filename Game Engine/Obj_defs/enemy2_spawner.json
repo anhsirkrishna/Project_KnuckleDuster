@@ -1,0 +1,14 @@
+{
+    "COMMON": {
+      "ENEMYSPAWNER": {
+        "total_enemy_count": 3,
+        "max_enemy_count": 1,
+        "enemy_obj_def": "enemy2",
+        "spawn_time": 3000,
+        "spawn_positions": [
+          [ 5, 200 ],
+          [ 5, 400 ]
+        ]
+      }
+    }
+  }

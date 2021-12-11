@@ -46,7 +46,7 @@ void Knockdown::Update() {
 		p_owner_hurtbox->SetPosition(curr_position);
 		if (p_owner_animation->Completed()) {
 			GetOwner()->ChangeState("DOWNED");
-			TimedEvent* downed_event = new TimedEvent(EventID::downed, false, GetOwner()->index);
+			TimedEvent* downed_event = new DownedEvent(GetOwner()->index);
 			downed_event->SetTime(1000);
 			p_event_manager->QueueTimedEvent(downed_event);
 		}

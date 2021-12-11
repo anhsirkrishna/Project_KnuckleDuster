@@ -3,6 +3,11 @@
 
 void StateStackManager::Update() {
 	state_stack.back()->Update();
+	while (to_delete.size() > 0)
+	{
+		delete to_delete.back();
+		to_delete.pop_back();
+	}
 }
 
 void StateStackManager::Render(ShaderProgram* p_program) {

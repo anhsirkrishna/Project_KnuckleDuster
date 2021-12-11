@@ -12,6 +12,8 @@ private:
 	std::vector<std::vector<int>> spawn_positions;
 	int spawn_timer, spawn_time;
 	std::vector<int> enemy_obj_index;
+	std::vector<std::string> enemy_types;
+	std::vector<int> enemy_spawn_chance;
 public:
 	EnemySpawner();
 	void Serialize(json json_object);

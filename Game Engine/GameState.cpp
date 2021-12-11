@@ -58,8 +58,9 @@ void GameState::Update() {
 	for (auto spawner : spawners) {
 		game_win = (game_win && spawner->Finished());
 	}
-	if (game_win)
+	if (game_win) {
 		p_statestack_manager->Push(new WinLoseState());
+	}
 }
 
 void GameState::Render(ShaderProgram* p_program) {

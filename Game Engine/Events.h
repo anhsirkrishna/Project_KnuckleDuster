@@ -52,3 +52,9 @@ public:
 	TakeDamageEvent(unsigned int _dmg, int _obj_index, bool _broadcast = false);
 	unsigned int hit_damage;
 };
+
+class DownedEvent : public TimedEvent {
+public:
+	DownedEvent(int _obj_index, bool _broadcast = false);
+	unsigned int downed_obj_index;
+};

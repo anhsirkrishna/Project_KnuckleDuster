@@ -30,3 +30,5 @@ HitEvent::HitEvent(unsigned int _dmg, int _direction, int _distance, int _obj_in
 																						 hit_damage(_dmg), direction(_direction), hit_move_distance(_distance) {}
 
 TakeDamageEvent::TakeDamageEvent(unsigned int _dmg, int _obj_index, bool _broadcast) : TimedEvent(EventID::take_damage, _broadcast, _obj_index), hit_damage(_dmg) {}
+
+DownedEvent::DownedEvent(int _obj_index, bool _broadcast) : TimedEvent(EventID::downed, _broadcast, _obj_index), downed_obj_index(_obj_index) {}
