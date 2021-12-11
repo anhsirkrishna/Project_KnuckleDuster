@@ -8,6 +8,7 @@ public:
 	void Update();
 	void Draw(ShaderProgram* program);
 	void Cleanup();
+	void Delete(unsigned int index);
 	const unsigned int max_objects = 50;
 	GameObject* game_object_list[50];
 	GameObject* p_background;

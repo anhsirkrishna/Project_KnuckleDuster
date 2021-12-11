@@ -45,6 +45,10 @@ void EnemyAI::Update() {
 	if (is_downed)
 		return;
 
+	if (GetOwner()->CurrentState() == "JUMPKICK" ||
+		GetOwner()->CurrentState() == "PUNCH" ||
+		GetOwner()->CurrentState() == "HURT")
+		return;
 	if (action_timer > 0) {
 		action_timer -= pFrameRateController->GetPrevLoopDeltaTime();
 		return;

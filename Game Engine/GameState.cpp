@@ -37,6 +37,7 @@ void GameState::Update() {
 		p_statestack_manager->Pop();
 		p_game_manager->SetLevel(curr_level);
 		p_statestack_manager->Push(new GameState());
+		return;
 	}
 
 	curr_level = p_game_manager->Level();
@@ -81,5 +82,6 @@ void GameState::Render(ShaderProgram* p_program) {
 }
 
 void GameState::Exit() {
+	p_event_manager->ClearSubscribeList();
 	pGameObjectManager->Cleanup();
 }

@@ -11,6 +11,7 @@ public:
 	void QueueTimedEvent(TimedEvent* p_event);
 	void Update();
 	void SubscribeToEvent(EventID event_type, GameObject* p_game_object);
+	void ClearSubscribeList();
 private:
 	std::vector<TimedEvent*> timed_event_list;
 	std::vector<TimedEvent*> new_events;

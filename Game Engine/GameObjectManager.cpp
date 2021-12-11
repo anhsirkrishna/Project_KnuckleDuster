@@ -51,3 +51,8 @@ void GameObjectManager::Cleanup() {
 		game_object_list[i] = NULL;
 	}
 }
+
+void GameObjectManager::Delete(unsigned int index) {
+	delete game_object_list[index];
+	game_object_list[index] = NULL;
+}

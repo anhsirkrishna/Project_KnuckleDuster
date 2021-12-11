@@ -42,6 +42,11 @@ void EventManager::SubscribeToEvent(EventID event_type, GameObject* p_game_objec
 	subscriber_list[event_type].push_back(p_game_object->index);
 }
 
+void EventManager::ClearSubscribeList() {
+	for (const auto e : all_events) {
+		subscriber_list[e].clear();
+	}
+}
 
 //Called once every game loop
 //Checks if it's time for any of the events to be triggered 

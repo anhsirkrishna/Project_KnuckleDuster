@@ -14,7 +14,15 @@ enum class EventID
 	NUM
 };
 
-static const EventID all_events[] = { EventID::collision, EventID::out_of_bounds, EventID::hit, EventID::NUM };
+static const EventID all_events[] = { EventID::collision,
+	EventID::out_of_bounds,
+	EventID::hit,
+	EventID::health_zero,
+	EventID::take_damage,
+	EventID::knock_down,
+	EventID::downed,
+	EventID::revived,
+	EventID::NUM };
 
 class TimedEvent {
 public:

@@ -76,6 +76,8 @@ void Jumpkick::CheckCollision() {
 			continue;
 		if (!obj_hurtbox->IsSolid())
 			continue;
+		if (IsAlly(curr_obj))
+			continue;
 		if (Collision::AABB(hitbox, obj_hurtbox->GetPosition())) {
 			p_event_manager->QueueTimedEvent(
 				new HitEvent(damage, p_owner_hurtbox->GetScaleX(), //Hit direction is the opposite of the Jumpkick direction 
@@ -95,6 +97,8 @@ void Jumpkick::CheckCollision() {
 			continue;
 		if (!obj_hurtbox->IsSolid())
 			continue;
+		if (IsAlly(curr_obj))
+			continue;
 		if (Collision::AABB(hitbox, obj_hurtbox->GetPosition())) {
 			p_event_manager->QueueTimedEvent(
 				new HitEvent(damage, p_owner_hurtbox->GetScaleX(), //Hit direction is the opposite of the Jumpkick direction 
@@ -102,4 +106,12 @@ void Jumpkick::CheckCollision() {
 			);
 		}
 	}
+}
+
+bool Jumpkick::IsAlly(GameObject* p_obj) {
+	if (GetOwner()->HasComponent("CONTROLLER") && p_obj->HasComponent("HOSTAGE"))
+		return true;
+	if (GetOwner()->HasComponent("ENEMYAI") && p_obj->HasComponent("ENEMYAI"))
+		return true;
+	return false;
 }

@@ -72,6 +72,8 @@ void Punching::CheckCollision() {
 			continue;
 		if (!obj_hurtbox->IsSolid())
 			continue;
+		if (IsAlly(curr_obj))
+			continue;
 		if (Collision::AABB(hitbox, obj_hurtbox->GetPosition())) {
 			p_event_manager->QueueTimedEvent(
 				new HitEvent(punch_damage, p_owner_hurtbox->GetScaleX(), //Hit direction is the opposite of the punching direction 
@@ -91,6 +93,8 @@ void Punching::CheckCollision() {
 			continue;
 		if (!obj_hurtbox->IsSolid())
 			continue;
+		if (IsAlly(curr_obj))
+			continue;
 		if (Collision::AABB(hitbox, obj_hurtbox->GetPosition())) {
 			p_event_manager->QueueTimedEvent(
 				new HitEvent(punch_damage, p_owner_hurtbox->GetScaleX(), //Hit direction is the opposite of the punching direction 
@@ -98,4 +102,12 @@ void Punching::CheckCollision() {
 			);
 		}
 	}
+}
+
+bool Punching::IsAlly(GameObject* p_obj) {
+	if (GetOwner()->HasComponent("CONTROLLER") && p_obj->HasComponent("HOSTAGE"))
+		return true;
+	if (GetOwner()->HasComponent("ENEMYAI") && p_obj->HasComponent("ENEMYAI"))
+		return true;
+	return false;
 }

@@ -22,6 +22,9 @@
     },
     "PLAYERDAZED": {
       "undazed_input_count": 10
+    },
+    "HEALTH": {
+      "max_health": 20
     }
   },
   "IDLE": {

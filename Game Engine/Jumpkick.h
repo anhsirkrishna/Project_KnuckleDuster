@@ -23,4 +23,5 @@ public:
 	void Kick();
 	void CheckCollision();
 	void UpdateHitbox();
+	bool IsAlly(GameObject* p_obj);
 };
