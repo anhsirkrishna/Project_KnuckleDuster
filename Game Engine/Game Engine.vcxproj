@@ -211,6 +211,7 @@
     <None Include="Obj_defs\enemy.json" />
     <None Include="Obj_defs\enemy1_spawner.json" />
     <None Include="Obj_defs\hostage.json" />
+    <None Include="Obj_defs\instructions.json" />
     <None Include="Obj_defs\level1_hurtbox.json" />
     <None Include="Obj_defs\level1_tilemap.json" />
     <None Include="Obj_defs\level2_tilemap.json" />

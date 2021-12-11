@@ -71,7 +71,6 @@ void EnemySpawner::HandleEvent(TimedEvent* p_event) {
 	switch (p_event->event_id) {
 	case EventID::downed:
 		current_enemy_count--;
-		SDL_Log("Received downed event. Curr enemy count : %d", current_enemy_count);
 		break;
 	}
 }

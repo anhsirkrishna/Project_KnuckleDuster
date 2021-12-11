@@ -25,7 +25,8 @@
     },
     "HEALTH": {
       "max_health": 20
-    }
+    },
+    "KNOCKDOWN": {}
   },
   "IDLE": {
     "GLSPRITE": {
@@ -214,6 +215,66 @@
         24, 0,
         48, 0,
         72, 0
+      ],
+      "looping": false,
+      "interval": 8
+    }
+  },
+  "KNOCKDOWN": {
+    "GLSPRITE": {
+      "texture_names": [ "Player_Knockdown" ],
+      "vertex_list": [
+           0,  0, 0,
+           0, 48, 0,
+          36, 48, 0,
+          36,  0, 0
+      ],
+      "color_list": [
+          0, 255,  0, 255,
+         50, 255, 50, 255,
+          0,   0,  0, 255,
+         50, 255, 50, 255
+      ],
+      "tex_coord_list": [
+           2,  0,
+           2, 32,
+          24, 32,
+          24,  0
+      ]
+    },
+    "ANIMATION": {
+      "frames": [
+        0, 0
+      ],
+      "looping": false,
+      "interval": 16
+    }
+  },
+  "DOWNED": {
+    "GLSPRITE": {
+      "texture_names": [ "Player_Downed" ],
+      "vertex_list": [
+           0,  0, 0,
+           0, 48, 0,
+          64, 48, 0,
+          64,  0, 0
+      ],
+      "color_list": [
+          0, 255,  0, 255,
+         50, 255, 50, 255,
+          0,   0,  0, 255,
+         50, 255, 50, 255
+      ],
+      "tex_coord_list": [
+           0,  2,
+           0, 32,
+          40, 32,
+          40,  2
+      ]
+    },
+    "ANIMATION": {
+      "frames": [
+        0, 0
       ],
       "looping": false,
       "interval": 8

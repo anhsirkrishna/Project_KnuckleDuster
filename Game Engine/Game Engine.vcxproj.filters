@@ -441,5 +441,8 @@
     <None Include="Obj_defs\enemy1_spawner.json">
       <Filter>Obj_defs</Filter>
     </None>
+    <None Include="Obj_defs\instructions.json">
+      <Filter>Obj_defs</Filter>
+    </None>
   </ItemGroup>
 </Project>

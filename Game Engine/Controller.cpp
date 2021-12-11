@@ -8,7 +8,11 @@ Controller::Controller() : Component("CONTROLLER"), p_owner_walking(NULL), p_own
 
 void Controller::HandleInput() {
 	if (GetOwner()->CurrentState() == "JUMPKICK" ||
-		GetOwner()->CurrentState() == "PUNCH")
+		GetOwner()->CurrentState() == "PUNCH" ||
+		GetOwner()->CurrentState() == "HURT" ||
+		GetOwner()->CurrentState() == "DAZED" ||
+		GetOwner()->CurrentState() == "DOWNED" ||
+		GetOwner()->CurrentState() == "KNOCKDOWN")
 		return;
 	if (pInputManager->isKeyPressed(SDL_SCANCODE_UP) || pInputManager->isKeyPressed(SDL_SCANCODE_W)) {
 		p_owner_walking->Walk(WalkDirection::Up);

@@ -24,10 +24,14 @@ void StartState::Enter() {
 	GameObject *ui_obj = new GameObject("UI_panel");
 	ui_obj->AddState("DEFAULT");
 	ui_obj->ChangeState("DEFAULT");
-	ui_obj->AddComponent(new Panel(170, 240, 25, 4));
-	std::string textbox_text = "PRESS ENTER TO START";
-	ui_obj->AddComponent(new Textbox(195, 260, textbox_text.size(), 1, textbox_text, 1.5));
+	ui_obj->AddComponent(new Panel(230, 210, 15, 3));
+	std::string textbox_text = "KUCKLEDUSTER";
+	ui_obj->AddComponent(new Textbox(250, 220, textbox_text.size(), 1, textbox_text, 1.5));
+	textbox_text = "PRESS ENTER TO START";
+	ui_obj->AddComponent(new Textbox(195, 380, textbox_text.size(), 1, textbox_text, 1.5));
 	pGameObjectManager->AddGameObject(ui_obj);
+
+	show_instructions = false;
 }
 
 void StartState::Update() {
@@ -37,10 +41,18 @@ void StartState::Update() {
 	}
 
 	if (pInputManager->isKeyTriggered(SDL_SCANCODE_RETURN)) {
-		p_statestack_manager->Pop();
-		p_game_manager->SetLevel(1);
-		p_statestack_manager->Push(new GameState());
-		return;
+		if (show_instructions) {
+			p_statestack_manager->Pop();
+			p_game_manager->SetLevel(1);
+			p_statestack_manager->Push(new GameState());
+			return;
+		}
+		else {
+			GameObject* ins_obj = GameObjectFactory().CreateGameObject("Instructions", "instructions");
+			ins_obj->LinkComponents();
+			pGameObjectManager->AddGameObject(ins_obj);
+			show_instructions = true;
+		}
 	}
 
 	pGameObjectManager->Update();
