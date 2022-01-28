@@ -9,7 +9,7 @@ It features :
 2) Event based communication
 3) Data driven design involving serialization and level editing
 4) Input management 
-5) Hardware accelerated sprite rendering with textures
+5) Hardware accelerated sprite rendering using shaders
 6) Sprite animations 
 7) Simple physics
 8) Framerate control
