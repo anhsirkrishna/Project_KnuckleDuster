@@ -1,4 +1,4 @@
-﻿# Project_KnuckleDuster
+﻿# Project_KnuckleDuster  - DigiPen Institute of Technology © 2022
 
 Custom 2D Game engine developed completely from the ground up in C++
 DigiPen Institute of Technology © 2022
